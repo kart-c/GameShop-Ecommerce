@@ -12,26 +12,3 @@
 body {
 	font-family: 'Poppins', 'Open Sans', sans-serif;
 }
-
-.header {
-	background-color: var(--white);
-	box-shadow: 0 2px 5px var(--lynx-grey);
-	color: var(--black);
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 1;
-}
-
-.header h1 {
-	font-size: var(--text-lg);
-	line-height: var(--line-ht-lg);
-}
-
-.header span {
-	color: var(--brand-color);
-}
-
-.header input {
-	border: 1px solid var(--black);
