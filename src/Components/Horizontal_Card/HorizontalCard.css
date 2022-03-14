@@ -1,0 +1,18 @@
+.horizontal-card picture,
+.horizontal-card .card-img {
+	border-radius: 0;
+}
+
+.card > .content {
+	padding: 0 0 0 1.6rem;
+	justify-content: flex-start;
+}
+
+.content > h4 {
+	font-weight: 700;
+	margin: 0 0 1.6rem;
+}
+
+.content p:first-of-type {
+	padding: 0;
+}

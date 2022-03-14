@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Header } from '../../Components';
-import Filters from './Components/Filters';
+import Filters from './Components/Filter/Filters';
 import './Products.css';
 
 const Products = () => {
