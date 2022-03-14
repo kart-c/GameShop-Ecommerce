@@ -1,0 +1,42 @@
+.pl-aside {
+	height: fit-content;
+	position: sticky;
+	top: 9.6rem;
+	width: 20rem;
+}
+
+.aside-heading {
+	display: flex;
+	justify-content: space-between;
+}
+
+.aside-heading button {
+	color: var(--info-color);
+	text-decoration: underline;
+}
+
+.aside-price {
+	margin: 2.4rem 0;
+}
+
+.aside-price > label,
+.aside-genre > span,
+.aside-rating > span {
+	display: block;
+	font-size: 1.6rem;
+	margin-bottom: 0.8rem;
+}
+
+.aside-price > input {
+	width: 90%;
+	margin: auto;
+}
+
+.checkbox-container,
+.radio-container {
+	margin: 0.8rem 0;
+}
+
+.aside-rating > span {
+	margin-top: 2.4rem;
+}
