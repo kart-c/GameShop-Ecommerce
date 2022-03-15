@@ -1,20 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Card.css';
+import { Category1 } from '../../Assets/images';
 
 const Card = () => {
 	return (
 		<article className="card product-card card-shadow">
-			<a href="#">
-				<picture>
-					<source srcset="../../Assets/wallpaperflare.com_wallpaper.jpg" />
-					<source srcset="../../Assets/wallpaperflare.com_wallpaper.jpg" />
-					<img
-						src="../../Assets/wallpaperflare.com_wallpaper.jpg"
-						alt="card image 1"
-						className="card-img"
-					/>
-				</picture>
-			</a>
+			<Link to="/products">
+				<img src={Category1} alt="card image 1" className="card-img" />
+			</Link>
 			<div className="content">
 				<h4>God of War</h4>
 				<span>RPG - PC game</span>
@@ -31,9 +25,9 @@ const Card = () => {
 					</small>
 					<small className="card-discount">(60% OFF)</small>
 				</p>
-				<a href="#" className="action-link">
+				<Link to="/cart" className="action-link">
 					Add to Cart
-				</a>
+				</Link>
 			</div>
 		</article>
 	);

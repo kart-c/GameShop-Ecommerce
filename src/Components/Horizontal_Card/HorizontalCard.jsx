@@ -1,17 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './HorizontalCard.css';
+import { Category1 } from '../../Assets/images';
 
 const HorizontalCard = () => {
 	return (
 		<article className="card horizontal-card card-shadow">
-			<picture>
-				<source srcSet="../../Assets/category-img-1__1.webp" />
-				<img
-					src="../../Assets/category-img-1__2.jpg"
-					alt="horizontal card image"
-					className="card-img"
-				/>
-			</picture>
+			<img src={Category1} alt="horizontal card image" className="card-img" />
 			<div className="content">
 				<h3>Read Dead Redemption 2</h3>
 				<div className="buy-info">
@@ -35,9 +30,9 @@ const HorizontalCard = () => {
 					</div>
 				</div>
 				<div>
-					<a href="#" className="action-link">
+					<Link to="/wishlist" className="action-link">
 						Move to wishlist
-					</a>
+					</Link>
 				</div>
 			</div>
 		</article>

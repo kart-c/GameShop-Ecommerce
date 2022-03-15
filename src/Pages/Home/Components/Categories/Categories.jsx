@@ -1,41 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Categories.css';
+import { Category1, Category2, Category3, Carousel1 } from '../../../../Assets/images';
 
 const Categories = () => {
 	return (
 		<div className="category-list">
-			<a href="#" className="category-item">
-				<picture>
-					<source srcSet="../Assets/category-img-1__1.webp" />
-					<source srcSet="./Assets/category-img-1__2.jpg" />
-					<img src="./Assets/category-img-1__3.jpg" alt="Hero Image" />
-				</picture>
+			<Link to="/products" className="category-item">
+				<img src={Category1} alt="Hero Image" />
 				<span>Action Games</span>
-			</a>
-			<a href="#" className="category-item">
-				<picture>
-					<source srcSet="../Assets/category-img-2__1.webp" />
-					<source srcSet="./Assets/category-img-2__2.jpg" />
-					<img src="./Assets/category-img-2__3.jpg" alt="Hero Image" />
-				</picture>
+			</Link>
+			<Link to="/products" className="category-item">
+				<img src={Category2} alt="Hero Image" />
 				<span>Sports Games</span>
-			</a>
-			<a href="#" className="category-item">
-				<picture>
-					<source srcSet="../Assets/hero-image.webp" />
-					<source srcSet="./Assets/hero-image-2.jpg" />
-					<img src="./Assets/hero.jpg" alt="Hero Image" />
-				</picture>
+			</Link>
+			<Link to="/products" className="category-item">
+				<img src={Carousel1} alt="Hero Image" />
 				<span>RPG Games</span>
-			</a>
-			<a href="#" className="category-item">
-				<picture>
-					<source srcSet="../Assets/category-img-3__1.webp" />
-					<source srcSet="./Assets/category-img-3__2.jpg" />
-					<img src="./Assets/category-img-3__3.jpg" alt="Hero Image" />
-				</picture>
+			</Link>
+			<Link to="/products" className="category-item">
+				<img src={Category3} alt="Hero Image" />
 				<span>Strategy Games</span>
-			</a>
+			</Link>
 		</div>
 	);
 };
