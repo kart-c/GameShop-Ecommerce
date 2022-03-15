@@ -3,6 +3,7 @@ import Cart from './Pages/Cart/Cart';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Products from './Pages/Products/Products';
+import Signup from './Pages/Signup/Signup';
 import Wishlist from './Pages/Wishlist/Wishlist';
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
 			{/* <Products /> */}
 			{/* <Cart /> */}
 			{/* {<Wishlist />} */}
-			<Login />
+			{/* <Login /> */}
+			<Signup />
 		</>
 	);
 }
