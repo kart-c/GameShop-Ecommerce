@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Header } from '../../Components';
 import Carousel from './Components/Carousel/Carousel';
 import Categories from './Components/Categories/Categories';
@@ -11,18 +12,18 @@ const Home = () => {
 			<Header />
 			<main className="lp-main">
 				<section className="hero-img-container">
-					<a href="#">
+					<Link to="/products">
 						<picture>
-							<source srcset="./Assets/hero-image.webp" className="hero-img" />
-							<source srcset="./Assets/hero-image-2.jpg" className="hero-img" />
+							<source srcSet="./Assets/hero-image.webp" className="hero-img" />
+							<source srcSet="./Assets/hero-image-2.jpg" className="hero-img" />
 							<img src="./Assets/hero-image-3.jpg" alt="Hero Image" className="hero-img" />
 						</picture>
-					</a>
+					</Link>
 				</section>
 				<section>
 					<div className="lp-text-container">
 						<h3>New Releases</h3>
-						<a href="./pages/product-listing/product-listing.html">View All</a>
+						<Link to="/products">View All</Link>
 					</div>
 					<Carousel />
 				</section>
@@ -32,7 +33,7 @@ const Home = () => {
 				</section>
 				<div className="lp-cta">
 					<button className="btn btn-primary">
-						<a href="./pages/product-listing/product-listing.html">Explore More</a>
+						<Link to="/products">Explore More</Link>
 					</button>
 				</div>
 			</main>

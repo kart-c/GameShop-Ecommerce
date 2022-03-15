@@ -1,32 +1,33 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
 	return (
 		<header className="header">
 			<h2>
-				<a href="#">
+				<Link to="/">
 					Game<span>Shop</span>
-				</a>
+				</Link>
 			</h2>
 			<input type="search" name="search" className="header-search" placeholder="Search..." />
 			<i className="fas fa-bars hamburger-menu"></i>
 			<nav className="nav">
 				<ul className="nav-list">
 					<li>
-						<a href="./pages/login/login.html">
+						<Link to="/login">
 							<i className="fas fa-user"></i> Profile
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="./pages/wishlist/wishlist.html">
+						<Link to="/wishlist">
 							<i className="fas fa-heart"></i> Wishlist
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="./pages/cart/cart.html">
-							<i className="fas fa-shopping-bag"></i> Bag
-						</a>
+						<Link to="/cart">
+							<i to="fas fa-shopping-bag"></i> Bag
+						</Link>
 					</li>
 				</ul>
 			</nav>
