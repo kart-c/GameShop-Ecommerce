@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './HorizontalCard.css';
 
 const HorizontalCard = () => {
@@ -35,9 +36,9 @@ const HorizontalCard = () => {
 					</div>
 				</div>
 				<div>
-					<a href="#" className="action-link">
+					<Link to="/wishlist" className="action-link">
 						Move to wishlist
-					</a>
+					</Link>
 				</div>
 			</div>
 		</article>
