@@ -20,18 +20,18 @@ const Home = () => {
 					</a>
 				</section>
 				<section>
-					<div class="lp-text-container">
+					<div className="lp-text-container">
 						<h3>New Releases</h3>
 						<a href="./pages/product-listing/product-listing.html">View All</a>
 					</div>
 					<Carousel />
 				</section>
-				<section class="lp-category">
+				<section className="lp-category">
 					<h3>Featured Categories</h3>
 					<Categories />
 				</section>
-				<div class="lp-cta">
-					<button class="btn btn-primary">
+				<div className="lp-cta">
+					<button className="btn btn-primary">
 						<a href="./pages/product-listing/product-listing.html">Explore More</a>
 					</button>
 				</div>

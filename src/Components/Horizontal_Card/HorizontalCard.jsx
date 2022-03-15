@@ -5,7 +5,7 @@ const HorizontalCard = () => {
 	return (
 		<article className="card horizontal-card card-shadow">
 			<picture>
-				<source srcset="../../Assets/category-img-1__1.webp" />
+				<source srcSet="../../Assets/category-img-1__1.webp" />
 				<img
 					src="../../Assets/category-img-1__2.jpg"
 					alt="horizontal card image"

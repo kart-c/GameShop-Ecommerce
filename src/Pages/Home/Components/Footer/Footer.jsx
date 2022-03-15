@@ -3,14 +3,14 @@ import './Footer.css';
 
 const Footer = () => {
 	return (
-		<footer class="lp-footer">
-			<div class="lp-footer-text">
+		<footer className="lp-footer">
+			<div className="lp-footer-text">
 				<h4>About US</h4>
 				<p>
 					Website is an open source project. To contribute <a href="#">Click here</a>.
 				</p>
 			</div>
-			<ul class="footer-nav-links">
+			<ul className="footer-nav-links">
 				<li>
 					<a href="#">Contact Us</a>
 				</li>
@@ -21,7 +21,7 @@ const Footer = () => {
 					<a href="#">New Releases</a>
 				</li>
 			</ul>
-			<ul class="footer-nav-links">
+			<ul className="footer-nav-links">
 				<li>
 					<a href="#">My Cart</a>
 				</li>

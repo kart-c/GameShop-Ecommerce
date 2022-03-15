@@ -21,9 +21,9 @@ const Products = () => {
 					<Card />
 					<Card />
 				</section>
-				<footer class="filter-footer">
-					<button class="btn-primary">Filters</button>
-					<button class="btn-primary">Sort</button>
+				<footer className="filter-footer">
+					<button className="btn-primary">Filters</button>
+					<button className="btn-primary">Sort</button>
 				</footer>
 			</main>
 		</>

@@ -6,10 +6,10 @@ const Wishlist = () => {
 	return (
 		<>
 			<Header />
-			<main class="wl-pg">
-				<h3 class="wl-heading">My Wishlist</h3>
+			<main className="wl-pg">
+				<h3 className="wl-heading">My Wishlist</h3>
 				<small>3 Items</small>
-				<section class="product-list">
+				<section className="product-list">
 					<Card />
 					<Card />
 					<Card />

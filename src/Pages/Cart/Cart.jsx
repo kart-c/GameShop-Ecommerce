@@ -10,11 +10,11 @@ const Cart = () => {
 			<Header />
 			<main className="cart-main">
 				<div>
-					<h3 class="cart-heading">My Cart</h3>
+					<h3 className="cart-heading">My Cart</h3>
 					<small>2 Items</small>
 				</div>
-				<section class="cart-container">
-					<div class="cart-items">
+				<section className="cart-container">
+					<div className="cart-items">
 						<HorizontalCard />
 						<HorizontalCard />
 					</div>

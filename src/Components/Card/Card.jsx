@@ -3,7 +3,7 @@ import './Card.css';
 
 const Card = () => {
 	return (
-		<article class="card product-card card-shadow">
+		<article className="card product-card card-shadow">
 			<a href="#">
 				<picture>
 					<source srcset="../../Assets/wallpaperflare.com_wallpaper.jpg" />
@@ -11,17 +11,17 @@ const Card = () => {
 					<img
 						src="../../Assets/wallpaperflare.com_wallpaper.jpg"
 						alt="card image 1"
-						class="card-img"
+						className="card-img"
 					/>
 				</picture>
 			</a>
-			<div class="content">
+			<div className="content">
 				<h4>God of War</h4>
 				<span>RPG - PC game</span>
-				<div class="overlay-icon">
-					<i class="far fa-heart"></i>
+				<div className="overlay-icon">
+					<i className="far fa-heart"></i>
 				</div>
-				<span class="product-card-badge">
+				<span className="product-card-badge">
 					<strong>New</strong>
 				</span>
 				<p>
@@ -29,9 +29,9 @@ const Card = () => {
 					<small>
 						<s>Rs. 2999</s>
 					</small>
-					<small class="card-discount">(60% OFF)</small>
+					<small className="card-discount">(60% OFF)</small>
 				</p>
-				<a href="#" class="action-link">
+				<a href="#" className="action-link">
 					Add to Cart
 				</a>
 			</div>
