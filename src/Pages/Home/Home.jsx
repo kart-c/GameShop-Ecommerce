@@ -5,6 +5,7 @@ import Carousel from './Components/Carousel/Carousel';
 import Categories from './Components/Categories/Categories';
 import Footer from './Components/Footer/Footer';
 import './Home.css';
+import { HeroImg1, HeroImg2 } from '../../Assets/images';
 
 const Home = () => {
 	return (
@@ -14,9 +15,8 @@ const Home = () => {
 				<section className="hero-img-container">
 					<Link to="/products">
 						<picture>
-							<source srcSet="./Assets/hero-image.webp" className="hero-img" />
-							<source srcSet="./Assets/hero-image-2.jpg" className="hero-img" />
-							<img src="./Assets/hero-image-3.jpg" alt="Hero Image" className="hero-img" />
+							<source srcSet={HeroImg1} className="hero-img" />
+							<img src={HeroImg2} alt="Hero Image" className="hero-img" />
 						</picture>
 					</Link>
 				</section>
