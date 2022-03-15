@@ -1,0 +1,47 @@
+.card {
+	box-shadow: none;
+	border-radius: 0;
+	height: 50rem;
+	width: 100%;
+}
+
+.card .card-img {
+	border-radius: 0;
+}
+
+.card .content {
+	height: calc(100% - 30rem);
+	display: flex;
+	flex-direction: column;
+}
+
+.content h4 {
+	font-weight: 700;
+	margin: 0;
+}
+
+.card-discount {
+	color: var(--brand-color);
+}
+
+.card p {
+	margin-top: auto;
+}
+
+.card .action-link {
+	background-color: var(--white);
+	color: var(--brand-color);
+	border: 2px solid var(--brand-color);
+	transition: color 0.2s ease-in, background-color 0.2s ease-in;
+}
+
+.card .action-link:hover {
+	background-color: var(--brand-color);
+	color: var(--white);
+	transition: color 0.2s ease-in, background-color 0.2s ease-in;
+}
+
+.product-card-badge,
+.product-card-badge::before {
+	background-color: var(--primary-color);
+}
