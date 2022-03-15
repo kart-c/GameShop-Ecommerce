@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Header } from '../../Components';
 
 const Signup = () => {
@@ -33,7 +34,7 @@ const Signup = () => {
 						<span>OR</span>
 					</div>
 					<button className="btn secondary">
-						<a href="../login/login.html">Log In</a>
+						<Link to="/login">Log In</Link>
 					</button>
 				</div>
 			</main>
