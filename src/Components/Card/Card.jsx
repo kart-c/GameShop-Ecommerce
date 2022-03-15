@@ -1,19 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
+import { Category1_1, Category1_2 } from '../../Assets/images';
 
 const Card = () => {
 	return (
 		<article className="card product-card card-shadow">
 			<Link to="/products">
 				<picture>
-					<source srcSet="../../Assets/wallpaperflare.com_wallpaper.jpg" />
-					<source srcSet="../../Assets/wallpaperflare.com_wallpaper.jpg" />
-					<img
-						src="../../Assets/wallpaperflare.com_wallpaper.jpg"
-						alt="card image 1"
-						className="card-img"
-					/>
+					<source srcSet={Category1_1} />
+					<img src={Category1_2} alt="card image 1" className="card-img" />
 				</picture>
 			</Link>
 			<div className="content">
