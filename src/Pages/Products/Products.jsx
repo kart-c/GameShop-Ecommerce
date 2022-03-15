@@ -2,18 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Header } from '../../Components';
 import Filters from './Components/Filter/Filters';
-import './Products.css';
+import styles from './Products.module.css';
 
 const Products = () => {
 	return (
 		<>
 			<Header />
-			<main className="pl-pg">
+			<main className={styles.plPg}>
 				<Filters />
-				<section className="product-list">
-					<div className="pl-breadcrumb">
+				<section className={styles.productList}>
+					<div className={styles.plBreadcrumb}>
 						<Link to="/">Home</Link> {' > '}
-						<Link to="/products" className="current-pg">
+						<Link to="/products" className={styles.currentPg}>
 							Products
 						</Link>
 					</div>
@@ -22,7 +22,7 @@ const Products = () => {
 					<Card />
 					<Card />
 				</section>
-				<footer className="filter-footer">
+				<footer className={styles.filterFooter}>
 					<button className="btn-primary">Filters</button>
 					<button className="btn-primary">Sort</button>
 				</footer>

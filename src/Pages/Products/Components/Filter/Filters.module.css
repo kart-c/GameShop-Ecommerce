@@ -1,42 +1,48 @@
-.pl-aside {
+.plAside {
 	height: fit-content;
 	position: sticky;
 	top: 9.6rem;
 	width: 20rem;
 }
 
-.aside-heading {
+.asideHeading {
 	display: flex;
 	justify-content: space-between;
 }
 
-.aside-heading button {
+.asideHeading button {
 	color: var(--info-color);
 	text-decoration: underline;
 }
 
-.aside-price {
+.asidePrice {
 	margin: 2.4rem 0;
 }
 
-.aside-price > label,
-.aside-genre > span,
-.aside-rating > span {
+.asidePrice label,
+.asideGenre span,
+.asideRating span {
 	display: block;
 	font-size: 1.6rem;
 	margin-bottom: 0.8rem;
 }
 
-.aside-price > input {
+.asidePrice input {
 	width: 90%;
 	margin: auto;
 }
 
-.checkbox-container,
-.radio-container {
+.checkboxContainer,
+.radioContainer {
 	margin: 0.8rem 0;
 }
 
-.aside-rating > span {
+.asideRating > span {
 	margin-top: 2.4rem;
+}
+
+@media only screen and (max-width: 980px) {
+	.plAside {
+		display: none;
+	}
 }
