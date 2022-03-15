@@ -1,52 +1,52 @@
-.lp-main {
+.lpMain {
 	margin: 10.4rem auto 0;
 	width: 90%;
 }
 
-.hero-img-container {
+.heroImgContainer {
 	box-shadow: 2px 2px 10px var(--lynx-grey) -2px -2px 10px var(--lynx-grey);
 	margin: 3.2rem auto 0;
 	height: 30vh;
 	position: relative;
 }
 
-.hero-img {
+.heroImg {
 	height: 100%;
 	object-fit: cover;
 	object-position: left 48% top 0;
 	width: 100%;
 }
 
-.lp-text-container {
+.lpTextContainer {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin: 2.4rem 0;
 }
 
-.lp-text-container > a {
+.lpTextContainer > a {
 	color: var(--info-color);
 	font-size: var(--text-md);
 	text-decoration: underline;
 }
 
-.lp-category > h3 {
+.lpCategory > h3 {
 	margin: 2.4rem 0;
 	text-align: center;
 }
 
-.lp-cta {
+.lpCta {
 	text-align: center;
 	margin: 3.2rem auto;
 }
 
-.lp-cta .btn {
+.lpCta button {
 	background-color: var(--brand-color);
 	color: var(--white);
 	border-radius: 4rem;
 	padding: 1.6rem 3.2rem;
 }
 
-.lp-cta a {
+.lpCta a {
 	color: inherit;
 }

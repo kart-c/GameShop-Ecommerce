@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import styles from './Header.module.css';
 
 const Header = () => {
 	return (
-		<header className="header">
+		<header className={`header ${styles.header}`}>
 			<h2>
 				<Link to="/">
 					Game<span>Shop</span>
