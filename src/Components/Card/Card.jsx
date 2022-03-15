@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Card.css';
 
 const Card = () => {
 	return (
 		<article className="card product-card card-shadow">
-			<a href="#">
+			<Link to="/products">
 				<picture>
-					<source srcset="../../Assets/wallpaperflare.com_wallpaper.jpg" />
-					<source srcset="../../Assets/wallpaperflare.com_wallpaper.jpg" />
+					<source srcSet="../../Assets/wallpaperflare.com_wallpaper.jpg" />
+					<source srcSet="../../Assets/wallpaperflare.com_wallpaper.jpg" />
 					<img
 						src="../../Assets/wallpaperflare.com_wallpaper.jpg"
 						alt="card image 1"
 						className="card-img"
 					/>
 				</picture>
-			</a>
+			</Link>
 			<div className="content">
 				<h4>God of War</h4>
 				<span>RPG - PC game</span>
@@ -31,9 +32,9 @@ const Card = () => {
 					</small>
 					<small className="card-discount">(60% OFF)</small>
 				</p>
-				<a href="#" className="action-link">
+				<Link to="/cart" className="action-link">
 					Add to Cart
-				</a>
+				</Link>
 			</div>
 		</article>
 	);

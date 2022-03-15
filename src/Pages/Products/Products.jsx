@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Header } from '../../Components';
 import Filters from './Components/Filter/Filters';
 import './Products.css';
@@ -11,10 +12,10 @@ const Products = () => {
 				<Filters />
 				<section className="product-list">
 					<div className="pl-breadcrumb">
-						<a href="../../index.html">Home</a> {' > '}
-						<a href="#" className="current-pg">
+						<Link to="/">Home</Link> {' > '}
+						<Link to="/products" className="current-pg">
 							Products
-						</a>
+						</Link>
 					</div>
 					<Card />
 					<Card />
