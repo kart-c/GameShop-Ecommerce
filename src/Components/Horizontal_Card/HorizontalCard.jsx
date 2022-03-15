@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './HorizontalCard.css';
-import { Category1_1, Category1_2 } from '../../Assets/images';
+import { Category1 } from '../../Assets/images';
 
 const HorizontalCard = () => {
 	return (
 		<article className="card horizontal-card card-shadow">
-			<picture>
-				<source srcSet={Category1_1} />
-				<img src={Category1_2} alt="horizontal card image" className="card-img" />
-			</picture>
+			<img src={Category1} alt="horizontal card image" className="card-img" />
 			<div className="content">
 				<h3>Read Dead Redemption 2</h3>
 				<div className="buy-info">
