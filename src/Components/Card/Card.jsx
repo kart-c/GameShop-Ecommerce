@@ -6,9 +6,7 @@ import { Category1 } from '../../Assets/images';
 const Card = () => {
 	return (
 		<article className={`card product-card card-shadow ${styles.card}`}>
-			<Link to="/products">
-				<img src={Category1} alt="card image 1" className={`card-img ${styles.cardImg}`} />
-			</Link>
+			<img src={Category1} alt="card image 1" className={`card-img ${styles.cardImg}`} />
 			<div className={`content ${styles.content}`}>
 				<h4>God of War</h4>
 				<span>RPG - PC game</span>
@@ -23,7 +21,7 @@ const Card = () => {
 					<small>
 						<s>Rs. 2999</s>
 					</small>
-					<small className={styles.cardDiscount}>(60% OFF)</small>
+					<small className={styles.cardDiscount}> (60% OFF)</small>
 				</p>
 				<Link to="/cart" className={`action-link ${styles.actionLink}`}>
 					Add to Cart
