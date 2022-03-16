@@ -1,15 +1,15 @@
 import React from 'react';
 import { Card, Header } from '../../Components';
-import './Wishlist.css';
+import styles from './Wishlist.module.css';
 
 const Wishlist = () => {
 	return (
 		<>
 			<Header />
-			<main className="wl-pg">
-				<h3 className="wl-heading">My Wishlist</h3>
+			<main className={styles.wlPg}>
+				<h3 className={styles.wlHeading}>My Wishlist</h3>
 				<small>3 Items</small>
-				<section className="product-list">
+				<section className={styles.productList}>
 					<Card />
 					<Card />
 					<Card />

@@ -1,0 +1,25 @@
+.wlPg {
+	width: 90%;
+	margin: 9.6rem auto 7.2rem;
+}
+
+.wlHeading {
+	font-weight: 400;
+	margin-bottom: 0.8rem;
+}
+
+.wlHeading + small {
+	font-size: 1.4rem;
+	color: var(--grey);
+}
+
+.productList {
+	margin: 2.4rem 0;
+	display: grid;
+	grid-gap: 2.4rem;
+	grid-template-columns: repeat(auto-fit, minmax(28rem, 30rem));
+}
+
+.productList i {
+	transform: translateY(1px);
+}
