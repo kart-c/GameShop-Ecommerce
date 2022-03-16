@@ -9,17 +9,23 @@
 	height: 100%;
 }
 
-.lpCarouselContainer > i {
-	color: var(--white);
-	cursor: pointer;
+.lpCarouselContainer button {
+	background-color: transparent;
 	font-size: var(--text-lg);
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
+	width: 2.4rem;
+	height: 2.4rem;
 }
 
-.lpCarouselContainer > i:active {
+.lpCarouselContainer > button:active {
 	opacity: 0.7;
+}
+
+.lpCarouselContainer i {
+	color: var(--white);
+	background-color: transparent;
 }
 
 .carouselLeft {
