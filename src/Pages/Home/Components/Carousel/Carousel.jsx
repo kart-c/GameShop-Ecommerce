@@ -9,8 +9,12 @@ const Carousel = () => {
 			<Link to="/products">
 				<img src={Carousel1} alt="carousel image 1" className="resp-img" />
 			</Link>
-			<i className={`fa-solid fa-circle-chevron-left ${styles.carouselLeft}`}></i>
-			<i className={`fa-solid fa-circle-chevron-right ${styles.carouselRight}`}></i>
+			<button className={styles.carouselLeft}>
+				<i className="fa-solid fa-circle-chevron-left"></i>
+			</button>
+			<button className={styles.carouselRight}>
+				<i className="fa-solid fa-circle-chevron-right"></i>
+			</button>
 		</div>
 	);
 };
