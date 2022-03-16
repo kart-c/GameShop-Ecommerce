@@ -8,6 +8,10 @@
 	border-radius: 0;
 }
 
+.card:hover {
+	box-shadow: none;
+}
+
 .cardImg {
 	border-radius: 0;
 }
