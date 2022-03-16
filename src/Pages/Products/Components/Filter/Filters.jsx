@@ -50,7 +50,7 @@ const Filters = () => {
 					<label htmlFor="rating-input-4">1 star and above</label>
 				</div>
 			</div>
-			<div className="aside-rating">
+			<div className={styles.asideRating}>
 				<span>Sort By</span>
 				<div className={`radio-container ${styles.radioContainer}`}>
 					<input type="radio" name="example input" id="sort-input-1" />
