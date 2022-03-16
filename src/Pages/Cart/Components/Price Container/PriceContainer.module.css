@@ -1,31 +1,31 @@
-.cart-price-container {
+.cartPriceContainer {
 	margin-left: 7.2rem;
 	width: 32rem;
 }
 
-.cart-price-container > h3 {
+.cartPriceContainer > h3 {
 	padding-bottom: 1.6rem;
 	border-bottom: 1px solid var(--grey);
 }
 
-.price-details {
+.priceDetails {
 	border-bottom: 1px solid var(--grey);
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 }
 
-.price-details span {
+.priceDetails span {
 	display: block;
 	font-size: 14px;
 	margin: 0.8rem 0;
 }
 
-.price-details div:last-of-type span {
+.priceDetails div:last-of-type span {
 	text-align: end;
 }
 
-.price-details .amount-span {
+.priceDetails .amountSpan {
 	border-top: 1px solid var(--grey);
 	font-weight: 700;
 	font-size: var(--text-md);
@@ -33,7 +33,7 @@
 	margin-bottom: 0;
 }
 
-.price-details + .btn {
+.priceDetails + button {
 	display: block;
 	width: 100%;
 	margin-top: 1.6rem;
@@ -41,7 +41,7 @@
 }
 
 @media only screen and (max-width: 820px) {
-	.cart-price-container {
+	.cartPriceContainer {
 		margin: 1.6rem 0;
 		align-self: flex-start;
 	}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './HorizontalCard.css';
+import styles from './HorizontalCard.module.css';
 import { Category1 } from '../../Assets/images';
 
 const HorizontalCard = () => {
 	return (
-		<article className="card horizontal-card card-shadow">
-			<img src={Category1} alt="horizontal card image" className="card-img" />
-			<div className="content">
+		<article className={`card horizontal-card card-shadow ${styles.card}`}>
+			<img src={Category1} alt="horizontal card image" className={`card-img ${styles.cardImg}`} />
+			<div className={`content ${styles.content}`}>
 				<h3>Read Dead Redemption 2</h3>
 				<div className="buy-info">
 					<p>
@@ -30,7 +30,7 @@ const HorizontalCard = () => {
 					</div>
 				</div>
 				<div>
-					<Link to="/wishlist" className="action-link">
+					<Link to="/wishlist" className={`action-link ${styles.actionLink}`}>
 						Move to wishlist
 					</Link>
 				</div>
