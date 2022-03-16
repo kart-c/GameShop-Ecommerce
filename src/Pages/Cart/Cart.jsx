@@ -1,20 +1,20 @@
 import React from 'react';
 import { Header } from '../../Components';
 import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
-import './Cart.css';
+import styles from './Cart.module.css';
 import PriceContainer from './Components/Price Container/PriceContainer';
 
 const Cart = () => {
 	return (
 		<>
 			<Header />
-			<main className="cart-main">
+			<main className={styles.cartMain}>
 				<div>
-					<h3 className="cart-heading">My Cart</h3>
+					<h3 className={styles.cartHeading}>My Cart</h3>
 					<small>2 Items</small>
 				</div>
-				<section className="cart-container">
-					<div className="cart-items">
+				<section className={styles.cartContainer}>
+					<div>
 						<HorizontalCard />
 						<HorizontalCard />
 					</div>

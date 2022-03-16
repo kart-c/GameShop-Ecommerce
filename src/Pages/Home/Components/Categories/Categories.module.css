@@ -1,23 +1,22 @@
-.category-list {
+.categoryList {
 	display: flex;
 	overflow-x: auto;
 	scroll-behavior: smooth;
 }
 
-.category-item {
+.categoryItem {
 	display: block;
 	margin: 0 1.6rem 1.6rem;
 }
 
-.category-item picture,
-.category-item img {
+.categoryItem img {
 	display: block;
 	height: 24rem;
 	width: 24rem;
 	object-fit: cover;
 }
 
-.category-item > span {
+.categoryItem > span {
 	display: block;
 	font-size: var(--text-md);
 	margin-top: 1.6rem;
@@ -26,12 +25,11 @@
 }
 
 @media only screen and (min-width: 1280px) {
-	.category-item {
+	.categoryItem {
 		margin: 0 2.4rem 1.6rem;
 	}
 
-	.category-item picture,
-	.category-item img {
+	.categoryItem img {
 		height: 32rem;
 		width: 32rem;
 	}
