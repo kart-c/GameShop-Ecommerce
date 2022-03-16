@@ -4,21 +4,25 @@ import { carouselImgs } from '../../../../Assets/images';
 import styles from './Carousel.module.css';
 
 const Carousel = () => {
-	const [currentImg, setCurrentImg] = useState(0);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
 	const carouselHandler = (btnName) => {
 		if (btnName === 'prev') {
-			currentImg === 0 ? setCurrentImg(carouselImgs.length - 1) : setCurrentImg((prev) => prev - 1);
+			currentIndex === 0
+				? setCurrentIndex(carouselImgs.length - 1)
+				: setCurrentIndex((prev) => prev - 1);
 		}
 		if (btnName === 'next') {
-			currentImg === carouselImgs.length - 1 ? setCurrentImg(0) : setCurrentImg((prev) => prev + 1);
+			currentIndex === carouselImgs.length - 1
+				? setCurrentIndex(0)
+				: setCurrentIndex((prev) => prev + 1);
 		}
 	};
 
 	return (
 		<div className={styles.lpCarouselContainer}>
 			<Link to="/products">
-				<img src={carouselImgs[currentImg]} alt="carousel image 1" className="resp-img" />
+				<img src={carouselImgs[currentIndex]} alt="carousel image 1" className="resp-img" />
 			</Link>
 			<button className={styles.carouselLeft} onClick={() => carouselHandler('prev')}>
 				<i className="fa-solid fa-circle-chevron-left"></i>
