@@ -1,23 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Card.module.css';
-import { AOE4 } from '../../Assets/images';
 
-const Card = () => {
+const Card = ({ badge, categoryName, image, price, rating, title, wishlist }) => {
 	return (
 		<article className={`card product-card card-shadow ${styles.card}`}>
-			<img src={AOE4} alt="card image 1" className={`card-img ${styles.cardImg}`} />
+			<img src={image} alt="card image 1" className={`card-img ${styles.cardImg}`} />
 			<div className={`content ${styles.content}`}>
-				<h4>God of War</h4>
-				<span>RPG - PC game</span>
+				<h4>{title}</h4>
+				<span>{categoryName} - PC game</span>
 				<div className="overlay-icon">
-					<i className="far fa-heart"></i>
+					<i className={`far fa-heart ${wishlist && 'fas'}`}></i>
 				</div>
-				<span className={`product-card-badge ${styles.productCardBadge}`}>
-					<strong>New</strong>
-				</span>
+				{badge && (
+					<span className={`product-card-badge ${styles.productCardBadge}`}>
+						<strong>{badge}</strong>
+					</span>
+				)}
+				<div className={styles.rating}>Ratings: {rating}/5</div>
 				<p>
-					<strong>Rs. 1799</strong>{' '}
+					<strong>Rs. {price}</strong>{' '}
 					<small>
 						<s>Rs. 2999</s>
 					</small>
