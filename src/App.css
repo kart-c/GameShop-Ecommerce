@@ -12,3 +12,8 @@
 body {
 	font-family: 'Poppins', 'Open Sans', sans-serif;
 }
+
+/* iframe style was given to avoid the react overlay bug */
+iframe {
+	pointer-events: none;
+}
