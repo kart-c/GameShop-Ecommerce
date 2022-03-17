@@ -5,7 +5,7 @@ import Carousel from './Components/Carousel/Carousel';
 import Categories from './Components/Categories/Categories';
 import Footer from './Components/Footer/Footer';
 import styles from './Home.module.css';
-import { HeroImg } from '../../Assets/images';
+import { horizon } from '../../Assets/images';
 
 const Home = () => {
 	return (
@@ -14,7 +14,7 @@ const Home = () => {
 			<main className={styles.lpMain}>
 				<section className={styles.heroImgContainer}>
 					<Link to="/products">
-						<img src={HeroImg} alt="Hero Image" className={styles.heroImg} />
+						<img src={horizon} alt="Hero Image" className={styles.heroImg} />
 					</Link>
 				</section>
 				<section>
