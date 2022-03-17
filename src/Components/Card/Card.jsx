@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Card.module.css';
-import { Category1 } from '../../Assets/images';
+import { AOE4 } from '../../Assets/images';
 
 const Card = () => {
 	return (
 		<article className={`card product-card card-shadow ${styles.card}`}>
-			<img src={Category1} alt="card image 1" className={`card-img ${styles.cardImg}`} />
+			<img src={AOE4} alt="card image 1" className={`card-img ${styles.cardImg}`} />
 			<div className={`content ${styles.content}`}>
 				<h4>God of War</h4>
 				<span>RPG - PC game</span>

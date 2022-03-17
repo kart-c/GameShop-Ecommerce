@@ -1,9 +1,9 @@
-import HeroImg from './hero-image-2.jpg';
-import Category1 from './category-img-1.jpg';
-import Category2 from './category-img-2.jpg';
-import Category3 from './category-img-3.jpg';
-import Carousel1 from './carousel-img-1.jpg';
+import HeroImg from './horizon.jpg';
+import RDR2 from './RDR2.jpg';
+import Fifa from './Fifa.jpg';
+import AOE4 from './AOE4.jpg';
+import GOW from './God of war.jpg';
 
-const carouselImgs = [Carousel1, Category1, Category2];
+const carouselImgs = [GOW, RDR2, Fifa];
 
-export { HeroImg, Category1, Category2, Category3, Carousel1, carouselImgs };
+export { HeroImg, RDR2, Fifa, AOE4, GOW, carouselImgs };
