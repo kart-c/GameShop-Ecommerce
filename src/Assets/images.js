@@ -1,9 +1,34 @@
-import HeroImg from './hero-image-2.jpg';
-import Category1 from './category-img-1.jpg';
-import Category2 from './category-img-2.jpg';
-import Category3 from './category-img-3.jpg';
-import Carousel1 from './carousel-img-1.jpg';
+import horizon from './horizon.jpg';
+import RDR2 from './RDR2.jpg';
+import Fifa from './Fifa.jpg';
+import AOE4 from './AOE4.jpg';
+import GOW from './God of war.jpg';
+import Batman from './arkham knight.jpg';
+import EldenRing from './Elden Ring.jpg';
+import valorant from './valorant.jpg';
+import civilization from './civilization.jpg';
+import AOE2 from './AOE2.jpg';
+import NBA from './NBA.jpg';
+import sekiro from './sekiro.jpg';
+import witcher from './witcher.jpg';
+import mario from './mario.jpg';
 
-const carouselImgs = [Carousel1, Category1, Category2];
+const carouselImgs = [GOW, RDR2, Fifa];
 
-export { HeroImg, Category1, Category2, Category3, Carousel1, carouselImgs };
+export {
+	horizon,
+	RDR2,
+	Fifa,
+	AOE4,
+	GOW,
+	carouselImgs,
+	Batman,
+	EldenRing,
+	valorant,
+	civilization,
+	AOE2,
+	NBA,
+	sekiro,
+	witcher,
+	mario,
+};
