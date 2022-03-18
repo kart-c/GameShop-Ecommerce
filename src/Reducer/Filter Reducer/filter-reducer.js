@@ -28,7 +28,7 @@ export const filterReducer = (state, action) => {
 			return { ...state, outOfStock: !state.outOfStock };
 
 		case 'CLEAR':
-			return { ...state, price: 5000, category: [], rating: null, sortBy: null };
+			return { ...state, price: 5000, category: [], rating: null, sortBy: null, outOfStock: false };
 
 		default:
 			throw new Error('ACTION NOT DEFINED');
