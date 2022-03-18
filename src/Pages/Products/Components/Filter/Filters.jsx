@@ -21,6 +21,7 @@ const Filters = () => {
 					value={state.price}
 					onChange={(e) => dispatch({ type: 'PRICE', payload: { price: e.target.value } })}
 				/>
+				<span className={styles.currentPrice}>{state.price}</span>
 			</div>
 			<div className={styles.asideGenre}>
 				<span htmlFor="category">Genre</span>
