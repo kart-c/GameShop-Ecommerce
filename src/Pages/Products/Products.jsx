@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Header } from '../../Components';
 import Filters from './Components/Filter/Filters';
 import styles from './Products.module.css';
+import { useFilter } from '../../Context';
+import {
+	categoryFilter,
+	checkInStock,
+	priceFilter,
+	productSort,
+	ratingFilter,
+} from '../../Utils/index';
 import axios from 'axios';
 
 const Products = () => {
+	const { state } = useFilter();
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
-
-	console.log(products);
 
 	// Fetch products from database
 	const fetchProducts = async () => {
@@ -32,6 +39,16 @@ const Products = () => {
 		fetchProducts();
 	}, []);
 
+	const removeFromStock = checkInStock(state, products);
+
+	const selectedCategories = categoryFilter(state, removeFromStock);
+
+	const selectedRating = ratingFilter(state, selectedCategories);
+
+	const priceRangeHandler = priceFilter(state, selectedRating);
+
+	const sortedProducts = productSort(state, priceRangeHandler);
+
 	return (
 		<>
 			<Header />
@@ -46,12 +63,17 @@ const Products = () => {
 					</div>
 					{isLoading && <h2>Loading ...</h2>}
 					{isError && <h2>Error ...</h2>}
-					{products.length > 1 &&
-						products.map((product) => (
-							<li key={product.id}>
-								<Card {...product} />
-							</li>
-						))}
+					{!isLoading && !isError ? (
+						sortedProducts.length > 0 ? (
+							sortedProducts.map((product) => (
+								<li key={product.id}>
+									<Card {...product} />
+								</li>
+							))
+						) : (
+							<h2>No Products found</h2>
+						)
+					) : null}
 				</ul>
 				<footer className={styles.filterFooter}>
 					<button className="btn-primary">Filters</button>
