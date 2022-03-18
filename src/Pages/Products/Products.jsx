@@ -14,7 +14,7 @@ import {
 import axios from 'axios';
 
 const Products = () => {
-	const { state } = useFilter();
+	const { filterState } = useFilter();
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -39,15 +39,15 @@ const Products = () => {
 		fetchProducts();
 	}, []);
 
-	const removeFromStock = checkInStock(state, products);
+	const removeFromStock = checkInStock(filterState, products);
 
-	const selectedCategories = categoryFilter(state, removeFromStock);
+	const selectedCategories = categoryFilter(filterState, removeFromStock);
 
-	const selectedRating = ratingFilter(state, selectedCategories);
+	const selectedRating = ratingFilter(filterState, selectedCategories);
 
-	const priceRangeHandler = priceFilter(state, selectedRating);
+	const priceRangeHandler = priceFilter(filterState, selectedRating);
 
-	const sortedProducts = productSort(state, priceRangeHandler);
+	const sortedProducts = productSort(filterState, priceRangeHandler);
 
 	return (
 		<>

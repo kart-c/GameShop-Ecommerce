@@ -10,7 +10,7 @@ const FilterContext = createContext({
 });
 
 const FilterProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(filterReducer, {
+	const [filterState, filterDispatch] = useReducer(filterReducer, {
 		price: 5000,
 		category: [],
 		rating: null,
@@ -18,7 +18,11 @@ const FilterProvider = ({ children }) => {
 		outOfStock: false,
 	});
 
-	return <FilterContext.Provider value={{ state, dispatch }}>{children}</FilterContext.Provider>;
+	return (
+		<FilterContext.Provider value={{ filterState, filterDispatch }}>
+			{children}
+		</FilterContext.Provider>
+	);
 };
 
 const useFilter = () => useContext(FilterContext);
