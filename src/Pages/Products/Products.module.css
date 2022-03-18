@@ -8,7 +8,7 @@
 	margin-left: 3.2rem;
 	display: grid;
 	grid-gap: 2.4rem 1.6rem;
-	grid-template-columns: repeat(auto-fit, minmax(28rem, 30rem));
+	grid-template-columns: repeat(auto-fit, 28rem);
 	justify-items: center;
 	align-items: baseline;
 	list-style: none;
