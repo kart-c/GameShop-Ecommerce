@@ -52,6 +52,12 @@
 	width: 100%;
 }
 
+.guestLogin {
+	margin-top: 1.6rem;
+	background-color: var(--info-color);
+	width: 100%;
+}
+
 .spacer {
 	border-bottom: 1px solid var(--lynx-grey);
 	line-height: 0;
