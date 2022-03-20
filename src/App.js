@@ -6,6 +6,8 @@ import Login from './Pages/Login/Login';
 import Products from './Pages/Products/Products';
 import Signup from './Pages/Signup/Signup';
 import Wishlist from './Pages/Wishlist/Wishlist';
+import Mockman from 'mockman-js';
+import User from './Pages/User/User';
 
 function App() {
 	return (
@@ -17,6 +19,8 @@ function App() {
 				<Route path="wishlist" element={<Wishlist />} />
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<Signup />} />
+				<Route path="user" element={<User />} />
+				<Route path="/mock" element={<Mockman />} />
 			</Routes>
 		</>
 	);

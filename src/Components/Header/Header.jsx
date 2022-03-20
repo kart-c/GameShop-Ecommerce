@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../Context';
 import styles from './Header.module.css';
 
 const Header = () => {
+	const { authState } = useAuth();
+
 	return (
 		<header className={`header ${styles.header}`}>
 			<h2>
@@ -15,7 +18,7 @@ const Header = () => {
 			<nav className="nav">
 				<ul className="nav-list">
 					<li>
-						<Link to="/login">
+						<Link to={authState.token && authState.user ? '/user' : '/login'}>
 							<i className="fas fa-user"></i> Profile
 						</Link>
 					</li>
