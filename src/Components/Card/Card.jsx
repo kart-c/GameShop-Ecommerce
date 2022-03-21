@@ -38,20 +38,23 @@ const Card = ({
 					</small>
 					<small className={styles.cardDiscount}> (60% OFF)</small>
 				</p>
-				<button
-					disabled={badge === 'Out of Stock'}
-					className={`action-link ${styles.actionBtn}`}
-					title={badge === 'Out of Stock' ? 'Item is out of stock' : ''}
-					onClick={() => cartBtnHandler(_id)}
-				>
-					{checkCartStatus(_id) === 'Go to Cart' ? (
-						<span onClick={() => navigate('/cart')} className={styles.nav}>
-							Go to Cart
-						</span>
-					) : (
-						<span>Add to Cart</span>
-					)}
-				</button>
+				{checkCartStatus(_id) === 'Add to Cart' ? (
+					<button
+						disabled={badge === 'Out of Stock'}
+						className={`action-link ${styles.actionBtn}`}
+						title={badge === 'Out of Stock' ? 'Item is out of stock' : ''}
+						onClick={() => cartBtnHandler(_id)}
+					>
+						Add to Cart
+					</button>
+				) : (
+					<button
+						onClick={() => navigate('/cart')}
+						className={`action-link ${styles.actionBtn} ${styles.navigate}`}
+					>
+						Go to Cart
+					</button>
+				)}
 			</div>
 		</article>
 	);
