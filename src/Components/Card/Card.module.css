@@ -33,17 +33,40 @@
 	margin-top: auto;
 }
 
-.card .actionLink {
+.actionBtn {
+	padding: 0;
+	background-color: var(--white);
+}
+
+.actionBtn span {
+	display: block;
+	padding: 0.8rem 1.6rem;
 	background-color: var(--white);
 	color: var(--brand-color);
 	border: 2px solid var(--brand-color);
 	transition: color 0.2s ease-in, background-color 0.2s ease-in;
+	height: 100%;
+	width: 100%;
 }
 
-.actionLink:hover {
+.actionBtn span:hover {
 	background-color: var(--brand-color);
 	color: var(--white);
 	transition: color 0.2s ease-in, background-color 0.2s ease-in;
+}
+
+.actionBtn[disabled] {
+	cursor: not-allowed;
+}
+
+.actionBtn[disabled]:hover {
+	background-color: var(--white);
+	color: var(--brand-color);
+}
+
+.actionBtn .nav {
+	background-color: var(--brand-color);
+	color: var(--white);
 }
 
 .productCardBadge,
