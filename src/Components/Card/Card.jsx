@@ -14,6 +14,7 @@ const Card = ({
 	cartBtnHandler,
 	_id,
 	checkCartStatus,
+	cartBtnLoader,
 }) => {
 	const navigate = useNavigate();
 	return (
@@ -40,7 +41,7 @@ const Card = ({
 				</p>
 				{checkCartStatus(_id) === 'Add to Cart' ? (
 					<button
-						disabled={badge === 'Out of Stock'}
+						disabled={badge === 'Out of Stock' || cartBtnLoader}
 						className={`action-link ${styles.actionBtn}`}
 						title={badge === 'Out of Stock' ? 'Item is out of stock' : ''}
 						onClick={() => cartBtnHandler(_id)}
@@ -51,6 +52,7 @@ const Card = ({
 					<button
 						onClick={() => navigate('/cart')}
 						className={`action-link ${styles.actionBtn} ${styles.navigate}`}
+						disabled={cartBtnLoader}
 					>
 						Go to Cart
 					</button>

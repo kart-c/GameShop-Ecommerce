@@ -19,6 +19,7 @@ const Products = () => {
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
+	const [cartBtnLoader, setCartBtnLoader] = useState(false);
 
 	const { authState } = useAuth();
 
@@ -34,6 +35,8 @@ const Products = () => {
 				setIsLoading(false);
 				setIsError(false);
 				setProducts(response.data.products);
+			} else {
+				console.error('ERROR: ', response);
 			}
 		} catch (error) {
 			setIsLoading(false);
@@ -47,13 +50,14 @@ const Products = () => {
 	}, []);
 
 	const cartBtnHandler = async (_id) => {
+		setCartBtnLoader(true);
 		const product = products.find((product) => product._id === _id);
 		if (authState.token) {
-			const res = await addToCartHandler(product, authState.token);
+			const response = await addToCartHandler(product, authState.token);
 
-			if (res.status === 201) {
-				console.log(res);
-				cartDispatch({ type: 'ADD_TO_CART', payload: res.data.cart });
+			if (response.status === 201) {
+				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
+				setCartBtnLoader(false);
 			}
 		} else {
 			alert('You are not logged in');
@@ -98,6 +102,7 @@ const Products = () => {
 										{...product}
 										cartBtnHandler={cartBtnHandler}
 										checkCartStatus={checkCartStatus}
+										cartBtnLoader={cartBtnLoader}
 									/>
 								</li>
 							))
