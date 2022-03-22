@@ -26,6 +26,7 @@
 }
 
 .cardDiscount {
+	font-size: 12px;
 	color: var(--brand-color);
 }
 
