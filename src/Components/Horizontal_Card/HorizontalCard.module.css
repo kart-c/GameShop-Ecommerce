@@ -12,6 +12,11 @@
 	box-shadow: none;
 }
 
+.card h4 {
+	font-weight: 700;
+	margin-top: 0;
+}
+
 .cardImg {
 	border-radius: 0;
 }
@@ -23,6 +28,10 @@
 
 .content p:first-of-type {
 	padding: 0;
+}
+
+.cardDiscount {
+	font-size: 12px;
 }
 
 .card .actionLink {
