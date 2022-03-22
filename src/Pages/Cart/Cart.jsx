@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Header } from '../../Components';
 import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
 import { useAuth, useCart } from '../../Context';

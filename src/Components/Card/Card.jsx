@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../../Context';
+import { useNavigate } from 'react-router-dom';
 import styles from './Card.module.css';
 
 const Card = ({
