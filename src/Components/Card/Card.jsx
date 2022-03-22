@@ -33,9 +33,9 @@ const Card = ({
 				<div className={styles.rating}>Ratings: {rating}/5</div>
 				<p>
 					{discount ? (
-						<strong>{(price - (discount / 100) * price).toFixed(0)} </strong>
+						<strong>Rs. {(price - (discount / 100) * price).toFixed(0)} </strong>
 					) : (
-						<strong>{price} </strong>
+						<strong>Rs. {price} </strong>
 					)}
 
 					<small>{discount && <s>Rs. {price}</s>}</small>
