@@ -38,14 +38,14 @@ const Card = ({
 						<strong>Rs. {price} </strong>
 					)}
 
-					<small>{discount && <s>Rs. {price}</s>}</small>
-					{discount && <small className={styles.cardDiscount}> ({discount}% OFF)</small>}
+					<small>{discount ? <s>Rs. {price}</s> : ''}</small>
+					{discount ? <small className={styles.cardDiscount}> ({discount}% OFF)</small> : null}
 				</p>
 				{checkCartStatus(_id) === 'Add to Cart' ? (
 					<button
 						disabled={badge === 'Out of Stock' || cartBtnLoader}
 						className={`action-link ${styles.actionBtn}`}
-						title={badge === 'Out of Stock' ? 'Item is out of stock' : ''}
+						title={badge === 'Out of Stock' ? 'Item is out of stock' : null}
 						onClick={() => cartBtnHandler(_id)}
 					>
 						Add to Cart

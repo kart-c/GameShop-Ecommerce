@@ -77,10 +77,14 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
 						)}
 					</p>
 					<p>
-						<small>{discount && <s>Rs. {price}</s>}</small>
-						{discount && (
+						{discount ? (
+							<small>
+								<s>Rs. {price}</s>
+							</small>
+						) : null}
+						{discount ? (
 							<small className={`card-discount ${styles.cardDiscount}`}> ({discount}% OFF)</small>
-						)}
+						) : null}
 					</p>
 					<div className="product-count">
 						<button
