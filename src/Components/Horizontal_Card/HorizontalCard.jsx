@@ -4,7 +4,7 @@ import { useAuth, useCart } from '../../Context';
 import styles from './HorizontalCard.module.css';
 import axios from 'axios';
 
-const HorizontalCard = ({ _id, title, image, price, qty }) => {
+const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
 	const [qtyChangeLoader, setQtyChangeLoader] = useState(false);
 
 	const { cartState, cartDispatch } = useCart();
@@ -67,16 +67,20 @@ const HorizontalCard = ({ _id, title, image, price, qty }) => {
 		<article className={`card horizontal-card card-shadow ${styles.card}`}>
 			<img src={image} alt={image} className={`card-img ${styles.cardImg}`} />
 			<div className={`content ${styles.content}`}>
-				<h3>{title}</h3>
+				<h4>{title}</h4>
 				<div className="buy-info">
 					<p>
-						<strong>Rs. {price}</strong>
+						{discount ? (
+							<strong>Rs. {(price - (discount / 100) * price).toFixed(0)} </strong>
+						) : (
+							<strong>Rs. {price} </strong>
+						)}
 					</p>
 					<p>
-						<small>
-							<s>Rs. 2999</s>
-						</small>
-						<small className="card-discount"> (60% OFF)</small>
+						<small>{discount && <s>Rs. {price}</s>}</small>
+						{discount && (
+							<small className={`card-discount ${styles.cardDiscount}`}> ({discount}% OFF)</small>
+						)}
 					</p>
 					<div className="product-count">
 						<button
