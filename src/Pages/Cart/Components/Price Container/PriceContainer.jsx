@@ -40,7 +40,7 @@ const PriceContainer = () => {
 				<div>
 					<span>{totalPrice.toFixed(2)} /-</span>
 					<span>- {discount.toFixed(2)} /-</span>
-					<span>{(40).toFixed(2)} /-</span>
+					<span>40.00 /-</span>
 					<span className={styles.amountSpan}>{(totalPrice - discount + 40).toFixed(2)} /-</span>
 				</div>
 			</div>
