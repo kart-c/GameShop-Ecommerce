@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Card.module.css';
 
 const Card = ({
+	discount,
 	badge,
 	categoryName,
 	image,
 	price,
 	rating,
 	title,
-	wishlist,
 	cartBtnHandler,
 	_id,
 	checkCartStatus,
@@ -23,7 +23,7 @@ const Card = ({
 				<h4>{title}</h4>
 				<span>{categoryName} - PC game</span>
 				<div className="overlay-icon">
-					<i className={`far fa-heart ${wishlist && 'fas'}`}></i>
+					<i className="far fa-heart"></i>
 				</div>
 				{badge && (
 					<span className={`product-card-badge ${styles.productCardBadge}`}>
@@ -32,17 +32,20 @@ const Card = ({
 				)}
 				<div className={styles.rating}>Ratings: {rating}/5</div>
 				<p>
-					<strong>Rs. {price}</strong>{' '}
-					<small>
-						<s>Rs. 2999</s>
-					</small>
-					<small className={styles.cardDiscount}> (60% OFF)</small>
+					{discount ? (
+						<strong>Rs. {(price - (discount / 100) * price).toFixed(0)} </strong>
+					) : (
+						<strong>Rs. {price} </strong>
+					)}
+
+					<small>{discount ? <s>Rs. {price}</s> : ''}</small>
+					{discount ? <small className={styles.cardDiscount}> ({discount}% OFF)</small> : null}
 				</p>
 				{checkCartStatus(_id) === 'Add to Cart' ? (
 					<button
 						disabled={badge === 'Out of Stock' || cartBtnLoader}
 						className={`action-link ${styles.actionBtn}`}
-						title={badge === 'Out of Stock' ? 'Item is out of stock' : ''}
+						title={badge === 'Out of Stock' ? 'Item is out of stock' : null}
 						onClick={() => cartBtnHandler(_id)}
 					>
 						Add to Cart

@@ -5,6 +5,7 @@ import { useAuth, useCart } from '../../Context';
 import styles from './Cart.module.css';
 import PriceContainer from './Components/Price Container/PriceContainer';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 	const { authState } = useAuth();
@@ -51,7 +52,12 @@ const Cart = () => {
 						</section>
 					</>
 				) : (
-					<h1>Cart is Empty</h1>
+					<>
+						<h2>
+							Cart is empty
+							<Link to="/products"> Browse Products</Link>
+						</h2>
+					</>
 				)}
 			</main>
 		</>
