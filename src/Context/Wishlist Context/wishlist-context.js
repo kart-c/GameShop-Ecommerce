@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+import { wishlistReducer } from '../../Reducer';
 
 const WishlistContext = createContext({ wishlistState: [], wishlistDispatch: () => {} });
 
