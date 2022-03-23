@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Card, Header } from '../../Components';
 import Filters from './Components/Filter/Filters';
 import styles from './Products.module.css';
-import { useAuth, useCart, useFilter } from '../../Context';
+import { useFilter } from '../../Context';
 import {
 	categoryFilter,
 	checkInStock,
@@ -19,13 +19,6 @@ const Products = () => {
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
-	const [cartBtnLoader, setCartBtnLoader] = useState(false);
-
-	const { authState } = useAuth();
-
-	const { cartState, cartDispatch } = useCart();
-
-	const navigate = useNavigate();
 
 	// Fetch products from database
 	const fetchProducts = async () => {
@@ -48,27 +41,6 @@ const Products = () => {
 	useEffect(() => {
 		fetchProducts();
 	}, []);
-
-	const cartBtnHandler = async (_id) => {
-		setCartBtnLoader(true);
-		const product = products.find((product) => product._id === _id);
-		if (authState.token) {
-			const response = await addToCartHandler(product, authState.token);
-
-			if (response.status === 201) {
-				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
-				setCartBtnLoader(false);
-			}
-		} else {
-			alert('You are not logged in');
-			navigate('/login');
-		}
-	};
-
-	const checkCartStatus = (_id) => {
-		const itemInCart = cartState.cart.find((item) => item._id === _id);
-		return itemInCart ? 'Go to Cart' : 'Add to Cart';
-	};
 
 	const removeFromStock = checkInStock(filterState, products);
 
@@ -98,12 +70,7 @@ const Products = () => {
 						sortedProducts.length > 0 ? (
 							sortedProducts.map((product) => (
 								<li key={product.id}>
-									<Card
-										{...product}
-										cartBtnHandler={cartBtnHandler}
-										checkCartStatus={checkCartStatus}
-										cartBtnLoader={cartBtnLoader}
-									/>
+									<Card {...product} products={products} />
 								</li>
 							))
 						) : (
