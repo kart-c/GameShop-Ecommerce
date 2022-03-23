@@ -10,7 +10,6 @@ import {
 	priceFilter,
 	productSort,
 	ratingFilter,
-	addToCartHandler,
 } from '../../Utils/index';
 import axios from 'axios';
 
