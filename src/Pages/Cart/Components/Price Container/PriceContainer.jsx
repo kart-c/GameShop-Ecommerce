@@ -3,9 +3,11 @@ import { useCart } from '../../../../Context';
 import styles from './PriceContainer.module.css';
 
 const PriceContainer = () => {
-	const { cartState } = useCart();
+	const {
+		cartState: { cart },
+	} = useCart();
 
-	const curr = cartState.cart.reduce(
+	const curr = cart.reduce(
 		(acc, curr) => ({
 			...acc,
 			price: acc.price + curr.price * curr.qty,
@@ -13,13 +15,11 @@ const PriceContainer = () => {
 		{ price: 0, qty: 0 }
 	);
 
-	console.log(curr);
-
 	const totalPrice = curr.price;
 
 	const discountCalc = (price, discount, qty) => price * qty * (1 - discount / 100);
 
-	const discountedPrice = cartState.cart.reduce(
+	const discountedPrice = cart.reduce(
 		(acc, curr) => acc + discountCalc(curr.price, curr.discount, curr.qty),
 		0,
 		{ price: 0, discount: 0, qty: 0 }
@@ -29,7 +29,7 @@ const PriceContainer = () => {
 
 	return (
 		<div className={styles.cartPriceContainer}>
-			<h3>Total Price ({cartState.cart.length} Items)</h3>
+			<h3>Total Price ({cart.length} Items)</h3>
 			<div className={styles.priceDetails}>
 				<div>
 					<span>Price</span>
