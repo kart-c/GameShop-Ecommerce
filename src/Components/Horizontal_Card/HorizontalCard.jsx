@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, useCart } from '../../Context';
+import { useAuth, useCart, useWishlist } from '../../Context';
 import styles from './HorizontalCard.module.css';
 import axios from 'axios';
+import { addToWishlistHandler, checkWishlistStatus } from '../../Utils';
 
 const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
 	const [qtyChangeLoader, setQtyChangeLoader] = useState(false);
 
 	const { cartState, cartDispatch } = useCart();
 	const { authState } = useAuth();
+	const { wishlistState, wishlistDispatch } = useWishlist();
 
 	useEffect(() => {
 		return () => {};
@@ -63,6 +65,26 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
 		}
 	};
 
+	const addToWishlist = async (_id) => {
+		if (authState.token) {
+			const product = cartState.cart.find((product) => product._id === _id);
+			if (!checkWishlistStatus(_id, wishlistState.wishlist)) {
+				const response = await addToWishlistHandler(product, authState.token);
+				if (response.status === 201) {
+					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
+				}
+			} else {
+				const response = await removeFromWishlistHandler(_id, authState.token);
+				if (response.status === 200) {
+					wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: response.data.wishlist });
+				}
+			}
+		} else {
+			alert('You are not logged in');
+			navigate('/login');
+		}
+	};
+
 	return (
 		<article className={`card horizontal-card card-shadow ${styles.card}`}>
 			<img src={image} alt={image} className={`card-img ${styles.cardImg}`} />
@@ -103,9 +125,18 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
 					</div>
 				</div>
 				<div>
-					<Link to="/wishlist" className={`action-link ${styles.actionLink}`}>
-						Move to wishlist
-					</Link>
+					{checkWishlistStatus(_id, wishlistState.wishlist) ? (
+						<Link to="/wishlist" className={`action-link ${styles.actionLink}`}>
+							Go to Wishlist
+						</Link>
+					) : (
+						<button
+							className={`action-link ${styles.actionLink}`}
+							onClick={() => addToWishlist(_id)}
+						>
+							Move to wishlist
+						</button>
+					)}
 				</div>
 			</div>
 		</article>
