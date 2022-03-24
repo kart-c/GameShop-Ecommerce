@@ -1,30 +1,79 @@
-import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth, useCart, useWishlist } from '../../Context';
+import {
+	addToCartHandler,
+	addToWishlistHandler,
+	checkWishlistStatus,
+	removeFromWishlistHandler,
+} from '../../Utils';
 import styles from './Card.module.css';
 
-const Card = ({
-	discount,
-	badge,
-	categoryName,
-	image,
-	price,
-	rating,
-	title,
-	cartBtnHandler,
-	_id,
-	checkCartStatus,
-	cartBtnLoader,
-}) => {
+const Card = ({ discount, badge, categoryName, image, price, rating, title, _id, products }) => {
+	const [cartBtnLoader, setCartBtnLoader] = useState(false);
+
 	const navigate = useNavigate();
+
+	const { authState } = useAuth();
+
+	const { cartState, cartDispatch } = useCart();
+
+	const { wishlistState, wishlistDispatch } = useWishlist();
+
+	const checkCartStatus = (_id) => {
+		const itemInCart = cartState.cart.find((item) => item._id === _id);
+		return itemInCart ? 'Go to Cart' : 'Add to Cart';
+	};
+
+	const cartBtnHandler = async (_id) => {
+		setCartBtnLoader(true);
+		const product = products.find((product) => product._id === _id);
+		if (authState.token) {
+			const response = await addToCartHandler(product, authState.token);
+
+			if (response.status === 201) {
+				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
+				setCartBtnLoader(false);
+			}
+		} else {
+			alert('You are not logged in');
+			navigate('/login');
+		}
+	};
+
+	const addToWishlist = async (_id) => {
+		if (authState.token) {
+			const product = products.find((product) => product._id === _id);
+			if (!checkWishlistStatus(_id, wishlistState.wishlist)) {
+				const response = await addToWishlistHandler(product, authState.token);
+				if (response.status === 201) {
+					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
+				}
+			} else {
+				const response = await removeFromWishlistHandler(_id, authState.token);
+				if (response.status === 200) {
+					wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: response.data.wishlist });
+				}
+			}
+		} else {
+			alert('You are not logged in');
+			navigate('/login');
+		}
+	};
+
 	return (
 		<article className={`card product-card card-shadow ${styles.card}`}>
 			<img src={image} alt="card image 1" className={`card-img ${styles.cardImg}`} />
 			<div className={`content ${styles.content}`}>
 				<h4>{title}</h4>
 				<span>{categoryName} - PC game</span>
-				<div className="overlay-icon">
-					<i className="far fa-heart"></i>
-				</div>
+				<button className="overlay-icon" onClick={() => addToWishlist(_id)}>
+					<i
+						className={`${
+							checkWishlistStatus(_id, wishlistState.wishlist) ? 'fas' : 'far'
+						} fa-heart `}
+					></i>
+				</button>
 				{badge && (
 					<span className={`product-card-badge ${styles.productCardBadge}`}>
 						<strong>{badge}</strong>

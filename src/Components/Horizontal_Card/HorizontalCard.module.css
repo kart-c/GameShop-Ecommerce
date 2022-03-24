@@ -40,6 +40,7 @@
 	color: var(--brand-color);
 	transition: color 0.2s ease-in, background-color 0.2s ease-in;
 	min-width: 15rem;
+	text-align: center;
 }
 
 .card .actionLink:hover {

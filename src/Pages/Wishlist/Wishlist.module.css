@@ -16,8 +16,8 @@
 .productList {
 	margin: 2.4rem 0;
 	display: grid;
-	grid-gap: 2.4rem;
-	grid-template-columns: repeat(auto-fit, minmax(28rem, 30rem));
+	grid-gap: 2.4rem 1.6rem;
+	grid-template-columns: repeat(auto-fit, 28rem);
 }
 
 .productList i {

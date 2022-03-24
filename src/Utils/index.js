@@ -4,3 +4,6 @@ export { priceFilter } from './price-filter';
 export { productSort } from './product-sort';
 export { ratingFilter } from './rating-filter';
 export { addToCartHandler } from './add-to-cart';
+export { addToWishlistHandler } from './add-to-wishlist';
+export { removeFromWishlistHandler } from './remove-from-wishlist';
+export { checkWishlistStatus } from './check-wishlist-status';
