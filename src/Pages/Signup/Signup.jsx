@@ -36,7 +36,7 @@ const Signup = () => {
 						});
 						localStorage.setItem('token', response.data.encodedToken);
 						localStorage.setItem('user', JSON.stringify(response.data.createdUser));
-						navigate('/');
+						navigate(-1);
 						alert('Signed up');
 					} else {
 						console.error('ERROR: ', response);
