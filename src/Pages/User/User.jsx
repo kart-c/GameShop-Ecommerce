@@ -1,18 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../../Components';
-import { useAuth } from '../../Context';
+import { useAuth, useCart, useWishlist } from '../../Context';
 
 const User = () => {
 	const { authDispatch } = useAuth();
+
+	const { cartDispatch } = useCart();
+
+	const { wishlistDispatch } = useWishlist();
+
 	const navigate = useNavigate();
 
 	const logoutHandler = () => {
 		alert('Logged out');
 		localStorage.removeItem('token');
 		localStorage.removeItem('user');
-
 		authDispatch({ type: 'LOGOUT' });
+		cartDispatch({ type: 'LOGOUT' });
+		wishlistDispatch({ type: 'LOGOUT' });
 		navigate('/');
 	};
 

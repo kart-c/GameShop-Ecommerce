@@ -17,6 +17,9 @@ export const cartReducer = (state, action) => {
 		case 'REMOVE_FROM_CART':
 			return { ...state, cart: payload };
 
+		case 'LOGOUT':
+			return { ...state, cart: [] };
+
 		default:
 			throw new Error('NO CASE FOUND IN CART REDUCER');
 	}

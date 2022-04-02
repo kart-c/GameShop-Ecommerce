@@ -12,6 +12,9 @@ export const wishlistReducer = (state, action) => {
 			console.log({ ...state, wishlist: payload });
 			return { ...state, wishlist: payload };
 
+		case 'LOGOUT':
+			return { ...state, wishlist: [] };
+
 		default:
 			throw new Error('ERROR!!! NO CASE FOUND IN WISHLIST REDUCER');
 	}
