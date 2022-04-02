@@ -7,3 +7,5 @@ export { addToCartHandler } from './add-to-cart';
 export { addToWishlistHandler } from './add-to-wishlist';
 export { removeFromWishlistHandler } from './remove-from-wishlist';
 export { checkWishlistStatus } from './check-wishlist-status';
+export { fetchCartProducts } from './fetch-cart-products';
+export { fetchWishlist } from './fetch-wishlist';

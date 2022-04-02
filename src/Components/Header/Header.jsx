@@ -19,7 +19,8 @@ const Header = () => {
 				<ul className="nav-list">
 					<li>
 						<Link to={authState.token && authState.user ? '/user' : '/login'}>
-							<i className="fas fa-user"></i> Profile
+							<i className="fas fa-user"></i>
+							{authState.user ? ` ${authState.user.firstName}` : ' Login'}
 						</Link>
 					</li>
 					<li>

@@ -27,7 +27,7 @@ const Signup = () => {
 					const response = await axios.post('/api/auth/signup', {
 						email: formData.email,
 						password: formData.password,
-						name: formData.name,
+						firstName: formData.name,
 					});
 					if (response.status === 201) {
 						authDispatch({
@@ -36,7 +36,7 @@ const Signup = () => {
 						});
 						localStorage.setItem('token', response.data.encodedToken);
 						localStorage.setItem('user', JSON.stringify(response.data.createdUser));
-						navigate('/');
+						navigate(-2);
 						alert('Signed up');
 					} else {
 						console.error('ERROR: ', response);
