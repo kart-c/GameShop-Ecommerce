@@ -2,9 +2,10 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../../Components';
-import { useAuth } from '../../Context';
+import { useAuth, useCart, useWishlist } from '../../Context';
 import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
+import { fetchCartProducts } from '../../Utils';
 
 const Login = () => {
 	const { authDispatch } = useAuth();
@@ -17,6 +18,10 @@ const Login = () => {
 	const emailRef = useRef();
 
 	const navigate = useNavigate();
+
+	const { cartDispatch } = useCart();
+
+	const { wishlistDispatch } = useWishlist();
 
 	useEffect(() => {
 		emailRef.current.focus();
@@ -45,6 +50,8 @@ const Login = () => {
 				});
 				localStorage.setItem('token', response.data.encodedToken);
 				localStorage.setItem('user', JSON.stringify(response.data.foundUser));
+				fetchCartProducts(response.data.encodedToken, cartDispatch);
+				fetchCartProducts(response.data.encodedToken, wishlistDispatch);
 				navigate(-1);
 				alert('Logged in');
 			} else {

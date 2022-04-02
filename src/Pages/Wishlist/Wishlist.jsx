@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Card, Header } from '../../Components';
 import styles from './Wishlist.module.css';
-import axios from 'axios';
 import { useAuth, useWishlist } from '../../Context';
 import { Link } from 'react-router-dom';
+import { fetchWishlist } from '../../Utils';
 
 const Wishlist = () => {
 	const { authState } = useAuth();
@@ -13,22 +13,7 @@ const Wishlist = () => {
 		wishlistDispatch,
 	} = useWishlist();
 
-	const fetchWishlist = async () => {
-		try {
-			const response = await axios.get('/api/user/wishlist', {
-				headers: { authorization: authState.token },
-			});
-			if (response.status === 200) {
-				wishlistDispatch({ type: 'INITIAL', payload: response.data.wishlist });
-			} else {
-				console.error('ERROR: ', response);
-			}
-		} catch (error) {
-			console.log('ERROR: ', error);
-		}
-	};
-
-	useEffect(() => fetchWishlist(), []);
+	useEffect(() => fetchWishlist(authState.token, wishlistDispatch), []);
 
 	return (
 		<>
