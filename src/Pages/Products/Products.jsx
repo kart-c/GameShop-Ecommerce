@@ -18,6 +18,7 @@ const Products = () => {
 	const [products, setProducts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
+	const [filterDisplay, setFilterDisplay] = useState(false);
 
 	// Fetch products from database
 	const fetchProducts = async () => {
@@ -53,9 +54,13 @@ const Products = () => {
 
 	return (
 		<>
+			<div
+				className={`${styles.backdrop} ${filterDisplay ? styles.active : ''}`}
+				onClick={() => setFilterDisplay(false)}
+			></div>
 			<Header />
 			<main className={styles.plPg}>
-				<Filters />
+				<Filters filterDisplay={filterDisplay} />
 				<ul className={styles.productList}>
 					<div className={styles.plBreadcrumb}>
 						<Link to="/">Home</Link> {' > '}
@@ -78,8 +83,10 @@ const Products = () => {
 					) : null}
 				</ul>
 				<footer className={styles.filterFooter}>
-					<button className="btn-primary">Filters</button>
-					<button className="btn-primary">Sort</button>
+					<button className="btn-primary" onClick={() => setFilterDisplay(!filterDisplay)}>
+						Filters
+						<i class={`fa-solid ${filterDisplay ? 'fa-angle-down' : 'fa-angle-up'}`}></i>
+					</button>
 				</footer>
 			</main>
 		</>
