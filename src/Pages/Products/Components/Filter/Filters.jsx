@@ -1,12 +1,11 @@
-import React from 'react';
 import { useFilter } from '../../../../Context';
 import styles from './Filters.module.css';
 
-const Filters = () => {
+const Filters = ({ filterDisplay }) => {
 	const { filterState, filterDispatch } = useFilter();
 
 	return (
-		<aside className={styles.plAside}>
+		<aside className={`${styles.plAside} ${filterDisplay ? styles.active : ''}`}>
 			<div className={styles.asideHeading}>
 				<h4>Filters</h4>
 				<button onClick={() => filterDispatch({ type: 'CLEAR' })}>Clear</button>
