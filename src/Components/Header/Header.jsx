@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context';
+import { useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
 const Header = () => {
 	const { authState } = useAuth();
+
+	const location = useLocation();
+
+	console.log(location.pathname);
 
 	return (
 		<header className={`header ${styles.header}`}>
@@ -13,7 +18,9 @@ const Header = () => {
 					Game<span>Shop</span>
 				</Link>
 			</h2>
-			<input type="search" name="search" className="header-search" placeholder="Search..." />
+			{location.pathname === '/products' ? (
+				<input type="search" name="search" className="header-search" placeholder="Search..." />
+			) : null}
 			<i className="fas fa-bars hamburger-menu"></i>
 			<nav className="nav">
 				<ul className="nav-list">

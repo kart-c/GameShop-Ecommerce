@@ -9,9 +9,8 @@
 	z-index: 1;
 }
 
-.header h1 {
-	font-size: var(--text-lg);
-	line-height: var(--line-ht-lg);
+.header h2 {
+	margin-left: 1.6rem;
 }
 
 .header span {
@@ -20,4 +19,10 @@
 
 .header input {
 	border: 1px solid var(--black);
+}
+
+@media only screen and (max-width: 768px) {
+	.header h2 {
+		margin: 0;
+	}
 }
