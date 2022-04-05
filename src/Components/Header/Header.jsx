@@ -1,10 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context';
+import { useFilter } from '../../Context';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
-const Header = () => {
+const Header = ({ searchValue, setSearchValue }) => {
 	const { authState } = useAuth();
+
+	const location = useLocation();
+
+	const { filterDispatch } = useFilter();
+
+	const searchHandler = (e) => {
+		filterDispatch({ type: 'CLEAR' });
+		setSearchValue(e.target.value);
+	};
 
 	return (
 		<header className={`header ${styles.header}`}>
@@ -13,7 +23,16 @@ const Header = () => {
 					Game<span>Shop</span>
 				</Link>
 			</h2>
-			<input type="search" name="search" className="header-search" placeholder="Search..." />
+			{location.pathname === '/products' ? (
+				<input
+					type="search"
+					name="search"
+					className="header-search"
+					placeholder="Search..."
+					value={searchValue}
+					onChange={searchHandler}
+				/>
+			) : null}
 			<i className="fas fa-bars hamburger-menu"></i>
 			<nav className="nav">
 				<ul className="nav-list">

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Header } from '../../Components';
 import Filters from './Components/Filter/Filters';
-import styles from './Products.module.css';
 import { useFilter } from '../../Context';
 import {
 	categoryFilter,
@@ -10,8 +9,10 @@ import {
 	priceFilter,
 	productSort,
 	ratingFilter,
-} from '../../Utils/index';
+	searchProducts,
+} from '../../Utils';
 import axios from 'axios';
+import styles from './Products.module.css';
 
 const Products = () => {
 	const { filterState } = useFilter();
@@ -19,6 +20,7 @@ const Products = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 	const [filterDisplay, setFilterDisplay] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
 
 	// Fetch products from database
 	const fetchProducts = async () => {
@@ -52,27 +54,37 @@ const Products = () => {
 
 	const sortedProducts = productSort(filterState, priceRangeHandler);
 
+	const searchedProducts = searchProducts(sortedProducts, searchValue);
+
 	return (
 		<>
 			<div
 				className={`${styles.backdrop} ${filterDisplay ? styles.active : ''}`}
 				onClick={() => setFilterDisplay(false)}
 			></div>
-			<Header />
+			<Header searchValue={searchValue} setSearchValue={setSearchValue} />
 			<main className={styles.plPg}>
 				<Filters filterDisplay={filterDisplay} />
 				<ul className={styles.productList}>
-					<div className={styles.plBreadcrumb}>
-						<Link to="/">Home</Link> {' > '}
-						<Link to="/products" className={styles.currentPg}>
-							Products
-						</Link>
+					<div className={styles.plBreadcrumbContainer}>
+						<div>
+							<Link to="/">Home</Link> {' > '}
+							<Link to="/products" className={styles.currentPg}>
+								Products
+							</Link>
+						</div>
+						{searchedProducts.length > 0 && (
+							<span>
+								Showing {searchedProducts.length}{' '}
+								{searchedProducts.length > 1 ? 'products' : 'product'}
+							</span>
+						)}
 					</div>
 					{isLoading && <h2>Loading ...</h2>}
 					{isError && <h2>Error ...</h2>}
 					{!isLoading && !isError ? (
-						sortedProducts.length > 0 ? (
-							sortedProducts.map((product) => (
+						searchedProducts.length > 0 ? (
+							searchedProducts.map((product) => (
 								<li key={product.id}>
 									<Card {...product} products={products} />
 								</li>
