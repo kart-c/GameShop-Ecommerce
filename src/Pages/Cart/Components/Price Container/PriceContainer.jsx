@@ -1,8 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 import { useCart } from '../../../../Context';
 import styles from './PriceContainer.module.css';
 
 const PriceContainer = () => {
+	const [applyCoupon, setApplyCoupon] = useState(false);
+
 	const {
 		cartState: { cart },
 	} = useCart();
@@ -28,25 +30,28 @@ const PriceContainer = () => {
 	const discount = totalPrice - discountedPrice;
 
 	return (
-		<div className={styles.cartPriceContainer}>
-			<h3>Total Price ({cart.length} Items)</h3>
-			<button className={`btn btn-info ${styles.couponBtn}`}>Apply Coupons</button>
-			<div className={styles.priceDetails}>
-				<div>
-					<span>Price</span>
-					<span>Discount</span>
-					<span>Delivery Charges</span>
-					<span className={styles.amountSpan}>Total Amount</span>
+		<>
+			<div className={`${styles.backdrop} ${applyCoupon ? styles.active : ''}`}></div>
+			<div className={styles.cartPriceContainer}>
+				<h3>Total Price ({cart.length} Items)</h3>
+				<button className={`btn btn-info ${styles.couponBtn}`}>Apply Coupons</button>
+				<div className={styles.priceDetails}>
+					<div>
+						<span>Price</span>
+						<span>Discount</span>
+						<span>Delivery Charges</span>
+						<span className={styles.amountSpan}>Total Amount</span>
+					</div>
+					<div>
+						<span>{totalPrice.toFixed(2)} /-</span>
+						<span>- {discount.toFixed(2)} /-</span>
+						<span>40.00 /-</span>
+						<span className={styles.amountSpan}>{(totalPrice - discount + 40).toFixed(2)} /-</span>
+					</div>
 				</div>
-				<div>
-					<span>{totalPrice.toFixed(2)} /-</span>
-					<span>- {discount.toFixed(2)} /-</span>
-					<span>40.00 /-</span>
-					<span className={styles.amountSpan}>{(totalPrice - discount + 40).toFixed(2)} /-</span>
-				</div>
+				<button className="btn btn-primary">Place Order</button>
 			</div>
-			<button className="btn btn-primary">Place Order</button>
-		</div>
+		</>
 	);
 };
 
