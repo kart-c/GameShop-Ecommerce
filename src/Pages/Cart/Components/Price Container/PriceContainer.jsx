@@ -29,9 +29,34 @@ const PriceContainer = () => {
 
 	const discount = totalPrice - discountedPrice;
 
+	const totalAmount = 11000;
+	// (totalPrice - discount + 40).toFixed(2);
+
 	return (
 		<>
-			<div className={`${styles.backdrop} ${applyCoupon ? styles.active : ''}`}></div>
+			<div className={`modal-backdrop ${styles.backdrop} ${applyCoupon ? 'modal-hide' : ''}`}></div>
+			<div className={`modal ${applyCoupon ? 'modal-hide' : ''}`}>
+				<div className={`modal-container ${styles.modalContainer}`}>
+					<div className={`modal-header ${styles.modalHeader}`}>
+						<span>Select Coupon</span>
+						<button>
+							<i className="fa-solid fa-circle-xmark"></i>
+						</button>
+					</div>
+					<div className={`checkbox-container ${styles.coupon}`}>
+						<input type="checkbox" name="coupon 10%" id="coupon-1" disabled={totalAmount < 10000} />
+						<label htmlFor="coupon-1" className={totalAmount < 10000 ? styles.couponLabel : ''}>
+							<strong>10% off</strong> on purchases above 10,000
+						</label>
+					</div>
+					<div className={`checkbox-container ${styles.coupon}`}>
+						<input type="checkbox" name="coupon 15%" id="coupon-2" disabled={totalAmount < 12000} />
+						<label htmlFor="coupon-2" className={totalAmount < 12000 ? styles.couponLabel : ''}>
+							<strong>12% off</strong> on purchases above 12,000
+						</label>
+					</div>
+				</div>
+			</div>
 			<div className={styles.cartPriceContainer}>
 				<h3>Total Price ({cart.length} Items)</h3>
 				<button className={`btn btn-info ${styles.couponBtn}`}>Apply Coupons</button>
@@ -46,7 +71,7 @@ const PriceContainer = () => {
 						<span>{totalPrice.toFixed(2)} /-</span>
 						<span>- {discount.toFixed(2)} /-</span>
 						<span>40.00 /-</span>
-						<span className={styles.amountSpan}>{(totalPrice - discount + 40).toFixed(2)} /-</span>
+						<span className={styles.amountSpan}>{totalAmount} /-</span>
 					</div>
 				</div>
 				<button className="btn btn-primary">Place Order</button>
