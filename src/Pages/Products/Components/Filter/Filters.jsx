@@ -1,8 +1,26 @@
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { useFilter } from '../../../../Context';
 import styles from './Filters.module.css';
 
 const Filters = ({ filterDisplay }) => {
 	const { filterState, filterDispatch } = useFilter();
+	const [categories, setCategories] = useState([]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const response = await axios.get('/api/categories');
+				if (response.status) {
+					setCategories(response.data.categories);
+				} else {
+					console.error('ERROR: ', error);
+				}
+			} catch (error) {
+				console.error('ERROR: ', error);
+			}
+		})();
+	}, []);
 
 	return (
 		<aside className={`${styles.plAside} ${filterDisplay ? styles.active : ''}`}>
@@ -24,66 +42,25 @@ const Filters = ({ filterDisplay }) => {
 			</div>
 			<div className={styles.asideGenre}>
 				<span htmlFor="category">Genre</span>
-				<div className={`checkbox-container ${styles.checkboxContainer}`}>
-					<input
-						type="checkbox"
-						name="category checkbox"
-						id="category-checkbox-1"
-						checked={filterState.category.includes('Action')}
-						onChange={(e) =>
-							filterDispatch({
-								type: 'CATEGORY_FILTER',
-								payload: { type: 'Action', isChecked: e.target.checked },
-							})
-						}
-					/>
-					<label htmlFor="category-checkbox-1">Action</label>
-				</div>
-				<div className={`checkbox-container ${styles.checkboxContainer}`}>
-					<input
-						type="checkbox"
-						name="category checkbox"
-						id="category-checkbox-2"
-						checked={filterState.category.includes('Sports')}
-						onChange={(e) =>
-							filterDispatch({
-								type: 'CATEGORY_FILTER',
-								payload: { type: 'Sports', isChecked: e.target.checked },
-							})
-						}
-					/>
-					<label htmlFor="category-checkbox-2">Sports</label>
-				</div>
-				<div className={`checkbox-container ${styles.checkboxContainer}`}>
-					<input
-						type="checkbox"
-						name="category checkbox"
-						id="category-checkbox-3"
-						checked={filterState.category.includes('RPG')}
-						onChange={(e) =>
-							filterDispatch({
-								type: 'CATEGORY_FILTER',
-								payload: { type: 'RPG', isChecked: e.target.checked },
-							})
-						}
-					/>
-					<label htmlFor="category-checkbox-3">RPG</label>
-				</div>
-				<div className={`checkbox-container ${styles.checkboxContainer}`}>
-					<input
-						type="checkbox"
-						name="category checkbox"
-						id="category-checkbox-4"
-						checked={filterState.category.includes('Strategy')}
-						onChange={(e) =>
-							filterDispatch({
-								type: 'CATEGORY_FILTER',
-								payload: { type: 'Strategy', isChecked: e.target.checked },
-							})
-						}
-					/>
-					<label htmlFor="category-checkbox-4">Strategy</label>
-				</div>
+				{categories.length > 1
+					? categories.map(({ _id, categoryName }) => (
+							<div key={_id} className={`checkbox-container ${styles.checkboxContainer}`}>
+								<input
+									type="checkbox"
+									name="category checkbox"
+									id={`${_id}`}
+									checked={filterState.category.includes(categoryName)}
+									onChange={(e) =>
+										filterDispatch({
+											type: 'CATEGORY_FILTER',
+											payload: { type: categoryName, isChecked: e.target.checked },
+										})
+									}
+								/>
+								<label htmlFor={`${_id}`}>{categoryName}</label>
+							</div>
+					  ))
+					: null}
 			</div>
 			<div className={styles.asideRating}>
 				<span>Rating</span>
