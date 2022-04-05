@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../../Components';
 import Carousel from './Components/Carousel/Carousel';
@@ -6,8 +6,15 @@ import Categories from './Components/Categories/Categories';
 import Footer from './Components/Footer/Footer';
 import styles from './Home.module.css';
 import { horizon } from '../../Assets/images';
+import { useFilter } from '../../Context';
 
 const Home = () => {
+	const { filterDispatch } = useFilter();
+
+	useEffect(() => {
+		filterDispatch({ type: 'CLEAR' });
+	}, []);
+
 	return (
 		<>
 			<Header />
