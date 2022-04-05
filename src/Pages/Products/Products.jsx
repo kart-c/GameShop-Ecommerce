@@ -66,11 +66,19 @@ const Products = () => {
 			<main className={styles.plPg}>
 				<Filters filterDisplay={filterDisplay} />
 				<ul className={styles.productList}>
-					<div className={styles.plBreadcrumb}>
-						<Link to="/">Home</Link> {' > '}
-						<Link to="/products" className={styles.currentPg}>
-							Products
-						</Link>
+					<div className={styles.plBreadcrumbContainer}>
+						<div>
+							<Link to="/">Home</Link> {' > '}
+							<Link to="/products" className={styles.currentPg}>
+								Products
+							</Link>
+						</div>
+						{searchedProducts.length > 0 && (
+							<span>
+								Showing {searchedProducts.length}{' '}
+								{searchedProducts.length > 1 ? 'products' : 'product'}
+							</span>
+						)}
 					</div>
 					{isLoading && <h2>Loading ...</h2>}
 					{isError && <h2>Error ...</h2>}

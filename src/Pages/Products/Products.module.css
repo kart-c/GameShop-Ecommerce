@@ -26,13 +26,21 @@
 	list-style: none;
 }
 
-.plBreadcrumb {
+.plBreadcrumbContainer {
 	grid-column: 1/-1;
 	font-size: var(--text-md);
 	justify-self: flex-start;
 }
 
-.plBreadcrumb .currentPg {
+.plBreadcrumbContainer > div {
+	display: inline-block;
+}
+
+.plBreadcrumbContainer > span {
+	margin-left: 2.4rem;
+}
+
+.plBreadcrumbContainer .currentPg {
 	color: var(--info-color);
 }
 
@@ -71,6 +79,21 @@
 	.productList {
 		margin: 0;
 		justify-content: center;
+	}
+
+	.plBreadcrumbContainer {
+		justify-self: center;
+	}
+
+	.plBreadcrumbContainer > div {
+		text-align: center;
+		display: block;
+	}
+
+	.plBreadcrumbContainer > span {
+		margin: 0;
+		display: inline-block;
+		margin-top: 8px;
 	}
 
 	.filterFooter {
