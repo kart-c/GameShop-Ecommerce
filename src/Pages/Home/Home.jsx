@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../../Components';
 import Carousel from './Components/Carousel/Carousel';

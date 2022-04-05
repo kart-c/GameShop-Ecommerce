@@ -85,7 +85,7 @@ const Products = () => {
 				<footer className={styles.filterFooter}>
 					<button className="btn-primary" onClick={() => setFilterDisplay(!filterDisplay)}>
 						Filters
-						<i class={`fa-solid ${filterDisplay ? 'fa-angle-down' : 'fa-angle-up'}`}></i>
+						<i className={`fa-solid ${filterDisplay ? 'fa-angle-down' : 'fa-angle-up'}`}></i>
 					</button>
 				</footer>
 			</main>
