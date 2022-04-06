@@ -22,6 +22,10 @@
 }
 
 @media only screen and (max-width: 768px) {
+	.header {
+		flex-wrap: wrap;
+	}
+
 	.header h2 {
 		margin: 0;
 	}
@@ -59,6 +63,10 @@
 		cursor: pointer;
 	}
 
+	.searchActive {
+		top: 12rem;
+	}
+
 	.nav > ul {
 		flex-direction: column;
 	}
@@ -66,5 +74,12 @@
 	.nav li {
 		width: 100%;
 		padding: 8px;
+	}
+
+	.search {
+		display: block;
+		order: 3;
+		width: 100%;
+		margin: 8px 0 0;
 	}
 }

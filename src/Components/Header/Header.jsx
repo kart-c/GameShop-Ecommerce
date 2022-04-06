@@ -20,7 +20,9 @@ const Header = ({ searchValue, setSearchValue }) => {
 	return (
 		<header className={`header ${styles.header}`}>
 			<div
-				className={`${showMenu ? styles.backdrop : ''}`}
+				className={`${showMenu ? styles.backdrop : ''} ${
+					location.pathname === '/products' ? styles.searchActive : ''
+				}`}
 				onClick={() => setShowMenu(false)}
 			></div>
 			<h2>
@@ -32,7 +34,7 @@ const Header = ({ searchValue, setSearchValue }) => {
 				<input
 					type="search"
 					name="search"
-					className="header-search"
+					className={`header-search ${styles.search}`}
 					placeholder="Search..."
 					value={searchValue}
 					onChange={searchHandler}
@@ -41,7 +43,11 @@ const Header = ({ searchValue, setSearchValue }) => {
 			<button className={`${styles.menuBtn}`} onClick={() => setShowMenu(!showMenu)}>
 				<i className="fas fa-bars hamburger-menu"></i>
 			</button>
-			<nav className={`nav ${styles.nav} ${showMenu ? styles.active : ''}`}>
+			<nav
+				className={`nav ${styles.nav} ${showMenu ? styles.active : ''} ${
+					location.pathname === '/products' ? styles.searchActive : ''
+				}`}
+			>
 				<ul className="nav-list">
 					<li>
 						<Link to={authState.token && authState.user ? '/user' : '/login'}>
