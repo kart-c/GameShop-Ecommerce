@@ -42,7 +42,6 @@ const Login = () => {
 				email: formData.email,
 				password: formData.password,
 			});
-			console.log(response);
 			if (response.status === 200) {
 				authDispatch({
 					type: 'LOGIN',

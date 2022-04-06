@@ -1,35 +1,44 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../../../Context';
 import './Footer.css';
 
 const Footer = () => {
+	const {
+		authState: { token },
+	} = useAuth();
+
 	return (
 		<footer className="lp-footer">
 			<div className="lp-footer-text">
 				<h4>About US</h4>
 				<p>
-					Website is an open source project. To contribute <a href="#">Click here</a>.
+					Website is an open source project. To contribute{' '}
+					<a href="https://github.com/kart-c/GameShop-Ecommerce" target="blank">
+						Click here
+					</a>
 				</p>
 			</div>
 			<ul className="footer-nav-links">
 				<li>
-					<a href="#">Contact Us</a>
+					<Link to="/">Contact Us</Link>
 				</li>
 				<li>
-					<a href="#">Trending</a>
+					<Link to="/products">Trending</Link>
 				</li>
 				<li>
-					<a href="#">New Releases</a>
+					<Link to="/products">New Releases</Link>
 				</li>
 			</ul>
 			<ul className="footer-nav-links">
 				<li>
-					<a href="#">My Cart</a>
+					<Link to={token ? '/cart' : '/'}>My Cart</Link>
 				</li>
 				<li>
-					<a href="./pages/signup/signup.html">Sign up</a>
+					<Link to={token ? '/user' : '/signup'}>Sign up</Link>
 				</li>
 				<li>
-					<a href="./pages/login/login.html">Login</a>
+					<Link to={token ? '/user' : '/login'}>Login</Link>
 				</li>
 			</ul>
 		</footer>
