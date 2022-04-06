@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Header } from '../../Components';
+import { Header, Loaders } from '../../Components';
 import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
 import { useAuth, useCart } from '../../Context';
 import styles from './Cart.module.css';
@@ -10,16 +10,18 @@ import { fetchCartProducts } from '../../Utils';
 const Cart = () => {
 	const { authState } = useAuth();
 	const [couponType, setCouponType] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
 
 	const { cartState, cartDispatch } = useCart();
 
 	useEffect(() => {
-		fetchCartProducts(authState.token, cartDispatch);
+		fetchCartProducts(authState.token, cartDispatch, setIsLoading);
 	}, []);
 
 	return (
 		<>
 			<Header />
+			{isLoading && <Loaders />}
 			<main className={styles.cartMain}>
 				{cartState.cart.length > 0 ? (
 					<>
