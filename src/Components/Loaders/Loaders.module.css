@@ -6,8 +6,9 @@
 	width: 1em;
 	height: 1em;
 	border-radius: 50%;
-	position: relative;
+	position: fixed;
 	left: 50%;
+	top: 50%;
 	transform: translateZ(0) translate(-50%, -50%);
 	animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
 }
