@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Header } from '../../Components';
+import { Card, Header, Loaders } from '../../Components';
 import Filters from './Components/Filter/Filters';
 import { useFilter } from '../../Context';
 import {
@@ -80,7 +80,7 @@ const Products = () => {
 							</span>
 						)}
 					</div>
-					{isLoading && <h2>Loading ...</h2>}
+					{isLoading && <Loaders />}
 					{isError && <h2>Error ...</h2>}
 					{!isLoading && !isError ? (
 						searchedProducts.length > 0 ? (
