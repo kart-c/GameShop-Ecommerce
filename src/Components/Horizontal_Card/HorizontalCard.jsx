@@ -5,7 +5,7 @@ import styles from './HorizontalCard.module.css';
 import axios from 'axios';
 import { addToWishlistHandler, checkWishlistStatus } from '../../Utils';
 
-const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
+const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType }) => {
 	const [qtyChangeLoader, setQtyChangeLoader] = useState(false);
 
 	const { cartState, cartDispatch } = useCart();
@@ -55,6 +55,7 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount }) => {
 				}
 			);
 			if (response.status === 200) {
+				type === 'decrement' ? setCouponType('') : null;
 				cartDispatch({ type: type.toUpperCase(), payload: response.data.cart });
 				setQtyChangeLoader(false);
 			} else {

@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { useCart } from '../../../../Context';
 import styles from './PriceContainer.module.css';
 
-const PriceContainer = () => {
+const PriceContainer = ({ couponType, setCouponType }) => {
 	const [applyCoupon, setApplyCoupon] = useState(false);
-	const [couponType, setCouponType] = useState('');
 
 	const {
 		cartState: { cart },

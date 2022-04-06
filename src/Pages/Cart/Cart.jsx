@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '../../Components';
 import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
 import { useAuth, useCart } from '../../Context';
@@ -9,6 +9,7 @@ import { fetchCartProducts } from '../../Utils';
 
 const Cart = () => {
 	const { authState } = useAuth();
+	const [couponType, setCouponType] = useState('');
 
 	const { cartState, cartDispatch } = useCart();
 
@@ -29,11 +30,11 @@ const Cart = () => {
 						<section className={styles.cartContainer}>
 							<div>
 								{cartState.cart.map((card) => (
-									<HorizontalCard {...card} key={card._id} />
+									<HorizontalCard {...card} key={card._id} setCouponType={setCouponType} />
 								))}
 							</div>
 
-							<PriceContainer />
+							<PriceContainer couponType={couponType} setCouponType={setCouponType} />
 						</section>
 					</>
 				) : (
