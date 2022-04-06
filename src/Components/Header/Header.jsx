@@ -1,10 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../Context';
 import { useFilter } from '../../Context';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
 
 const Header = ({ searchValue, setSearchValue }) => {
+	const [showMenu, setShowMenu] = useState(false);
 	const { authState } = useAuth();
 
 	const location = useLocation();
@@ -18,6 +19,10 @@ const Header = ({ searchValue, setSearchValue }) => {
 
 	return (
 		<header className={`header ${styles.header}`}>
+			<div
+				className={`${showMenu ? styles.backdrop : ''}`}
+				onClick={() => setShowMenu(false)}
+			></div>
 			<h2>
 				<Link to="/">
 					Game<span>Shop</span>
@@ -33,8 +38,10 @@ const Header = ({ searchValue, setSearchValue }) => {
 					onChange={searchHandler}
 				/>
 			) : null}
-			<i className="fas fa-bars hamburger-menu"></i>
-			<nav className="nav">
+			<button className={`${styles.menuBtn}`} onClick={() => setShowMenu(!showMenu)}>
+				<i className="fas fa-bars hamburger-menu"></i>
+			</button>
+			<nav className={`nav ${styles.nav} ${showMenu ? styles.active : ''}`}>
 				<ul className="nav-list">
 					<li>
 						<Link to={authState.token && authState.user ? '/user' : '/login'}>
