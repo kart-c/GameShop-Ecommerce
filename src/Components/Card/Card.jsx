@@ -33,8 +33,8 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 		const product = products.find((product) => product._id === _id);
 		if (authState.token) {
 			const response = await addToCartHandler(product, authState.token);
-
 			if (response.status === 201) {
+				toast.success(`${product.title} added to cart`);
 				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
 				setCartBtnLoader(false);
 			}
@@ -51,12 +51,14 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 			if (!checkWishlistStatus(_id, wishlistState.wishlist)) {
 				const response = await addToWishlistHandler(product, authState.token);
 				if (response.status === 201) {
+					toast.success(`${product.title} added to wishlist`);
 					setWishlistLoader(false);
 					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
 				}
 			} else {
 				const response = await removeFromWishlistHandler(_id, authState.token);
 				if (response.status === 200) {
+					toast.info(`${product.title} removed from wishlist`);
 					setWishlistLoader(false);
 					wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: response.data.wishlist });
 				}
