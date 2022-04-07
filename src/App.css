@@ -3,6 +3,7 @@
 :root {
 	--brand-color: #e7230d;
 	--white: #fff;
+	--toastify-toast-min-height: 5.6rem;
 }
 
 * {
