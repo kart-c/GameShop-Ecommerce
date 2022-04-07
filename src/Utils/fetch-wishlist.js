@@ -6,7 +6,7 @@ export const fetchWishlist = async (token, wishlistDispatch, setIsLoading) => {
 			headers: { authorization: token },
 		});
 		if (response.status === 200) {
-			setIsLoading(false);
+			setIsLoading && setIsLoading(false);
 			wishlistDispatch({ type: 'INITIAL', payload: response.data.wishlist });
 		} else {
 			console.error('ERROR: ', response);

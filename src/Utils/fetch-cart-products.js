@@ -6,12 +6,13 @@ export const fetchCartProducts = async (token, cartDispatch, setIsLoading) => {
 			headers: { authorization: token },
 		});
 		if (response.status === 200) {
-			setIsLoading(false);
+			setIsLoading && setIsLoading(false);
 			cartDispatch({ type: 'INITIAL', payload: response.data.cart });
 		} else {
 			console.error('ERROR: ', response);
 		}
 	} catch (error) {
+		console.log(error);
 		console.log('ERROR: ', error);
 	}
 };
