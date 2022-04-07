@@ -97,7 +97,7 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 						title={badge === 'Out of Stock' ? 'Item is out of stock' : null}
 						onClick={() => cartBtnHandler(_id)}
 					>
-						Add to Cart
+						{cartBtnLoader ? <span className={styles.loader}></span> : 'Add to Cart'}
 					</button>
 				) : (
 					<button
