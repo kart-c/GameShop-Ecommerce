@@ -96,12 +96,16 @@ const PriceContainer = ({ couponType, setCouponType }) => {
 						<span>Price</span>
 						<span>Discount</span>
 						<span>Delivery Charges</span>
+						{totalAmount !== finalValue() ? <span>Coupon discount</span> : null}
 						<span className={styles.amountSpan}>Total Amount</span>
 					</div>
 					<div>
 						<span>{totalPrice.toFixed(2)} /-</span>
 						<span>- {discount.toFixed(2)} /-</span>
 						<span>40.00 /-</span>
+						{totalAmount !== finalValue() ? (
+							<span>- {(totalAmount - finalValue()).toFixed(2)} /-</span>
+						) : null}
 						<span className={styles.amountSpan}>{finalValue()} /-</span>
 					</div>
 				</div>
