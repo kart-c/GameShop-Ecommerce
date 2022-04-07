@@ -30,7 +30,7 @@ const Cart = () => {
 			});
 			if (response.status === 200) {
 				setCouponType('');
-				toast.info(`Removed ${title} from cart`);
+				title && toast.info(`Removed ${title} from cart`);
 				cartDispatch({ type: 'REMOVE_FROM_CART', payload: response.data.cart });
 				setQtyChangeLoader && setQtyChangeLoader(false);
 			} else {
