@@ -57,7 +57,7 @@ const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
 				key_secret: 'aveN5IQwnEMFnITnCwBadifG',
 				amount: finalValue() * 100,
 				currency: 'INR',
-				name: 'CheckMate Store',
+				name: 'GameShop',
 				description: 'Thank you for shopping with us',
 				callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
 				prefill: {
