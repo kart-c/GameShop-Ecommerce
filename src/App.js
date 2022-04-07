@@ -11,6 +11,7 @@ import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { Error404 } from './Pages/Error404/Error404';
 
 function App() {
 	const { authState } = useAuth();
@@ -38,6 +39,7 @@ function App() {
 				<Route path="signup" element={<Signup />} />
 				<Route path="user" element={<User />} />
 				<Route path="/mock" element={<Mockman />} />
+				<Route path="*" element={<Error404 />} />
 			</Routes>
 		</>
 	);
