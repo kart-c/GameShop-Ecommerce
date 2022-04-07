@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Header, Loaders } from '../../Components';
-import styles from './Wishlist.module.css';
 import { useAuth, useWishlist } from '../../Context';
 import { Link } from 'react-router-dom';
 import { fetchWishlist } from '../../Utils';
+import { emptyWishlist } from '../../Assets/images';
+import styles from './Wishlist.module.css';
 
 const Wishlist = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -32,9 +33,15 @@ const Wishlist = () => {
 						</section>
 					</>
 				) : (
-					<h1>
-						Your Wishlist is empty. <Link to="/products">Browse Products</Link>
-					</h1>
+					<>
+						{!isLoading && (
+							<div className={styles.emptyCartContainer}>
+								<span className={styles.emptyMsgTitle}>Hmm... So empty</span>
+								<img src={emptyWishlist} alt="responsive image" className="resp-img" />
+								<Link to="/products"> Browse Products</Link>
+							</div>
+						)}
+					</>
 				)}
 			</main>
 		</>
