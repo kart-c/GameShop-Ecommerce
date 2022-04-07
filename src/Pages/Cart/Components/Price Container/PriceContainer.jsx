@@ -90,7 +90,7 @@ const PriceContainer = ({ couponType, setCouponType }) => {
 					Total Price ({cart.length} {cart.length > 1 ? 'Items' : 'Item'})
 				</h3>
 				<button className={`btn btn-info ${styles.couponBtn}`} onClick={() => setApplyCoupon(true)}>
-					{couponType ? 'Coupon Applied' : 'Apply Coupons'}
+					{couponType ? 'Coupon Applied' : 'Apply Coupon'}
 				</button>
 				{couponType ? <span className={styles.couponType}>{couponType}%</span> : ''}
 				<div className={styles.priceDetails}>
