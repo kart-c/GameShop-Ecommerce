@@ -4,6 +4,7 @@ import { useAuth, useCart, useWishlist } from '../../Context';
 import styles from './HorizontalCard.module.css';
 import axios from 'axios';
 import { addToWishlistHandler, checkWishlistStatus } from '../../Utils';
+import { toast } from 'react-toastify';
 
 const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType }) => {
 	const [qtyChangeLoader, setQtyChangeLoader] = useState(false);
@@ -24,6 +25,7 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 				},
 			});
 			if (response.status === 200) {
+				toast.info(`Removed ${title} from cart`);
 				cartDispatch({ type: 'REMOVE_FROM_CART', payload: response.data.cart });
 				setQtyChangeLoader(false);
 			} else {
@@ -72,6 +74,7 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 			if (!checkWishlistStatus(_id, wishlistState.wishlist)) {
 				const response = await addToWishlistHandler(product, authState.token);
 				if (response.status === 201) {
+					toast.info(`${title} added to wishlist`);
 					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
 				}
 			} else {
@@ -135,7 +138,7 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 							className={`action-link ${styles.actionLink}`}
 							onClick={() => addToWishlist(_id)}
 						>
-							Move to wishlist
+							Add to wishlist
 						</button>
 					)}
 				</div>
