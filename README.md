@@ -2,8 +2,8 @@
 
 GameShop is an online ecommerce application, where you can buy all your favourite games. You can browse through various products and select your favourite to buy.
 
-![Forks](https://img.shields.io/github/forks/AtulPant2704/checkmate-store)
-![Stars](https://img.shields.io/github/stars/AtulPant2704/checkmate-store)
+![Forks](https://img.shields.io/github/forks/kart-c/GameShop-Ecommerce)
+![Stars](https://img.shields.io/github/stars/kart-c/GameShop-Ecommerce)
 
 ---
 
@@ -85,7 +85,7 @@ If you would like to request a feature, or report a bug simple click [here](http
 ## Desktop Demo
 
 <p align="center">
-  <img width="100%" src="./src/Assets/gameshop.gif" alt="CheckMate Store"/>
+  <img width="100%" src="./src/Assets/gameshop.gif" alt="Gameshop"/>
 </p>
 
 ## Connect with me
