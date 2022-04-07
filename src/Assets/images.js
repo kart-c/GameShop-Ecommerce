@@ -12,6 +12,9 @@ import NBA from './NBA.jpg';
 import sekiro from './sekiro.jpg';
 import witcher from './witcher.jpg';
 import mario from './mario.jpg';
+import emptyCart from './empty-cart.jpg';
+import emptyWishlist from './empty-wishlist.jpg';
+import error404 from './404.png';
 
 const carouselImgs = [GOW, RDR2, Fifa];
 
@@ -31,4 +34,7 @@ export {
 	sekiro,
 	witcher,
 	mario,
+	emptyCart,
+	emptyWishlist,
+	error404,
 };
