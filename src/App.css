@@ -3,10 +3,16 @@
 :root {
 	--brand-color: #e7230d;
 	--white: #fff;
+	--toastify-toast-min-height: 5.6rem;
+	--toastify-color-info: var(--info-color);
 }
 
 * {
 	box-sizing: border-box;
+}
+
+.Toastify__toast-container--top-right {
+	font-size: var(--text-md);
 }
 
 body {

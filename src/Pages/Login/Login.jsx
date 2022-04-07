@@ -6,6 +6,7 @@ import { useAuth, useCart, useWishlist } from '../../Context';
 import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
 import { fetchCartProducts, fetchWishlist } from '../../Utils';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 	const { authDispatch } = useAuth();
@@ -43,6 +44,7 @@ const Login = () => {
 				password: formData.password,
 			});
 			if (response.status === 200) {
+				toast.success(`Welcome back! ${response.data.foundUser.firstName}`);
 				authDispatch({
 					type: 'LOGIN',
 					payload: { token: response.data.encodedToken, user: response.data.foundUser },
@@ -52,13 +54,12 @@ const Login = () => {
 				fetchCartProducts(response.data.encodedToken, cartDispatch);
 				fetchWishlist(response.data.encodedToken, wishlistDispatch);
 				navigate(-1);
-				alert('Logged in');
 			} else {
 				console.error('ERROR: ', response);
 				alert('ERROR');
 			}
 		} catch (error) {
-			alert('ERROR');
+			toast.error(error.response.data.errors[0]);
 			console.error(error);
 		}
 	};

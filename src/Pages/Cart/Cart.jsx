@@ -1,27 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Header } from '../../Components';
+import { Header, Loaders } from '../../Components';
 import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
 import { useAuth, useCart } from '../../Context';
-import styles from './Cart.module.css';
 import PriceContainer from './Components/Price Container/PriceContainer';
 import { Link } from 'react-router-dom';
 import { fetchCartProducts } from '../../Utils';
+import styles from './Cart.module.css';
 
 const Cart = () => {
 	const { authState } = useAuth();
 	const [couponType, setCouponType] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
 
 	const { cartState, cartDispatch } = useCart();
 
 	useEffect(() => {
-		fetchCartProducts(authState.token, cartDispatch);
+		fetchCartProducts(authState.token, cartDispatch, setIsLoading);
 	}, []);
 
 	return (
 		<>
 			<Header />
+			{isLoading && <Loaders />}
 			<main className={styles.cartMain}>
-				{cartState.cart.length > 0 ? (
+				{cartState.cart.length > 0 && !isLoading ? (
 					<>
 						<div>
 							<h3 className={styles.cartHeading}>My Cart</h3>

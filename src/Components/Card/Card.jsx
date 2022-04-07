@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import {
 	addToCartHandler,
@@ -11,6 +12,7 @@ import styles from './Card.module.css';
 
 const Card = ({ discount, badge, categoryName, image, price, rating, title, _id, products }) => {
 	const [cartBtnLoader, setCartBtnLoader] = useState(false);
+	const [wishlistLoader, setWishlistLoader] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -27,36 +29,42 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 
 	const cartBtnHandler = async (_id) => {
 		setCartBtnLoader(true);
+
 		const product = products.find((product) => product._id === _id);
 		if (authState.token) {
 			const response = await addToCartHandler(product, authState.token);
-
 			if (response.status === 201) {
+				toast.success(`${product.title} added to cart`);
 				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
 				setCartBtnLoader(false);
 			}
 		} else {
-			alert('You are not logged in');
+			toast.warning('You are not logged in!');
 			navigate('/login');
 		}
 	};
 
 	const addToWishlist = async (_id) => {
+		setWishlistLoader(true);
 		if (authState.token) {
 			const product = products.find((product) => product._id === _id);
 			if (!checkWishlistStatus(_id, wishlistState.wishlist)) {
 				const response = await addToWishlistHandler(product, authState.token);
 				if (response.status === 201) {
+					toast.success(`${product.title} added to wishlist`);
+					setWishlistLoader(false);
 					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
 				}
 			} else {
 				const response = await removeFromWishlistHandler(_id, authState.token);
 				if (response.status === 200) {
+					toast.info(`${product.title} removed from wishlist`);
+					setWishlistLoader(false);
 					wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: response.data.wishlist });
 				}
 			}
 		} else {
-			alert('You are not logged in');
+			toast.warning('You are not logged in!');
 			navigate('/login');
 		}
 	};
@@ -67,7 +75,11 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 			<div className={`content ${styles.content}`}>
 				<h4>{title}</h4>
 				<span>{categoryName} - PC game</span>
-				<button className="overlay-icon" onClick={() => addToWishlist(_id)}>
+				<button
+					className="overlay-icon"
+					onClick={() => addToWishlist(_id)}
+					disabled={wishlistLoader}
+				>
 					<i
 						className={`${
 							checkWishlistStatus(_id, wishlistState.wishlist) ? 'fas' : 'far'
@@ -97,7 +109,7 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 						title={badge === 'Out of Stock' ? 'Item is out of stock' : null}
 						onClick={() => cartBtnHandler(_id)}
 					>
-						Add to Cart
+						{cartBtnLoader ? <span className={styles.loader}></span> : 'Add to Cart'}
 					</button>
 				) : (
 					<button
