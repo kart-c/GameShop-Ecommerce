@@ -5,6 +5,7 @@ import { useAuth, useCart } from '../../Context';
 import PriceContainer from './Components/Price Container/PriceContainer';
 import { Link } from 'react-router-dom';
 import { fetchCartProducts } from '../../Utils';
+import { emptyCart } from '../../Assets/images';
 import styles from './Cart.module.css';
 
 const Cart = () => {
@@ -41,10 +42,13 @@ const Cart = () => {
 					</>
 				) : (
 					<>
-						<h2>
-							Cart is empty
-							<Link to="/products"> Browse Products</Link>
-						</h2>
+						{!isLoading && (
+							<div className={styles.emptyCartContainer}>
+								<span className={styles.emptyMsgTitle}>Looks like your cart is empty</span>
+								<img src={emptyCart} alt="responsive image" className="resp-img" />
+								<Link to="/products"> Browse Products</Link>
+							</div>
+						)}
 					</>
 				)}
 			</main>
