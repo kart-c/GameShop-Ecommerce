@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { fetchCartProducts } from '../../Utils';
 import { emptyCart } from '../../Assets/images';
 import styles from './Cart.module.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
 	const { authState } = useAuth();
@@ -18,6 +20,26 @@ const Cart = () => {
 	useEffect(() => {
 		fetchCartProducts(authState.token, cartDispatch, setIsLoading);
 	}, []);
+
+	const deleteHandler = async (_id, setQtyChangeLoader, title) => {
+		try {
+			const response = await axios.delete(`/api/user/cart/${_id}`, {
+				headers: {
+					authorization: authState.token,
+				},
+			});
+			if (response.status === 200) {
+				setCouponType('');
+				toast.info(`Removed ${title} from cart`);
+				cartDispatch({ type: 'REMOVE_FROM_CART', payload: response.data.cart });
+				setQtyChangeLoader && setQtyChangeLoader(false);
+			} else {
+				console.error('ERROR: ', response);
+			}
+		} catch (error) {
+			console.error('ERROR: ', error);
+		}
+	};
 
 	return (
 		<>
@@ -35,11 +57,20 @@ const Cart = () => {
 						<section className={styles.cartContainer}>
 							<div>
 								{cartState.cart.map((card) => (
-									<HorizontalCard {...card} key={card._id} setCouponType={setCouponType} />
+									<HorizontalCard
+										{...card}
+										key={card._id}
+										setCouponType={setCouponType}
+										deleteHandler={deleteHandler}
+									/>
 								))}
 							</div>
 
-							<PriceContainer couponType={couponType} setCouponType={setCouponType} />
+							<PriceContainer
+								couponType={couponType}
+								setCouponType={setCouponType}
+								deleteHandler={deleteHandler}
+							/>
 						</section>
 					</>
 				) : (

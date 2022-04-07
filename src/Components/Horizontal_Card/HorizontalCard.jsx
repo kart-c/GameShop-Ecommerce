@@ -6,7 +6,16 @@ import axios from 'axios';
 import { addToWishlistHandler, checkWishlistStatus } from '../../Utils';
 import { toast } from 'react-toastify';
 
-const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType }) => {
+const HorizontalCard = ({
+	_id,
+	title,
+	image,
+	price,
+	qty,
+	discount,
+	setCouponType,
+	deleteHandler,
+}) => {
 	const [qtyChangeLoader, setQtyChangeLoader] = useState(false);
 
 	const { cartState, cartDispatch } = useCart();
@@ -16,26 +25,6 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 	useEffect(() => {
 		return () => {};
 	}, []);
-
-	const deleteHandler = async (_id) => {
-		try {
-			const response = await axios.delete(`/api/user/cart/${_id}`, {
-				headers: {
-					authorization: authState.token,
-				},
-			});
-			if (response.status === 200) {
-				setCouponType('');
-				toast.info(`Removed ${title} from cart`);
-				cartDispatch({ type: 'REMOVE_FROM_CART', payload: response.data.cart });
-				setQtyChangeLoader(false);
-			} else {
-				console.error('ERROR: ', response);
-			}
-		} catch (error) {
-			console.error('ERROR: ', error);
-		}
-	};
 
 	const updateHandler = async (_id, type) => {
 		setQtyChangeLoader(true);
@@ -115,7 +104,11 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 					</p>
 					<div className="product-count">
 						<button
-							onClick={() => (qty === 1 ? deleteHandler(_id) : updateHandler(_id, 'decrement'))}
+							onClick={() =>
+								qty === 1
+									? deleteHandler(_id, setQtyChangeLoader, title)
+									: updateHandler(_id, 'decrement')
+							}
 							disabled={qtyChangeLoader}
 						>
 							<i className={`fa-solid fa-minus ${qty === 1 && 'fa-trash'}`}></i>
@@ -128,7 +121,10 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 							<i className="fa-solid fa-plus"></i>
 						</button>
 						{qty > 1 ? (
-							<button onClick={() => deleteHandler(_id)} disabled={qtyChangeLoader}>
+							<button
+								onClick={() => deleteHandler(_id, setQtyChangeLoader, title)}
+								disabled={qtyChangeLoader}
+							>
 								<i className={`fa-solid fa-trash ${styles.deleteBtn}`}></i>
 							</button>
 						) : null}
