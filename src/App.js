@@ -9,6 +9,7 @@ import Mockman from 'mockman-js';
 import User from './Pages/User/User';
 import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 	return (
 		<>
 			<ToastContainer
+				theme="colored"
 				position="top-right"
 				autoClose={2000}
 				hideProgressBar={false}

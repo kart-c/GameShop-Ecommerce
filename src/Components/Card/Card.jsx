@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import {
 	addToCartHandler,
@@ -38,7 +39,7 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 				setCartBtnLoader(false);
 			}
 		} else {
-			alert('You are not logged in');
+			toast.warning('You are not logged in!');
 			navigate('/login');
 		}
 	};
@@ -61,7 +62,7 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 				}
 			}
 		} else {
-			alert('You are not logged in');
+			toast.warning('You are not logged in!');
 			navigate('/login');
 		}
 	};

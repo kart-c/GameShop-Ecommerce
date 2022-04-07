@@ -9,6 +9,10 @@
 	box-sizing: border-box;
 }
 
+.Toastify__toast-container--top-right {
+	font-size: var(--text-md);
+}
+
 body {
 	font-family: 'Poppins', 'Open Sans', sans-serif;
 }
