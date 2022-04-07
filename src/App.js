@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import Cart from './Pages/Cart/Cart';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
@@ -9,12 +8,25 @@ import Wishlist from './Pages/Wishlist/Wishlist';
 import Mockman from 'mockman-js';
 import User from './Pages/User/User';
 import { useAuth } from './Context';
+import { ToastContainer } from 'react-toastify';
+import './App.css';
 
 function App() {
 	const { authState } = useAuth();
 
 	return (
 		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={2000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="products" element={<Products />} />
