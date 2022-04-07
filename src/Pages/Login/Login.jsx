@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Header } from '../../Components';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import styles from './Login.module.css';
-import { useNavigate } from 'react-router-dom';
 import { fetchCartProducts, fetchWishlist } from '../../Utils';
 import { toast } from 'react-toastify';
 
@@ -15,6 +14,8 @@ const Login = () => {
 		email: '',
 		password: '',
 	});
+
+	const location = useLocation();
 
 	const emailRef = useRef();
 
@@ -53,7 +54,7 @@ const Login = () => {
 				localStorage.setItem('user', JSON.stringify(response.data.foundUser));
 				fetchCartProducts(response.data.encodedToken, cartDispatch);
 				fetchWishlist(response.data.encodedToken, wishlistDispatch);
-				navigate(-1);
+				navigate(location?.state?.from?.pathname || -1, { replace: true });
 			} else {
 				console.error('ERROR: ', response);
 				alert('ERROR');
