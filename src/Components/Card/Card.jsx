@@ -11,6 +11,7 @@ import styles from './Card.module.css';
 
 const Card = ({ discount, badge, categoryName, image, price, rating, title, _id, products }) => {
 	const [cartBtnLoader, setCartBtnLoader] = useState(false);
+	const [wishlistLoader, setWishlistLoader] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 
 	const cartBtnHandler = async (_id) => {
 		setCartBtnLoader(true);
+
 		const product = products.find((product) => product._id === _id);
 		if (authState.token) {
 			const response = await addToCartHandler(product, authState.token);
@@ -42,16 +44,19 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 	};
 
 	const addToWishlist = async (_id) => {
+		setWishlistLoader(true);
 		if (authState.token) {
 			const product = products.find((product) => product._id === _id);
 			if (!checkWishlistStatus(_id, wishlistState.wishlist)) {
 				const response = await addToWishlistHandler(product, authState.token);
 				if (response.status === 201) {
+					setWishlistLoader(false);
 					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
 				}
 			} else {
 				const response = await removeFromWishlistHandler(_id, authState.token);
 				if (response.status === 200) {
+					setWishlistLoader(false);
 					wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: response.data.wishlist });
 				}
 			}
@@ -67,7 +72,11 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 			<div className={`content ${styles.content}`}>
 				<h4>{title}</h4>
 				<span>{categoryName} - PC game</span>
-				<button className="overlay-icon" onClick={() => addToWishlist(_id)}>
+				<button
+					className="overlay-icon"
+					onClick={() => addToWishlist(_id)}
+					disabled={wishlistLoader}
+				>
 					<i
 						className={`${
 							checkWishlistStatus(_id, wishlistState.wishlist) ? 'fas' : 'far'
