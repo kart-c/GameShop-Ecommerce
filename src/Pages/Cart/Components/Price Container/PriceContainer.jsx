@@ -86,9 +86,11 @@ const PriceContainer = ({ couponType, setCouponType }) => {
 				</div>
 			</div>
 			<div className={styles.cartPriceContainer}>
-				<h3>Total Price ({cart.length} Items)</h3>
+				<h3>
+					Total Price ({cart.length} {cart.length > 1 ? 'Items' : 'Item'})
+				</h3>
 				<button className={`btn btn-info ${styles.couponBtn}`} onClick={() => setApplyCoupon(true)}>
-					{couponType ? 'Coupon Applied' : 'Apply Coupons'}
+					{couponType ? 'Coupon Applied' : 'Apply Coupon'}
 				</button>
 				{couponType ? <span className={styles.couponType}>{couponType}%</span> : ''}
 				<div className={styles.priceDetails}>
@@ -96,12 +98,16 @@ const PriceContainer = ({ couponType, setCouponType }) => {
 						<span>Price</span>
 						<span>Discount</span>
 						<span>Delivery Charges</span>
+						{totalAmount !== finalValue() ? <span>Coupon discount</span> : null}
 						<span className={styles.amountSpan}>Total Amount</span>
 					</div>
 					<div>
 						<span>{totalPrice.toFixed(2)} /-</span>
 						<span>- {discount.toFixed(2)} /-</span>
 						<span>40.00 /-</span>
+						{totalAmount !== finalValue() ? (
+							<span>- {(totalAmount - finalValue()).toFixed(2)} /-</span>
+						) : null}
 						<span className={styles.amountSpan}>{finalValue()} /-</span>
 					</div>
 				</div>

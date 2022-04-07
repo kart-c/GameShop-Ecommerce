@@ -10,8 +10,9 @@ import User from './Pages/User/User';
 import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './App.css';
+import { RequiresAuth } from './Components';
 import { Error404 } from './Pages/Error404/Error404';
+import './App.css';
 
 function App() {
 	const { authState } = useAuth();
@@ -32,12 +33,33 @@ function App() {
 			/>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="products" element={<Products />} />
-				<Route path="cart" element={authState.token ? <Cart /> : <Login />} />
-				<Route path="wishlist" element={authState.token ? <Wishlist /> : <Login />} />
-				<Route path="login" element={<Login />} />
-				<Route path="signup" element={<Signup />} />
-				<Route path="user" element={<User />} />
+				<Route path="/products" element={<Products />} />
+				<Route
+					path="/cart"
+					element={
+						<RequiresAuth>
+							<Cart />
+						</RequiresAuth>
+					}
+				/>
+				<Route
+					path="/wishlist"
+					element={
+						<RequiresAuth>
+							<Wishlist />
+						</RequiresAuth>
+					}
+				/>
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route
+					path="/user"
+					element={
+						<RequiresAuth>
+							<User />
+						</RequiresAuth>
+					}
+				/>
 				<Route path="/mock" element={<Mockman />} />
 				<Route path="*" element={<Error404 />} />
 			</Routes>

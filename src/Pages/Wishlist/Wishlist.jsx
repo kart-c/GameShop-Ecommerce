@@ -25,7 +25,9 @@ const Wishlist = () => {
 				{wishlist.length > 0 && !isLoading ? (
 					<>
 						<h3 className={styles.wlHeading}>My Wishlist</h3>
-						<small>3 Items</small>
+						<small>
+							{wishlist.length} {wishlist.length > 1 ? 'items' : 'item'}
+						</small>
 						<section className={styles.productList}>
 							{wishlist.map((wishlistItem) => (
 								<Card key={wishlistItem._id} {...wishlistItem} products={wishlist} />

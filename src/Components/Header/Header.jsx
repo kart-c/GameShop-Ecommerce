@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../../Context';
+import { useAuth, useCart, useWishlist } from '../../Context';
 import { useFilter } from '../../Context';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.css';
@@ -7,6 +7,13 @@ import styles from './Header.module.css';
 const Header = ({ searchValue, setSearchValue }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const { authState } = useAuth();
+	const {
+		cartState: { cart },
+	} = useCart();
+
+	const {
+		wishlistState: { wishlist },
+	} = useWishlist();
 
 	const location = useLocation();
 
@@ -56,13 +63,15 @@ const Header = ({ searchValue, setSearchValue }) => {
 						</Link>
 					</li>
 					<li>
-						<Link to="/wishlist">
+						<Link to="/wishlist" className={styles.badgeContainer}>
 							<i className="fas fa-heart"></i> Wishlist
+							{wishlist.length > 0 ? <span className={styles.badge}>{wishlist.length}</span> : null}
 						</Link>
 					</li>
 					<li>
-						<Link to="/cart">
+						<Link to="/cart" className={styles.badgeContainer}>
 							<i className="fa-solid fa-bag-shopping"></i> Bag
+							{cart.length > 0 ? <span className={styles.badge}>{cart.length}</span> : null}
 						</Link>
 					</li>
 				</ul>

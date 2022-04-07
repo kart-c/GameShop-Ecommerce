@@ -28,7 +28,9 @@ const Cart = () => {
 					<>
 						<div>
 							<h3 className={styles.cartHeading}>My Cart</h3>
-							<small>2 Items</small>
+							<small>
+								{cartState.cart.length} {cartState.cart.length > 1 ? 'items' : 'item'}
+							</small>
 						</div>
 						<section className={styles.cartContainer}>
 							<div>

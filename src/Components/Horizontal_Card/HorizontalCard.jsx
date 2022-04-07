@@ -25,6 +25,7 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 				},
 			});
 			if (response.status === 200) {
+				setCouponType('');
 				toast.info(`Removed ${title} from cart`);
 				cartDispatch({ type: 'REMOVE_FROM_CART', payload: response.data.cart });
 				setQtyChangeLoader(false);
@@ -126,6 +127,11 @@ const HorizontalCard = ({ _id, title, image, price, qty, discount, setCouponType
 						>
 							<i className="fa-solid fa-plus"></i>
 						</button>
+						{qty > 1 ? (
+							<button onClick={() => deleteHandler(_id)} disabled={qtyChangeLoader}>
+								<i className={`fa-solid fa-trash ${styles.deleteBtn}`}></i>
+							</button>
+						) : null}
 					</div>
 				</div>
 				<div>
