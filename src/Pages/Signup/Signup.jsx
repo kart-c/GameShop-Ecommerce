@@ -5,6 +5,7 @@ import styles from '../Login/Login.module.css';
 import axios from 'axios';
 import { useAuth } from '../../Context';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
 	const [formData, setFormData] = useState({
@@ -34,21 +35,22 @@ const Signup = () => {
 							type: 'SIGNUP',
 							payload: { token: response.data.encodedToken, user: response.data.createdUser },
 						});
+						toast.success(`Welcome ${response.data.createdUser.firstName}`);
 						localStorage.setItem('token', response.data.encodedToken);
 						localStorage.setItem('user', JSON.stringify(response.data.createdUser));
 						navigate(-2);
-						alert('Signed up');
 					} else {
 						console.error('ERROR: ', response);
 					}
 				} catch (error) {
+					toast.error(error.response.data.errors[0]);
 					console.error(error);
 				}
 			} else {
-				alert('passwords do not match');
+				toast.error('Passwords do not match');
 			}
 		} else {
-			alert('Enter all fields');
+			toast.warn('Enter all fields');
 		}
 	};
 

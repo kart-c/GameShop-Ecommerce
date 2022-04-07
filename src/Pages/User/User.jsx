@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Header } from '../../Components';
 import { useAuth, useCart, useWishlist } from '../../Context';
 
@@ -13,7 +14,7 @@ const User = () => {
 	const navigate = useNavigate();
 
 	const logoutHandler = () => {
-		alert('Logged out');
+		toast.success('Logged out');
 		localStorage.removeItem('token');
 		localStorage.removeItem('user');
 		authDispatch({ type: 'LOGOUT' });
