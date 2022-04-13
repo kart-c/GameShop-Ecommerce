@@ -27,7 +27,8 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 		return itemInCart ? 'Go to Cart' : 'Add to Cart';
 	};
 
-	const cartBtnHandler = async (_id) => {
+	const cartBtnHandler = async (e, _id) => {
+		e.stopPropagation();
 		setCartBtnLoader(true);
 
 		const product = products.find((product) => product._id === _id);
@@ -44,7 +45,8 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 		}
 	};
 
-	const addToWishlist = async (_id) => {
+	const addToWishlist = async (e, _id) => {
+		e.stopPropagation();
 		setWishlistLoader(true);
 		if (authState.token) {
 			const product = products.find((product) => product._id === _id);
@@ -70,14 +72,17 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 	};
 
 	return (
-		<article className={`card product-card card-shadow ${styles.card}`}>
+		<article
+			className={`card product-card card-shadow ${styles.card}`}
+			onClick={() => navigate(`/products/${_id}`)}
+		>
 			<img src={image} alt="card image 1" className={`card-img ${styles.cardImg}`} />
 			<div className={`content ${styles.content}`}>
 				<h4>{title}</h4>
 				<span>{categoryName} - PC game</span>
 				<button
 					className="overlay-icon"
-					onClick={() => addToWishlist(_id)}
+					onClick={(e) => addToWishlist(e, _id)}
 					disabled={wishlistLoader}
 				>
 					<i
@@ -107,7 +112,7 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 						disabled={badge === 'Out of Stock' || cartBtnLoader}
 						className={`action-link ${styles.actionBtn}`}
 						title={badge === 'Out of Stock' ? 'Item is out of stock' : null}
-						onClick={() => cartBtnHandler(_id)}
+						onClick={(e) => cartBtnHandler(e, _id)}
 					>
 						{cartBtnLoader ? <span className={styles.loader}></span> : 'Add to Cart'}
 					</button>
