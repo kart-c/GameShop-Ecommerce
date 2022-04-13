@@ -50,4 +50,4 @@ const Wishlist = () => {
 	);
 };
 
-export default Wishlist;
+export { Wishlist };

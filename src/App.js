@@ -1,17 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import Cart from './Pages/Cart/Cart';
-import Home from './Pages/Home/Home';
-import Login from './Pages/Login/Login';
-import Products from './Pages/Products/Products';
-import Signup from './Pages/Signup/Signup';
-import Wishlist from './Pages/Wishlist/Wishlist';
 import Mockman from 'mockman-js';
-import User from './Pages/User/User';
 import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RequiresAuth } from './Components';
-import { Error404 } from './Pages/Error404/Error404';
+import { Home, Products, Cart, Wishlist, Login, Signup, User, Error404 } from './Pages';
 import './App.css';
 
 function App() {
