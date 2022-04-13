@@ -4,7 +4,17 @@ import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RequiresAuth } from './Components';
-import { Home, Products, Cart, Wishlist, Login, Signup, User, Error404 } from './Pages';
+import {
+	Home,
+	Products,
+	Cart,
+	Wishlist,
+	Login,
+	Signup,
+	User,
+	Error404,
+	SingleProduct,
+} from './Pages';
 import './App.css';
 
 function App() {
@@ -55,6 +65,7 @@ function App() {
 				/>
 				<Route path="/mock" element={<Mockman />} />
 				<Route path="*" element={<Error404 />} />
+				<Route path="/products/:_id" element={<SingleProduct />} />
 			</Routes>
 		</>
 	);
