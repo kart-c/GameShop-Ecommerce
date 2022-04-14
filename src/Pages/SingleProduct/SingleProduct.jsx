@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Header, Loaders } from '../../Components';
 import styles from './SingleProduct.module.css';
+import { useAuth, useCart } from '../../Context';
+import { addToCartHandler } from '../../Utils';
+import { toast } from 'react-toastify';
 
 const SingleProduct = () => {
+	const [cartBtnLoader, setCartBtnLoader] = useState(false);
+	const [wishlistLoader, setWishlistLoader] = useState(false);
 	const [product, setProduct] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-
 	const params = useParams();
+	const navigate = useNavigate();
+	const {
+		cartState: { cart },
+		cartDispatch,
+	} = useCart();
+	const { authState } = useAuth();
 
 	const fetchProduct = async () => {
 		try {
@@ -31,6 +41,26 @@ const SingleProduct = () => {
 	const discoutedPrice = (price, discount) => (price - (price * discount) / 100).toFixed(0);
 
 	const ratings = [1, 2, 3, 4, 5];
+
+	const checkCartStatus = (_id) => {
+		const itemInCart = cart.find((item) => item._id === _id);
+		return itemInCart ? 'Go to Cart' : 'Add to Cart';
+	};
+
+	const cartBtnHandler = async (_id) => {
+		setCartBtnLoader(true);
+		if (authState.token) {
+			const response = await addToCartHandler(product, authState.token);
+			if (response.status === 201) {
+				toast.success(`${product.title} added to cart`);
+				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
+				setCartBtnLoader(false);
+			}
+		} else {
+			toast.warning('You are not logged in!');
+			navigate('/login');
+		}
+	};
 
 	return (
 		<>
@@ -76,7 +106,21 @@ const SingleProduct = () => {
 					<span>₹ {discoutedPrice(product.price, product.discount)}/-</span>
 					<p className={styles.description}>{product.description}</p>
 					<div className={styles.btnContainer}>
-						<button className={`btn btn-primary ${styles.primaryBtn}`}>Add to Cart</button>
+						{checkCartStatus(product._id) === 'Add to Cart' ? (
+							<button
+								className={`btn btn-primary ${styles.primaryBtn}`}
+								onClick={() => cartBtnHandler(product._id)}
+							>
+								{cartBtnLoader ? <span className={styles.loader}></span> : 'Add to Cart'}
+							</button>
+						) : (
+							<button
+								className={`btn btn-primary ${styles.primaryBtn}`}
+								onClick={() => navigate('/cart')}
+							>
+								Go To Cart
+							</button>
+						)}
 						<button className={`btn outline-primary ${styles.secondaryBtn}`}>
 							Add to Wishlist
 						</button>
