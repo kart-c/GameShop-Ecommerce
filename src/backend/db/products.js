@@ -106,7 +106,7 @@ export const products = [
 		image: valorant,
 		price: 1149,
 		rating: 1.5,
-		reviewers: 67,
+		reviewers: 3,
 		categoryName: 'Action',
 	},
 	{
