@@ -118,7 +118,10 @@ const Card = ({ discount, badge, categoryName, image, price, rating, title, _id,
 					</button>
 				) : (
 					<button
-						onClick={() => navigate('/cart')}
+						onClick={(e) => {
+							e.stopPropagation();
+							navigate('/cart');
+						}}
 						className={`action-link ${styles.actionBtn} ${styles.navigate}`}
 						disabled={cartBtnLoader}
 					>
