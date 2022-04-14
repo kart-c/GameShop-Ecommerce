@@ -142,12 +142,14 @@ const SingleProduct = () => {
 						{checkCartStatus(product._id) === 'Add to Cart' ? (
 							<button
 								className={`btn btn-primary ${styles.primaryBtn}`}
+								disabled={product.badge === 'Out of Stock'}
 								onClick={() => cartBtnHandler(product._id)}
 							>
 								{cartBtnLoader ? <span className={styles.loader}></span> : 'Add to Cart'}
 							</button>
 						) : (
 							<button
+								disabled={product.badge === 'Out of Stock'}
 								className={`btn btn-primary ${styles.primaryBtn}`}
 								onClick={() => navigate('/cart')}
 							>
