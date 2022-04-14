@@ -99,17 +99,17 @@ const SingleProduct = () => {
 		<>
 			<Header />
 			{isLoading && <Loaders />}
-			<div className={styles.plBreadcrumbContainer}>
-				<div>
-					<Link to="/">Home</Link> {' > '}
-					<Link to="/products">Products</Link>
-					{' > '}
-					<Link to={`/products/${params._id}`} className={styles.currentPg}>
-						{product.title}
-					</Link>
-				</div>
-			</div>
 			<section className={styles.productPg}>
+				<div className={styles.plBreadcrumbContainer}>
+					<div>
+						<Link to="/">Home</Link> {' > '}
+						<Link to="/products">Products</Link>
+						{' > '}
+						<Link to={`/products/${params._id}`} className={styles.currentPg}>
+							{product.title}
+						</Link>
+					</div>
+				</div>
 				<div className={styles.imgContainer}>
 					<img
 						src={product.image}
