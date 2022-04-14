@@ -66,11 +66,12 @@
 .btnContainer {
 	display: flex;
 	justify-content: space-between;
-	max-width: 28rem;
+	max-width: 29.6rem;
 	margin-top: 1.6rem;
 }
 
 .primaryBtn {
+	min-width: 12rem;
 	padding: 10px 1.6rem;
 	background-color: var(--brand-color);
 }
@@ -78,6 +79,34 @@
 .primaryBtn + .secondaryBtn {
 	color: var(--brand-color);
 	border-color: var(--brand-color);
+}
+
+.loader {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	display: block;
+	margin: 2px auto;
+	position: relative;
+	background: #fff;
+	box-shadow: -24px 0 #fff, 24px 0 #fff;
+	box-sizing: border-box;
+	animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+	33% {
+		background: #fff;
+		box-shadow: -24px 0 var(--brand-color), 24px 0 #fff;
+	}
+	66% {
+		background: var(--brand-color);
+		box-shadow: -24px 0 #fff, 24px 0 #fff;
+	}
+	100% {
+		background: #fff;
+		box-shadow: -24px 0 #fff, 24px 0 var(--brand-color);
+	}
 }
 
 @media only screen and (max-width: 768px) {
