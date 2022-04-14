@@ -3,8 +3,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Header, Loaders } from '../../Components';
 import styles from './SingleProduct.module.css';
-import { useAuth, useCart } from '../../Context';
-import { addToCartHandler } from '../../Utils';
+import { useAuth, useCart, useWishlist } from '../../Context';
+import {
+	addToCartHandler,
+	addToWishlistHandler,
+	checkWishlistStatus,
+	removeFromWishlistHandler,
+} from '../../Utils';
 import { toast } from 'react-toastify';
 
 const SingleProduct = () => {
@@ -19,6 +24,10 @@ const SingleProduct = () => {
 		cartDispatch,
 	} = useCart();
 	const { authState } = useAuth();
+	const {
+		wishlistState: { wishlist },
+		wishlistDispatch,
+	} = useWishlist();
 
 	const fetchProduct = async () => {
 		try {
@@ -55,6 +64,30 @@ const SingleProduct = () => {
 				toast.success(`${product.title} added to cart`);
 				cartDispatch({ type: 'ADD_TO_CART', payload: response.data.cart });
 				setCartBtnLoader(false);
+			}
+		} else {
+			toast.warning('You are not logged in!');
+			navigate('/login');
+		}
+	};
+
+	const addToWishlist = async (_id) => {
+		setWishlistLoader(true);
+		if (authState.token) {
+			if (!checkWishlistStatus(_id, wishlist)) {
+				const response = await addToWishlistHandler(product, authState.token);
+				if (response.status === 201) {
+					toast.success(`${product.title} added to wishlist`);
+					setWishlistLoader(false);
+					wishlistDispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist });
+				}
+			} else {
+				const response = await removeFromWishlistHandler(_id, authState.token);
+				if (response.status === 200) {
+					toast.info(`${product.title} removed from wishlist`);
+					setWishlistLoader(false);
+					wishlistDispatch({ type: 'REMOVE_FROM_WISHLIST', payload: response.data.wishlist });
+				}
 			}
 		} else {
 			toast.warning('You are not logged in!');
@@ -121,8 +154,17 @@ const SingleProduct = () => {
 								Go To Cart
 							</button>
 						)}
-						<button className={`btn outline-primary ${styles.secondaryBtn}`}>
-							Add to Wishlist
+						<button
+							className={`btn outline-primary ${styles.secondaryBtn}`}
+							onClick={() => addToWishlist(product._id)}
+						>
+							{wishlistLoader ? (
+								<span className={styles.loader}></span>
+							) : checkWishlistStatus(product._id, wishlist) ? (
+								'Remove from wishlist'
+							) : (
+								'Add to wishlist'
+							)}
 						</button>
 					</div>
 				</div>
