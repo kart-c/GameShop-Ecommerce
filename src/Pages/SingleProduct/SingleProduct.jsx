@@ -135,8 +135,11 @@ const SingleProduct = () => {
 						))}
 						<span className={styles.reviews}>({product.reviewers} reviews)</span>
 					</div>
-					<span className={styles.price}>{product.price}</span>
-					<span>₹ {discoutedPrice(product.price, product.discount)}/-</span>
+					<span className={styles.price}>{product.discount && product.price}</span>
+					<span>
+						₹ {product.discount ? discoutedPrice(product.price, product.discount) : product.price}
+						/-
+					</span>
 					<p className={styles.description}>{product.description}</p>
 					<div className={styles.btnContainer}>
 						{checkCartStatus(product._id) === 'Add to Cart' ? (
