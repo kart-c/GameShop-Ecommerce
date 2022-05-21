@@ -1,38 +1,44 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Header } from '../../Components';
-import { useAuth, useCart, useWishlist } from '../../Context';
+import styles from './User.module.css';
 
 const User = () => {
-	const { authDispatch } = useAuth();
-
-	const { cartDispatch } = useCart();
-
-	const { wishlistDispatch } = useWishlist();
+	const [activeTab, setActiveTab] = useState('profile');
 
 	const navigate = useNavigate();
 
-	const logoutHandler = () => {
-		toast.success('Logged out');
-		localStorage.removeItem('token');
-		localStorage.removeItem('user');
-		authDispatch({ type: 'LOGOUT' });
-		cartDispatch({ type: 'LOGOUT' });
-		wishlistDispatch({ type: 'LOGOUT' });
-		navigate('/');
-	};
+	useEffect(() => {
+		navigate(`${activeTab}`);
+	}, [activeTab]);
 
 	return (
 		<>
 			<Header />
-			<button
-				style={{ marginTop: '10rem', marginLeft: '10rem' }}
-				className="btn btn-info"
-				onClick={logoutHandler}
-			>
-				Logout
-			</button>
+			<nav className={styles.userNav}>
+				<button
+					className={activeTab === 'profile' ? styles.active : ''}
+					onClick={() => setActiveTab('profile')}
+				>
+					Profile
+				</button>
+				<button
+					className={activeTab === 'address' ? styles.active : ''}
+					onClick={() => setActiveTab('address')}
+				>
+					Address
+				</button>
+				<button
+					className={activeTab === 'orders' ? styles.active : ''}
+					onClick={() => setActiveTab('orders')}
+				>
+					Orders
+				</button>
+			</nav>
+			<section className={styles.container}>
+				<h3 className={styles.containerTitle}>My Profile</h3>
+				<Outlet />
+			</section>
 		</>
 	);
 };
