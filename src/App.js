@@ -3,7 +3,7 @@ import Mockman from 'mockman-js';
 import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { RequiresAuth } from './Components';
+import { RequiresAuth, Profile, Address, Orders } from './Components';
 import {
 	Home,
 	Products,
@@ -24,7 +24,7 @@ function App() {
 		<>
 			<ToastContainer
 				theme="colored"
-				position="top-right"
+				position="bottom-right"
 				autoClose={2000}
 				hideProgressBar={false}
 				newestOnTop={false}
@@ -62,7 +62,11 @@ function App() {
 							<User />
 						</RequiresAuth>
 					}
-				/>
+				>
+					<Route path="profile" element={<Profile />} />
+					<Route path="address" element={<Address />} />
+					<Route path="orders" element={<Orders />} />
+				</Route>
 				<Route path="/mock" element={<Mockman />} />
 				<Route path="*" element={<Error404 />} />
 				<Route path="/products/:_id" element={<SingleProduct />} />
