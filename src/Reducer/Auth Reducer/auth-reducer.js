@@ -13,6 +13,9 @@ export const authReducer = (state, action) => {
 		case 'GET_ADDRESS':
 			return { ...state, address: payload };
 
+		case 'ADD_NEW_ADDRESS':
+			return { ...state, address: payload };
+
 		default:
 			throw new Error('ERROR: action not defined');
 	}
