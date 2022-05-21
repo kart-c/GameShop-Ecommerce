@@ -15,7 +15,7 @@
 }
 
 button.active {
-	padding-bottom: 6px;
+	padding-bottom: 5px;
 	border-bottom: 3px solid var(--brand-color);
 }
 
