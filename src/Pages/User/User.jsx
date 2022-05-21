@@ -12,6 +12,8 @@ const User = () => {
 		navigate(`${activeTab}`);
 	}, [activeTab]);
 
+	const title = activeTab.slice(0, 1).toUpperCase() + activeTab.slice(1, activeTab.length);
+
 	return (
 		<>
 			<Header />
@@ -36,7 +38,7 @@ const User = () => {
 				</button>
 			</nav>
 			<section className={styles.container}>
-				<h3 className={styles.containerTitle}>My Profile</h3>
+				<h3 className={styles.containerTitle}>My {title}</h3>
 				<Outlet />
 			</section>
 		</>
