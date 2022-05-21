@@ -15,6 +15,7 @@
 
 .newBtn {
 	font-size: var(--text-lg);
+	min-height: 214px;
 }
 
 .card p,

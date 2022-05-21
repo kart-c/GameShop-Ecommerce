@@ -10,6 +10,9 @@ export const authReducer = (state, action) => {
 		case 'LOGOUT':
 			return { ...state, token: null, user: null };
 
+		case 'GET_ADDRESS':
+			return { ...state, address: payload };
+
 		default:
 			throw new Error('ERROR: action not defined');
 	}

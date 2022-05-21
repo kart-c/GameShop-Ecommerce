@@ -10,3 +10,4 @@ export { checkWishlistStatus } from './check-wishlist-status';
 export { fetchCartProducts } from './fetch-cart-products';
 export { fetchWishlist } from './fetch-wishlist';
 export { searchProducts } from './search-products';
+export { getAddress } from './get-address';
