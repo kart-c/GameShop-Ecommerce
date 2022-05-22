@@ -7,6 +7,8 @@ const AuthProvider = ({ children }) => {
 	const [authState, authDispatch] = useReducer(authReducer, {
 		token: localStorage.getItem('token') || null,
 		user: JSON.parse(localStorage.getItem('user')) || null,
+		address: [],
+		orders: [],
 	});
 
 	return (
