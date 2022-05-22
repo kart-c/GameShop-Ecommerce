@@ -13,3 +13,4 @@ export { searchProducts } from './search-products';
 export { getAddress } from './get-address';
 export { addNewAddress } from './add-new-address';
 export { editAddress } from './edit-address';
+export { deleteAddress } from './delete-address';

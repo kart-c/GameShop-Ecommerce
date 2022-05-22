@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../Context';
-import { getAddress } from '../../Utils';
+import { getAddress, deleteAddress } from '../../Utils';
 import { AddressModal } from '../index';
 import styles from './Address.module.css';
 
@@ -39,6 +39,8 @@ const Address = () => {
 		setIsEditing((prev) => ({ ...prev, _id: address._id, editing: true }));
 	};
 
+	const deleteBtnHandler = (_id) => deleteAddress(_id, token, authDispatch);
+
 	return (
 		<>
 			<AddressModal
@@ -62,7 +64,7 @@ const Address = () => {
 								<span>Mob - {address.mobile}</span>
 								<div className={styles.btnContainer}>
 									<button onClick={() => editBtnHandler(address._id)}>Edit</button> |{' '}
-									<button>Delete</button>
+									<button onClick={() => deleteBtnHandler(address._id)}>Delete</button>
 								</div>
 							</article>
 					  ))
