@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../Context';
-import { getAddress } from '../../Utils/';
+import { getAddress } from '../../Utils';
 import { AddressModal } from '../index';
 import styles from './Address.module.css';
 
 const Address = () => {
 	const [modalState, setModalState] = useState(false);
+	const [isEditing, setIsEditing] = useState({ editing: false, _id: '' });
 	const [address, setAddress] = useState({
 		name: '',
 		street: '',
@@ -23,6 +24,21 @@ const Address = () => {
 		getAddress(token, authDispatch);
 	}, []);
 
+	const editBtnHandler = (_id) => {
+		const address = userAddress.find((user) => user._id === _id);
+		setAddress((prev) => ({
+			...prev,
+			name: address.name,
+			street: address.street,
+			city: address.city,
+			zipCode: address.zipCode,
+			state: address.state,
+			mobile: address.mobile,
+		}));
+		setModalState(true);
+		setIsEditing((prev) => ({ ...prev, _id: address._id, editing: true }));
+	};
+
 	return (
 		<>
 			<AddressModal
@@ -30,6 +46,8 @@ const Address = () => {
 				setModalState={setModalState}
 				address={address}
 				setAddress={setAddress}
+				isEditing={isEditing}
+				setIsEditing={setIsEditing}
 			/>
 			<div className={styles.container}>
 				<button className={styles.newBtn} onClick={() => setModalState(true)}>
@@ -43,7 +61,7 @@ const Address = () => {
 								<span>{address.state}</span>
 								<span>Mob - {address.mobile}</span>
 								<div className={styles.btnContainer}>
-									<button onClick={() => setModalState(true)}>Edit</button> |{' '}
+									<button onClick={() => editBtnHandler(address._id)}>Edit</button> |{' '}
 									<button>Delete</button>
 								</div>
 							</article>

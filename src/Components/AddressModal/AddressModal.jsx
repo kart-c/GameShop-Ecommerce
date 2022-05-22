@@ -1,9 +1,16 @@
 import React from 'react';
 import { useAuth } from '../../Context';
-import { addNewAddress } from '../../Utils';
+import { addNewAddress, editAddress } from '../../Utils';
 import styles from './AddressModal.module.css';
 
-const AddressModal = ({ modalState, setModalState, address, setAddress }) => {
+const AddressModal = ({
+	modalState,
+	setModalState,
+	address,
+	setAddress,
+	isEditing,
+	setIsEditing,
+}) => {
 	const {
 		authState: { token },
 		authDispatch,
@@ -28,7 +35,12 @@ const AddressModal = ({ modalState, setModalState, address, setAddress }) => {
 			address.mobile
 		) {
 			e.preventDefault();
-			addNewAddress(token, address, authDispatch);
+			if (isEditing.editing) {
+				editAddress({ token, address, authDispatch, _id: isEditing._id });
+				setIsEditing((prev) => ({ ...prev, editing: false }));
+			} else {
+				addNewAddress(token, address, authDispatch);
+			}
 			setAddress((prev) => ({
 				...prev,
 				name: '',

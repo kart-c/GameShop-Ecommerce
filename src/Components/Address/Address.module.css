@@ -1,9 +1,14 @@
 .container {
-	margin-top: 2.4rem;
+	margin: 2.4rem 0;
 	display: grid;
 	gap: 2.4rem;
 	grid-template-columns: repeat(auto-fit, 28rem);
 	justify-content: center;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
 }
 
 .card,
@@ -29,6 +34,7 @@
 }
 
 .btnContainer {
+	margin-top: auto;
 	font-size: var(--text-md);
 	text-align: right;
 }
