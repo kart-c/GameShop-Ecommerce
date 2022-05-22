@@ -42,10 +42,27 @@ const AddressModal = ({ modalState, setModalState, address, setAddress }) => {
 		}
 	};
 
+	const dummyBtnHandler = () =>
+		setAddress((prev) => ({
+			...prev,
+			name: 'Adarsh Balika',
+			street: '15, Plot No11, East St, Sec 12 D',
+			city: 'Mumbai',
+			zipCode: '754162',
+			state: 'Maharashtra',
+			mobile: '1122334455',
+		}));
+
 	return (
 		<>
 			<div className={`modal-backdrop ${styles.backdrop} ${!modalState ? styles.hide : ''}`}></div>
 			<form className={`modal ${styles.modal} ${!modalState ? styles.hide : ''}`}>
+				<div className={styles.formTitle}>
+					<p>Enter new Address</p>
+					<button type="button" onClick={() => setModalState(false)}>
+						<i className="fa-solid fa-xmark"></i>
+					</button>
+				</div>
 				<input
 					type="text"
 					id="name"
@@ -101,11 +118,11 @@ const AddressModal = ({ modalState, setModalState, address, setAddress }) => {
 					required
 				/>
 				<div className={styles.btnContainer}>
+					<button className="btn grey-bg" onClick={dummyBtnHandler} type="button">
+						Dummy Address
+					</button>
 					<button className="btn btn-info" onClick={saveBtnHandler} type="submit">
 						Save
-					</button>
-					<button className="btn btn-primary" onClick={() => setModalState(false)} type="button">
-						Cancel
 					</button>
 				</div>
 			</form>
