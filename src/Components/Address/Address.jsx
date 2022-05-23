@@ -20,10 +20,6 @@ const Address = () => {
 		authDispatch,
 	} = useAuth();
 
-	useEffect(() => {
-		getAddress(token, authDispatch);
-	}, []);
-
 	const editBtnHandler = (_id) => {
 		const address = userAddress.find((user) => user._id === _id);
 		setAddress((prev) => ({
