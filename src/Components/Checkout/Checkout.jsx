@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth, useCart } from '../../Context';
 import { discount, discountedPrice, finalValue, totalPrice } from '../../Utils';
 import { AddressModal } from '../AddressModal/AddressModal';
 import styles from './Checkout.module.css';
 
-const Checkout = ({ couponType, setCheckout }) => {
+const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 	const [modalState, setModalState] = useState(false);
 	const [address, setAddress] = useState({
 		name: '',
@@ -16,13 +17,13 @@ const Checkout = ({ couponType, setCheckout }) => {
 	});
 	const [addressId, setAddressId] = useState();
 	const {
-		authState: { address: userAddress },
+		authState: { user, address: userAddress },
 	} = useAuth();
 	const {
 		cartState: { cart },
 	} = useCart();
 
-	console.log(cart);
+	const navigate = useNavigate();
 
 	const totalPayable = totalPrice(cart);
 
@@ -35,6 +36,56 @@ const Checkout = ({ couponType, setCheckout }) => {
 	const finalPayable = finalValue(couponType, totalAmount);
 
 	const deliveryAddress = userAddress.find((address) => address._id === addressId);
+
+	const placeOrder = async () => {
+		const response = await loadSdk();
+		if (response) {
+			const options = {
+				key: 'rzp_test_WYsT96c0wBHKtE',
+				key_id: 'rzp_test_WYsT96c0wBHKtE',
+				key_secret: 'aveN5IQwnEMFnITnCwBadifG',
+				amount: Number(finalPayable) * 100,
+				currency: 'INR',
+				name: 'GameShop',
+				description: 'Thank you for shopping with us',
+				callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
+				prefill: {
+					name: user.firstName,
+					email: user.email,
+					contact: '9999999999',
+				},
+				notes: { address: 'Razorpay Corporate Office' },
+				theme: { color: '#202528' },
+				handler: function (response) {
+					console.log(response);
+					cart.map((item) => deleteHandler(item._id));
+					navigate('/products');
+					toast.success('Order Placed Successfully');
+				},
+			};
+			const rzp1 = new window.Razorpay(options);
+			rzp1.open();
+			rzp1.on('payment.failed', function (response) {
+				toast.error('Something went wrong', response.error.code);
+			});
+		} else {
+			toast.error('Something went wrong');
+		}
+	};
+
+	const loadSdk = async () => {
+		return new Promise((resolve) => {
+			const script = document.createElement('script');
+			script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+			script.onload = () => {
+				resolve(true);
+			};
+			script.onerror = () => {
+				resolve(false);
+			};
+			document.body.appendChild(script);
+		});
+	};
 
 	return (
 		<>
@@ -132,6 +183,7 @@ const Checkout = ({ couponType, setCheckout }) => {
 								deliveryAddress ? '' : styles.defaultBtn
 							}`}
 							disabled={!deliveryAddress}
+							onClick={placeOrder}
 						>
 							Proceed to Payment
 						</button>

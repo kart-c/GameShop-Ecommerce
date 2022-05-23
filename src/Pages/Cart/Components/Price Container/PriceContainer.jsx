@@ -1,22 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAuth, useCart } from '../../../../Context';
+import { useCart } from '../../../../Context';
 import { discount, discountedPrice, finalValue, totalPrice } from '../../../../Utils';
 import styles from './PriceContainer.module.css';
 
-const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
+const PriceContainer = ({ couponType, setCouponType, setCheckout }) => {
 	const [applyCoupon, setApplyCoupon] = useState(false);
 
 	const {
 		cartState: { cart },
 	} = useCart();
-
-	const {
-		authState: { user },
-	} = useAuth();
-
-	const navigate = useNavigate();
 
 	const totalPayable = totalPrice(cart);
 
@@ -27,55 +19,6 @@ const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
 	const totalAmount = (totalPayable.price - totalDiscount + 40).toFixed(2);
 
 	const finalPayable = finalValue(couponType, totalAmount);
-
-	const placeOrder = async () => {
-		const response = await loadSdk();
-		if (response) {
-			const options = {
-				key: 'rzp_test_WYsT96c0wBHKtE',
-				key_id: 'rzp_test_WYsT96c0wBHKtE',
-				key_secret: 'aveN5IQwnEMFnITnCwBadifG',
-				amount: finalValue() * 100,
-				currency: 'INR',
-				name: 'GameShop',
-				description: 'Thank you for shopping with us',
-				callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
-				prefill: {
-					name: user.firstName,
-					email: user.email,
-					contact: '9999999999',
-				},
-				notes: { address: 'Razorpay Corporate Office' },
-				theme: { color: '#202528' },
-				handler: function (response) {
-					cart.map((item) => deleteHandler(item._id));
-					navigate('/products');
-					toast.success('Order Placed Successfully');
-				},
-			};
-			const rzp1 = new window.Razorpay(options);
-			rzp1.open();
-			rzp1.on('payment.failed', function (response) {
-				toast.error('Something went wrong', response.error.code);
-			});
-		} else {
-			toast.error('Something went wrong');
-		}
-	};
-
-	const loadSdk = async () => {
-		return new Promise((resolve) => {
-			const script = document.createElement('script');
-			script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-			script.onload = () => {
-				resolve(true);
-			};
-			script.onerror = () => {
-				resolve(false);
-			};
-			document.body.appendChild(script);
-		});
-	};
 
 	return (
 		<>
@@ -148,7 +91,7 @@ const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
 						<span className={styles.amountSpan}>{finalPayable} /-</span>
 					</div>
 				</div>
-				<button className="btn btn-primary" onClick={placeOrder}>
+				<button className="btn btn-primary" onClick={() => setCheckout(true)}>
 					Place Order
 				</button>
 			</div>
