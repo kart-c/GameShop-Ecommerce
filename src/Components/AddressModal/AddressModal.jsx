@@ -8,8 +8,8 @@ const AddressModal = ({
 	setModalState,
 	address,
 	setAddress,
-	isEditing,
 	setIsEditing,
+	isEditing = {},
 }) => {
 	const {
 		authState: { token },
