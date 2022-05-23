@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth, useCart } from '../../../../Context';
+import { discount, discountedPrice, finalValue, totalPrice } from '../../../../Utils';
 import styles from './PriceContainer.module.css';
 
 const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
@@ -17,36 +18,15 @@ const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
 
 	const navigate = useNavigate();
 
-	const curr = cart.reduce(
-		(acc, curr) => ({
-			...acc,
-			price: acc.price + curr.price * curr.qty,
-		}),
-		{ price: 0, qty: 0 }
-	);
+	const totalPayable = totalPrice(cart);
 
-	const totalPrice = curr.price;
+	const priceAfterDiscount = discountedPrice(cart);
 
-	const discountCalc = (price, discount, qty) => price * qty * (1 - discount / 100);
+	const totalDiscount = discount(totalPayable.price, priceAfterDiscount);
 
-	const discountedPrice = cart.reduce(
-		(acc, curr) => acc + discountCalc(curr.price, curr.discount, curr.qty),
-		0,
-		{ price: 0, discount: 0, qty: 0 }
-	);
+	const totalAmount = (totalPayable.price - totalDiscount + 40).toFixed(2);
 
-	const discount = totalPrice - discountedPrice;
-
-	const totalAmount = (totalPrice - discount + 40).toFixed(2);
-
-	const finalValue = () => {
-		if (couponType === '10') {
-			return (totalAmount - (totalAmount * Number(couponType)) / 100).toFixed(2);
-		} else if (couponType === '15') {
-			return (totalAmount - (totalAmount * Number(couponType)) / 100).toFixed(2);
-		}
-		return totalAmount;
-	};
+	const finalPayable = finalValue(couponType, totalAmount);
 
 	const placeOrder = async () => {
 		const response = await loadSdk();
@@ -155,17 +135,17 @@ const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
 						<span>Price</span>
 						<span>Discount</span>
 						<span>Delivery Charges</span>
-						{totalAmount !== finalValue() ? <span>Coupon discount</span> : null}
+						{totalAmount !== finalPayable ? <span>Coupon discount</span> : null}
 						<span className={styles.amountSpan}>Total Amount</span>
 					</div>
 					<div>
-						<span>{totalPrice.toFixed(2)} /-</span>
-						<span>- {discount.toFixed(2)} /-</span>
+						<span>{totalPayable.price.toFixed(2)} /-</span>
+						<span>- {totalDiscount.toFixed(2)} /-</span>
 						<span>40.00 /-</span>
-						{totalAmount !== finalValue() ? (
-							<span>- {(totalAmount - finalValue()).toFixed(2)} /-</span>
+						{totalAmount !== finalPayable ? (
+							<span>- {(totalAmount - finalPayable).toFixed(2)} /-</span>
 						) : null}
-						<span className={styles.amountSpan}>{finalValue()} /-</span>
+						<span className={styles.amountSpan}>{finalPayable} /-</span>
 					</div>
 				</div>
 				<button className="btn btn-primary" onClick={placeOrder}>
