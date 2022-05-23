@@ -5,7 +5,6 @@ export const deleteAddress = async (_id, token, authDispatch) => {
 		const response = await axios.delete(`/api/user/address/${_id}`, {
 			headers: { authorization: token },
 		});
-		console.log(response);
 		if (response.status === 200) {
 			authDispatch({ type: 'DELETE_ADDRESS', payload: response.data.address });
 		}

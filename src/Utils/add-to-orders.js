@@ -7,7 +7,6 @@ export const addToOrders = async (token, order) => {
 			{ order },
 			{ headers: { authorization: token } }
 		);
-		console.log(response);
 	} catch (error) {
 		console.error('ERROR', error);
 	}

@@ -13,8 +13,6 @@ const Orders = () => {
 		getOrders(token, authDispatch);
 	}, []);
 
-	console.log(orders);
-
 	return (
 		<div className={styles.orderContainer}>
 			{orders.length > 0

@@ -8,11 +8,8 @@ export const fetchCartProducts = async (token, cartDispatch, setIsLoading) => {
 		if (response.status === 200) {
 			setIsLoading && setIsLoading(false);
 			cartDispatch({ type: 'INITIAL', payload: response.data.cart });
-		} else {
-			console.error('ERROR: ', response);
 		}
 	} catch (error) {
-		console.log(error);
-		console.log('ERROR: ', error);
+		console.error('ERROR: ', error);
 	}
 };
