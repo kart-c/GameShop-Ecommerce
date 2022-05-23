@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAuth, useCart } from '../../Context';
-import { discount, discountedPrice, finalValue, totalPrice } from '../../Utils';
+import { addToOrders, discount, discountedPrice, finalValue, totalPrice } from '../../Utils';
 import { AddressModal } from '../AddressModal/AddressModal';
 import styles from './Checkout.module.css';
 
@@ -17,7 +18,7 @@ const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 	});
 	const [addressId, setAddressId] = useState();
 	const {
-		authState: { user, address: userAddress },
+		authState: { user, address: userAddress, token },
 	} = useAuth();
 	const {
 		cartState: { cart },
@@ -44,7 +45,7 @@ const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 				key: 'rzp_test_WYsT96c0wBHKtE',
 				key_id: 'rzp_test_WYsT96c0wBHKtE',
 				key_secret: 'aveN5IQwnEMFnITnCwBadifG',
-				amount: Number(finalPayable) * 100,
+				amount: parseInt(finalPayable) * 100,
 				currency: 'INR',
 				name: 'GameShop',
 				description: 'Thank you for shopping with us',
@@ -57,9 +58,17 @@ const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 				notes: { address: 'Razorpay Corporate Office' },
 				theme: { color: '#202528' },
 				handler: function (response) {
-					console.log(response);
+					const order = {
+						orderId: response.razorpay_payment_id,
+						items: cart,
+						deliveryAddress,
+						totalPayable: totalPayable.price,
+						totalDiscount,
+						finalPayable,
+					};
+					addToOrders(token, order);
 					cart.map((item) => deleteHandler(item._id));
-					navigate('/products');
+					navigate('/user/orders');
 					toast.success('Order Placed Successfully');
 				},
 			};
