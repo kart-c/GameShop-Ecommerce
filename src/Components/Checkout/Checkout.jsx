@@ -19,6 +19,7 @@ const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 	const [addressId, setAddressId] = useState();
 	const {
 		authState: { user, address: userAddress, token },
+		authDispatch,
 	} = useAuth();
 	const {
 		cartState: { cart },
@@ -66,7 +67,7 @@ const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 						totalDiscount,
 						finalPayable,
 					};
-					addToOrders(token, order);
+					addToOrders(token, order, authDispatch);
 					cart.map((item) => deleteHandler(item._id));
 					navigate('/products');
 					toast.success('Order Placed Successfully');
