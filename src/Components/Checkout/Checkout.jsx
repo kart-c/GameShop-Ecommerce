@@ -4,7 +4,7 @@ import { discount, discountedPrice, finalValue, totalPrice } from '../../Utils';
 import { AddressModal } from '../AddressModal/AddressModal';
 import styles from './Checkout.module.css';
 
-const Checkout = ({ couponType }) => {
+const Checkout = ({ couponType, setCheckout }) => {
 	const [modalState, setModalState] = useState(false);
 	const [address, setAddress] = useState({
 		name: '',
@@ -47,6 +47,9 @@ const Checkout = ({ couponType }) => {
 				/>
 			) : null}
 			<h3 className={styles.pgTitle}>Checkout</h3>
+			<div className={styles.backBtnContainer}>
+				<button onClick={() => setCheckout(false)}>Go Back</button>
+			</div>
 			<section className={styles.checkoutPg}>
 				<aside>
 					{userAddress.length > 0

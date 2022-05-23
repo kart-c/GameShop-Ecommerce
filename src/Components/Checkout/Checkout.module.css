@@ -3,6 +3,18 @@
 	text-align: center;
 }
 
+.backBtnContainer {
+	max-width: 1024px;
+	margin: auto;
+	padding: 0 2.4rem;
+}
+
+.backBtnContainer button {
+	font-size: var(--text-md);
+	color: var(--info-color);
+	text-decoration: underline;
+}
+
 .checkoutPg {
 	display: flex;
 	max-width: 1024px;
