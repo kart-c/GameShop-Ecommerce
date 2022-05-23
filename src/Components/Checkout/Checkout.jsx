@@ -69,7 +69,7 @@ const Checkout = ({ couponType, setCheckout, deleteHandler }) => {
 					};
 					addToOrders(token, order, authDispatch);
 					cart.map((item) => deleteHandler(item._id));
-					navigate('/products');
+					navigate('/user/orders');
 					toast.success('Order Placed Successfully');
 				},
 			};
