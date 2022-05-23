@@ -39,14 +39,17 @@ const Address = () => {
 
 	return (
 		<>
-			<AddressModal
-				modalState={modalState}
-				setModalState={setModalState}
-				address={address}
-				setAddress={setAddress}
-				isEditing={isEditing}
-				setIsEditing={setIsEditing}
-			/>
+			{modalState ? (
+				<AddressModal
+					modalState={modalState}
+					setModalState={setModalState}
+					address={address}
+					setAddress={setAddress}
+					isEditing={isEditing}
+					setIsEditing={setIsEditing}
+				/>
+			) : null}
+
 			<div className={styles.container}>
 				<button className={styles.newBtn} onClick={() => setModalState(true)}>
 					Add new <i className="fa-solid fa-plus"></i>
