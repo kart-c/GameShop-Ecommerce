@@ -75,6 +75,22 @@
 	font-size: var(--text-lg);
 }
 
+.pgButtonContainer {
+	grid-column: 1/-1;
+	display: flex;
+	gap: 2.4rem;
+}
+
+.pgButtonContainer > button {
+	font-size: var(--text-md);
+	padding: 6px 10px;
+	border: 1px solid;
+}
+
+.pgActiveBtn {
+	background-color: var(--lynx-grey);
+}
+
 @media only screen and (max-width: 980px) {
 	.productList {
 		margin: 0;
