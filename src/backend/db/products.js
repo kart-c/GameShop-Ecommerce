@@ -13,6 +13,11 @@ import {
 	sekiro,
 	witcher,
 	mario,
+	codmw,
+	gtav,
+	rl,
+	minecraft,
+	portal,
 } from '../../Assets/images';
 
 /**
@@ -186,5 +191,70 @@ export const products = [
 		rating: 4,
 		reviewers: 78,
 		categoryName: 'Sports',
+	},
+	{
+		_id: uuid(),
+		title: 'Call of Duty: Modern Warfare',
+		description:
+			'Call of Duty: Modern Warfare is a 2019 first-person shooter game developed by Infinity Ward and published by Activision.',
+		badge: '',
+		image: codmw,
+		price: 2750,
+		discount: 10,
+		rating: 3.5,
+		reviewers: 122,
+		categoryName: 'Action',
+	},
+	{
+		_id: uuid(),
+		title: 'Grand Theft Auto V',
+		description:
+			"Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008's Grand Theft Auto IV, and the fifteenth instalment overall.",
+		badge: '',
+		image: gtav,
+		price: 3200,
+		discount: 12,
+		rating: 4,
+		reviewers: 157,
+		categoryName: 'RPG',
+	},
+	{
+		_id: uuid(),
+		title: 'Rocket League',
+		description:
+			'Rocket League is a vehicular soccer video game developed and published by Psyonix. The game was first released for Microsoft Windows and PlayStation 4 in July 2015',
+		badge: '',
+		image: rl,
+		price: 2100,
+		discount: 20,
+		rating: 4,
+		reviewers: 157,
+		categoryName: 'sports',
+	},
+	{
+		_id: uuid(),
+		title: 'Minecraft',
+		description:
+			'Minecraft is a sandbox video game developed by Mojang Studios. The game was created by Markus "Notch" Persson.',
+		badge: '',
+		image: minecraft,
+		price: 800,
+		discount: '',
+		rating: 3.5,
+		reviewers: 15,
+		categoryName: 'strategy',
+	},
+	{
+		_id: uuid(),
+		title: 'Portal 2',
+		description:
+			"Portal 2 is a 2011 puzzle-platform video game developed by Valve for Windows, Mac OS X, Linux, PlayStation 3, and Xbox 360. The digital PC version is distributed online by Valve's Steam service, while all retail editions were distributed by Electronic Arts.",
+		badge: '',
+		image: portal,
+		price: 1200,
+		discount: '',
+		rating: 4,
+		reviewers: 117,
+		categoryName: 'strategy',
 	},
 ];
