@@ -1,44 +1,37 @@
-import { useState, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { Header } from '../../Components';
+import React from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Header, Profile } from '../../Components';
 import styles from './User.module.css';
 
 const User = () => {
-	const [activeTab, setActiveTab] = useState('profile');
-
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		navigate(`${activeTab}`);
-	}, [activeTab]);
-
-	const title = activeTab.slice(0, 1).toUpperCase() + activeTab.slice(1, activeTab.length);
+	const location = useLocation();
 
 	return (
 		<>
 			<Header />
 			<nav className={styles.userNav}>
 				<button
-					className={activeTab === 'profile' ? styles.active : ''}
-					onClick={() => setActiveTab('profile')}
+					className={location.pathname === '/user' ? styles.active : ''}
+					onClick={() => navigate('/user')}
 				>
 					Profile
 				</button>
 				<button
-					className={activeTab === 'address' ? styles.active : ''}
-					onClick={() => setActiveTab('address')}
+					className={location.pathname === '/user/address' ? styles.active : ''}
+					onClick={() => navigate('/user/address')}
 				>
 					Address
 				</button>
 				<button
-					className={activeTab === 'orders' ? styles.active : ''}
-					onClick={() => setActiveTab('orders')}
+					className={location.pathname === '/user/orders' ? styles.active : ''}
+					onClick={() => navigate('/user/orders')}
 				>
 					Orders
 				</button>
 			</nav>
 			<section className={styles.container}>
-				<h3 className={styles.containerTitle}>My {title}</h3>
+				{location.pathname === '/user' ? <Profile /> : null}
 				<Outlet />
 			</section>
 		</>

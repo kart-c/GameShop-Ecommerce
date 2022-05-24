@@ -1,23 +1,44 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useAuth } from '../../Context';
+import { getOrders } from '../../Utils';
 import styles from './Orders.module.css';
 
 const Orders = () => {
+	const {
+		authState: { token, orders },
+		authDispatch,
+	} = useAuth();
+
+	useEffect(() => {
+		getOrders(token, authDispatch);
+	}, []);
+
 	return (
 		<div className={styles.orderContainer}>
-			<article className={styles.order}>
-				<span className={styles.orderId}>Order Id #f3386752-a980-477d-b6ef-012c9377e44d</span>
-				<div className={styles.orderPrice}>
-					<span className={styles.priceTitle}>Price</span>
-					<span>Total Price - 1000 /-</span>
-					<span>Total Discount - 1000 /-</span>
-					<span>Amount Paid - 1000 /-</span>
-				</div>
-				<p>Delivered At - 15, Plot No11, East St, Sec 12 D, Mumbai - 754162, Maharashtra</p>
-				<div className={styles.productCard}>
-					<img src="https://picsum.photos/300" alt="order image" />
-					<span>Fifa 2022</span>
-				</div>
-			</article>
+			{orders.length > 0
+				? orders.map(({ order }) => (
+						<article className={styles.order} key={order.orderId}>
+							<span className={styles.orderId}>Order Id - {order.orderId}</span>
+							<div className={styles.orderPrice}>
+								<span className={styles.priceTitle}>Price</span>
+								<span>Total Price - {order.totalPayable.toFixed(2)} /-</span>
+								<span>Total Discount - {order.totalDiscount.toFixed(2)} /-</span>
+								<span>Delivery Charges - 40 /-</span>
+								<span>Amount Paid - {Number(order.finalPayable).toFixed(2)} /-</span>
+							</div>
+							<p>
+								{order.deliveryAddress.street}, {order.deliveryAddress.city} -{' '}
+								{order.deliveryAddress.zipCode}. {order.deliveryAddress.state}
+							</p>
+							{order.items.map((item) => (
+								<div className={styles.productCard} key={item._id}>
+									<img src={item.image} alt={item.title} className="resp-img" />
+									<span>{item.title}</span>
+								</div>
+							))}
+						</article>
+				  ))
+				: 'No Previous Orders found'}
 		</div>
 	);
 };

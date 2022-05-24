@@ -6,3 +6,4 @@ export { Profile } from './Profile/Profile';
 export { Address } from './Address/Address';
 export { Orders } from './Orders/Orders';
 export { AddressModal } from './AddressModal/AddressModal';
+export { Checkout } from './Checkout/Checkout';

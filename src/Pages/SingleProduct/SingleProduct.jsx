@@ -35,11 +35,9 @@ const SingleProduct = () => {
 			if (response.status === 200) {
 				setIsLoading(false);
 				setProduct(response.data.product);
-			} else {
-				console.log('ERROR: ', response);
 			}
 		} catch (error) {
-			console.log('ERROR: ', error);
+			console.error('ERROR: ', error);
 		}
 	};
 

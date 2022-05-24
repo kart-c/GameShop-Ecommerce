@@ -5,11 +5,9 @@ export const wishlistReducer = (state, action) => {
 			return { ...state, wishlist: payload };
 
 		case 'ADD_TO_WISHLIST':
-			console.log({ ...state, wishlist: payload });
 			return { ...state, wishlist: payload };
 
 		case 'REMOVE_FROM_WISHLIST':
-			console.log({ ...state, wishlist: payload });
 			return { ...state, wishlist: payload };
 
 		case 'LOGOUT':

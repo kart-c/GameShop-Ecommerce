@@ -8,10 +8,8 @@ export const fetchWishlist = async (token, wishlistDispatch, setIsLoading) => {
 		if (response.status === 200) {
 			setIsLoading && setIsLoading(false);
 			wishlistDispatch({ type: 'INITIAL', payload: response.data.wishlist });
-		} else {
-			console.error('ERROR: ', response);
 		}
 	} catch (error) {
-		console.log('ERROR: ', error);
+		console.error('ERROR: ', error);
 	}
 };

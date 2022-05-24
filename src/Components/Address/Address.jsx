@@ -20,10 +20,6 @@ const Address = () => {
 		authDispatch,
 	} = useAuth();
 
-	useEffect(() => {
-		getAddress(token, authDispatch);
-	}, []);
-
 	const editBtnHandler = (_id) => {
 		const address = userAddress.find((user) => user._id === _id);
 		setAddress((prev) => ({
@@ -43,14 +39,17 @@ const Address = () => {
 
 	return (
 		<>
-			<AddressModal
-				modalState={modalState}
-				setModalState={setModalState}
-				address={address}
-				setAddress={setAddress}
-				isEditing={isEditing}
-				setIsEditing={setIsEditing}
-			/>
+			{modalState ? (
+				<AddressModal
+					modalState={modalState}
+					setModalState={setModalState}
+					address={address}
+					setAddress={setAddress}
+					isEditing={isEditing}
+					setIsEditing={setIsEditing}
+				/>
+			) : null}
+
 			<div className={styles.container}>
 				<button className={styles.newBtn} onClick={() => setModalState(true)}>
 					Add new <i className="fa-solid fa-plus"></i>

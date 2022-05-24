@@ -1,101 +1,24 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAuth, useCart } from '../../../../Context';
+import { useCart } from '../../../../Context';
+import { discount, discountedPrice, finalValue, totalPrice } from '../../../../Utils';
 import styles from './PriceContainer.module.css';
 
-const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
+const PriceContainer = ({ couponType, setCouponType, setCheckout }) => {
 	const [applyCoupon, setApplyCoupon] = useState(false);
 
 	const {
 		cartState: { cart },
 	} = useCart();
 
-	const {
-		authState: { user },
-	} = useAuth();
+	const totalPayable = totalPrice(cart);
 
-	const navigate = useNavigate();
+	const priceAfterDiscount = discountedPrice(cart);
 
-	const curr = cart.reduce(
-		(acc, curr) => ({
-			...acc,
-			price: acc.price + curr.price * curr.qty,
-		}),
-		{ price: 0, qty: 0 }
-	);
+	const totalDiscount = discount(totalPayable.price, priceAfterDiscount);
 
-	const totalPrice = curr.price;
+	const totalAmount = (totalPayable.price - totalDiscount + 40).toFixed(2);
 
-	const discountCalc = (price, discount, qty) => price * qty * (1 - discount / 100);
-
-	const discountedPrice = cart.reduce(
-		(acc, curr) => acc + discountCalc(curr.price, curr.discount, curr.qty),
-		0,
-		{ price: 0, discount: 0, qty: 0 }
-	);
-
-	const discount = totalPrice - discountedPrice;
-
-	const totalAmount = (totalPrice - discount + 40).toFixed(2);
-
-	const finalValue = () => {
-		if (couponType === '10') {
-			return (totalAmount - (totalAmount * Number(couponType)) / 100).toFixed(2);
-		} else if (couponType === '15') {
-			return (totalAmount - (totalAmount * Number(couponType)) / 100).toFixed(2);
-		}
-		return totalAmount;
-	};
-
-	const placeOrder = async () => {
-		const response = await loadSdk();
-		if (response) {
-			const options = {
-				key: 'rzp_test_WYsT96c0wBHKtE',
-				key_id: 'rzp_test_WYsT96c0wBHKtE',
-				key_secret: 'aveN5IQwnEMFnITnCwBadifG',
-				amount: finalValue() * 100,
-				currency: 'INR',
-				name: 'GameShop',
-				description: 'Thank you for shopping with us',
-				callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
-				prefill: {
-					name: user.firstName,
-					email: user.email,
-					contact: '9999999999',
-				},
-				notes: { address: 'Razorpay Corporate Office' },
-				theme: { color: '#202528' },
-				handler: function (response) {
-					cart.map((item) => deleteHandler(item._id));
-					navigate('/products');
-					toast.success('Order Placed Successfully');
-				},
-			};
-			const rzp1 = new window.Razorpay(options);
-			rzp1.open();
-			rzp1.on('payment.failed', function (response) {
-				toast.error('Something went wrong', response.error.code);
-			});
-		} else {
-			toast.error('Something went wrong');
-		}
-	};
-
-	const loadSdk = async () => {
-		return new Promise((resolve) => {
-			const script = document.createElement('script');
-			script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-			script.onload = () => {
-				resolve(true);
-			};
-			script.onerror = () => {
-				resolve(false);
-			};
-			document.body.appendChild(script);
-		});
-	};
+	const finalPayable = finalValue(couponType, totalAmount);
 
 	return (
 		<>
@@ -155,20 +78,20 @@ const PriceContainer = ({ couponType, setCouponType, deleteHandler }) => {
 						<span>Price</span>
 						<span>Discount</span>
 						<span>Delivery Charges</span>
-						{totalAmount !== finalValue() ? <span>Coupon discount</span> : null}
+						{totalAmount !== finalPayable ? <span>Coupon discount</span> : null}
 						<span className={styles.amountSpan}>Total Amount</span>
 					</div>
 					<div>
-						<span>{totalPrice.toFixed(2)} /-</span>
-						<span>- {discount.toFixed(2)} /-</span>
+						<span>{totalPayable.price.toFixed(2)} /-</span>
+						<span>- {totalDiscount.toFixed(2)} /-</span>
 						<span>40.00 /-</span>
-						{totalAmount !== finalValue() ? (
-							<span>- {(totalAmount - finalValue()).toFixed(2)} /-</span>
+						{totalAmount !== finalPayable ? (
+							<span>- {(totalAmount - finalPayable).toFixed(2)} /-</span>
 						) : null}
-						<span className={styles.amountSpan}>{finalValue()} /-</span>
+						<span className={styles.amountSpan}>{finalPayable} /-</span>
 					</div>
 				</div>
-				<button className="btn btn-primary" onClick={placeOrder}>
+				<button className="btn btn-primary" onClick={() => setCheckout(true)}>
 					Place Order
 				</button>
 			</div>
