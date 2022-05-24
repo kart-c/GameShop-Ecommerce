@@ -15,6 +15,11 @@ import mario from './mario.jpg';
 import emptyCart from './empty-cart.jpg';
 import emptyWishlist from './empty-wishlist.jpg';
 import error404 from './404.png';
+import codmw from './codmw.jpg';
+import gtav from './gtav.jpg';
+import rl from './rl.jpg';
+import minecraft from './minecraft.png';
+import portal from './portal.jpg';
 
 const carouselImgs = [GOW, RDR2, Fifa];
 
@@ -37,4 +42,9 @@ export {
 	emptyCart,
 	emptyWishlist,
 	error404,
+	codmw,
+	gtav,
+	rl,
+	minecraft,
+	portal,
 };
