@@ -31,9 +31,7 @@ const Header = ({ products }) => {
 	return (
 		<header className={`header ${styles.header}`}>
 			<div
-				className={`${showMenu ? styles.backdrop : ''} ${
-					location.pathname === '/products' ? styles.searchActive : ''
-				}`}
+				className={`${showMenu ? styles.backdrop : ''} ${styles.searchActive}`}
 				onClick={() => setShowMenu(false)}
 			></div>
 			<h2>
@@ -41,6 +39,9 @@ const Header = ({ products }) => {
 					Game<span>Shop</span>
 				</Link>
 			</h2>
+			<Link to="/products" className={styles.shopNow}>
+				Shop Now
+			</Link>
 			<div className={styles.searchContainer}>
 				{location.pathname !== '/user' &&
 				location.pathname !== '/user/orders' &&
@@ -76,11 +77,7 @@ const Header = ({ products }) => {
 			<button className={`${styles.menuBtn}`} onClick={() => setShowMenu(!showMenu)}>
 				<i className="fas fa-bars hamburger-menu"></i>
 			</button>
-			<nav
-				className={`nav ${styles.nav} ${showMenu ? styles.active : ''} ${
-					location.pathname === '/products' ? styles.searchActive : ''
-				}`}
-			>
+			<nav className={`nav ${styles.nav} ${showMenu ? styles.active : ''} ${styles.searchActive}`}>
 				<ul className="nav-list">
 					<li>
 						<Link to={authState.token && authState.user ? '/user' : '/login'}>

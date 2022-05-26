@@ -44,6 +44,7 @@
 	position: relative;
 	width: 35%;
 	margin-left: auto;
+	z-index: 3;
 }
 
 .searchList {
@@ -54,7 +55,6 @@
 	font-size: var(--text-md);
 	background-color: var(--white);
 	border: 1px solid;
-	z-index: 2;
 	max-height: 32rem;
 	overflow-y: auto;
 }
@@ -69,7 +69,12 @@
 	background-color: var(--lynx-grey);
 }
 
-@media only screen and (max-width: 768px) {
+.shopNow {
+	margin-left: 1.6rem;
+	font-size: var(--text-md);
+}
+
+@media only screen and (max-width: 980px) {
 	.header {
 		flex-wrap: wrap;
 	}
@@ -91,7 +96,7 @@
 		left: 0;
 		top: 7.2rem;
 		padding: 1.6rem;
-		z-index: 5;
+		z-index: 2;
 		background-color: var(--white);
 	}
 
@@ -112,7 +117,7 @@
 	}
 
 	.searchActive {
-		top: 12rem;
+		top: 11rem;
 	}
 
 	.nav > ul {
