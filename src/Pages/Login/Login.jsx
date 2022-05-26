@@ -12,6 +12,7 @@ const Login = () => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
+		rememberMe: false,
 	});
 
 	const location = useLocation();
@@ -33,6 +34,7 @@ const Login = () => {
 			...prev,
 			email: 'adarshbalika@gmail.com',
 			password: 'adarshBalika123',
+			rememberMe: true,
 		}));
 	};
 
@@ -49,8 +51,10 @@ const Login = () => {
 					type: 'LOGIN',
 					payload: { token: response.data.encodedToken, user: response.data.foundUser },
 				});
-				localStorage.setItem('token', response.data.encodedToken);
-				localStorage.setItem('user', JSON.stringify(response.data.foundUser));
+				if (formData.rememberMe) {
+					localStorage.setItem('token', response.data.encodedToken);
+					localStorage.setItem('user', JSON.stringify(response.data.foundUser));
+				}
 				fetchCartProducts(response.data.encodedToken, cartDispatch);
 				fetchWishlist(response.data.encodedToken, wishlistDispatch);
 				navigate(location?.state?.from?.pathname || -1, { replace: true });
@@ -94,9 +98,14 @@ const Login = () => {
 								onChange={(e) => setFormData({ ...formData, password: e.target.value })}
 							/>
 						</div>
-						<span>Forgot password?</span>
 						<div className={`checkbox-container ${styles.checkboxContainer}`}>
-							<input type="checkbox" name="disabled example input" id="checkbox-1" />
+							<input
+								type="checkbox"
+								name="disabled example input"
+								id="checkbox-1"
+								checked={formData.rememberMe}
+								onChange={() => setFormData((prev) => ({ ...prev, rememberMe: !prev.rememberMe }))}
+							/>
 							<label htmlFor="checkbox-1">Remember me</label>
 						</div>
 						<button
