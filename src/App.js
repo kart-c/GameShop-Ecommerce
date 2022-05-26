@@ -41,7 +41,7 @@ function App() {
 				draggable
 				pauseOnHover
 			/>
-			<Header />
+			<Header products={products} />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route

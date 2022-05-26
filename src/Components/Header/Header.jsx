@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth, useCart, useWishlist } from '../../Context';
-import { useFilter } from '../../Context';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 
-const Header = ({ searchValue, setSearchValue }) => {
+const Header = ({ products }) => {
 	const [showMenu, setShowMenu] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
 	const { authState } = useAuth();
+	const [searchList, setSearchList] = useState([]);
 	const {
 		cartState: { cart },
 	} = useCart();
@@ -16,13 +17,16 @@ const Header = ({ searchValue, setSearchValue }) => {
 	} = useWishlist();
 
 	const location = useLocation();
+	const navigate = useNavigate();
 
-	const { filterDispatch } = useFilter();
-
-	const searchHandler = (e) => {
-		filterDispatch({ type: 'CLEAR' });
-		setSearchValue(e.target.value);
-	};
+	useEffect(() => {
+		if (searchValue) {
+			const searchedProducts = products.filter((product) =>
+				product.title.toLowerCase().includes(searchValue.toLowerCase())
+			);
+			setSearchList(searchedProducts);
+		}
+	}, [searchValue]);
 
 	return (
 		<header className={`header ${styles.header}`}>
@@ -37,16 +41,37 @@ const Header = ({ searchValue, setSearchValue }) => {
 					Game<span>Shop</span>
 				</Link>
 			</h2>
-			{location.pathname === '/products' ? (
-				<input
-					type="search"
-					name="search"
-					className={`header-search ${styles.search}`}
-					placeholder="Search..."
-					value={searchValue}
-					onChange={searchHandler}
-				/>
-			) : null}
+			<div className={styles.searchContainer}>
+				{location.pathname !== '/user' &&
+				location.pathname !== '/user/orders' &&
+				location.pathname !== '/user/address' ? (
+					<input
+						type="search"
+						name="search"
+						className={`header-search ${styles.search}`}
+						placeholder="Search..."
+						value={searchValue}
+						onChange={(e) => setSearchValue(e.target.value)}
+					/>
+				) : null}
+				{searchValue ? (
+					<ul className={styles.searchList}>
+						{searchList.length > 0
+							? searchList.map((listItem) => (
+									<li
+										key={listItem._id}
+										onClick={() => {
+											navigate(`/products/${listItem._id}`);
+											setSearchValue('');
+										}}
+									>
+										{listItem.title}
+									</li>
+							  ))
+							: 'No products found'}
+					</ul>
+				) : null}
+			</div>
 			<button className={`${styles.menuBtn}`} onClick={() => setShowMenu(!showMenu)}>
 				<i className="fas fa-bars hamburger-menu"></i>
 			</button>
