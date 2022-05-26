@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth, useCart, useWishlist } from '../../Context';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 
 const Header = ({ products }) => {
@@ -18,7 +18,6 @@ const Header = ({ products }) => {
 		wishlistState: { wishlist },
 	} = useWishlist();
 
-	const location = useLocation();
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -52,19 +51,15 @@ const Header = ({ products }) => {
 				Shop Now
 			</Link>
 			<div className={styles.searchContainer}>
-				{location.pathname !== '/user' &&
-				location.pathname !== '/user/orders' &&
-				location.pathname !== '/user/address' ? (
-					<input
-						type="search"
-						name="search"
-						className={`header-search ${styles.search}`}
-						placeholder="Search..."
-						value={searchValue}
-						onChange={(e) => setSearchValue(e.target.value)}
-						autoComplete="off"
-					/>
-				) : null}
+				<input
+					type="search"
+					name="search"
+					className={`header-search ${styles.search}`}
+					placeholder="Search..."
+					value={searchValue}
+					onChange={(e) => setSearchValue(e.target.value)}
+					autoComplete="off"
+				/>
 				{searchValue && isDebouncing ? (
 					<ul className={styles.searchList}>
 						{searchList.length > 0
