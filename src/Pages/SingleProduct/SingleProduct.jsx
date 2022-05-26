@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Header, Loaders } from '../../Components';
+import { Loaders } from '../../Components';
 import styles from './SingleProduct.module.css';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import {
@@ -95,7 +95,6 @@ const SingleProduct = () => {
 
 	return (
 		<>
-			{/* <Header /> */}
 			{isLoading && <Loaders />}
 			<section className={styles.productPg}>
 				<div className={styles.plBreadcrumbContainer}>

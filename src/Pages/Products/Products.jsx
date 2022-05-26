@@ -54,7 +54,6 @@ const Products = ({ products, isLoading, isError }) => {
 				className={`${styles.backdrop} ${filterDisplay ? styles.active : ''}`}
 				onClick={() => setFilterDisplay(false)}
 			></div>
-			{/* <Header searchValue={searchValue} setSearchValue={setSearchValue} /> */}
 			<main className={styles.plPg}>
 				<Filters filterDisplay={filterDisplay} />
 				<ul className={styles.productList}>

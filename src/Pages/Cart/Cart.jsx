@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Checkout, Header, Loaders } from '../../Components';
+import { Checkout, Loaders } from '../../Components';
 import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
 import { useAuth, useCart } from '../../Context';
 import PriceContainer from './Components/Price Container/PriceContainer';
@@ -44,7 +44,6 @@ const Cart = () => {
 
 	return (
 		<>
-			{/* <Header /> */}
 			{isLoading && <Loaders />}
 			{checkout ? (
 				<Checkout couponType={couponType} setCheckout={setCheckout} deleteHandler={deleteHandler} />

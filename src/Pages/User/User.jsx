@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Header, Profile } from '../../Components';
+import { Profile } from '../../Components';
 import styles from './User.module.css';
 
 const User = () => {
@@ -9,7 +9,6 @@ const User = () => {
 
 	return (
 		<>
-			{/* <Header /> */}
 			<nav className={styles.userNav}>
 				<button
 					className={location.pathname === '/user' ? styles.active : ''}

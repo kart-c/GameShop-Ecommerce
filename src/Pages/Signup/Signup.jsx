@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from '../../Components';
 import styles from '../Login/Login.module.css';
 import axios from 'axios';
 import { useAuth } from '../../Context';
@@ -56,7 +55,6 @@ const Signup = () => {
 
 	return (
 		<>
-			<Header />
 			<main>
 				<form action="">
 					<div className={styles.loginContainer}>

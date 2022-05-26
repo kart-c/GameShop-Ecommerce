@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Header } from '../../Components';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import styles from './Login.module.css';
 import { fetchCartProducts, fetchWishlist } from '../../Utils';
@@ -67,7 +66,6 @@ const Login = () => {
 
 	return (
 		<>
-			<Header />
 			<main>
 				<form>
 					<div className={styles.loginContainer}>

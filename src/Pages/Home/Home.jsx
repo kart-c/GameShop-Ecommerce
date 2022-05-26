@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../../Components';
 import Carousel from './Components/Carousel/Carousel';
 import Categories from './Components/Categories/Categories';
 import Footer from './Components/Footer/Footer';
@@ -9,7 +8,6 @@ import { horizon } from '../../Assets/images';
 const Home = () => {
 	return (
 		<>
-			{/* <Header /> */}
 			<main className={styles.lpMain}>
 				<section className={styles.heroImgContainer}>
 					<Link to="/products">
