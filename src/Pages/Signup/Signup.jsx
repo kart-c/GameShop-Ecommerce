@@ -12,6 +12,7 @@ const Signup = () => {
 		email: '',
 		password: '',
 		confirmPassword: '',
+		checkbox: false,
 	});
 
 	const navigate = useNavigate();
@@ -19,9 +20,14 @@ const Signup = () => {
 	const { authDispatch } = useAuth();
 
 	const formSubmitHandler = async (e) => {
-		e.preventDefault();
-
-		if (formData.name && formData.email && formData.password && formData.confirmPassword) {
+		if (
+			formData.name &&
+			formData.email &&
+			formData.password &&
+			formData.confirmPassword &&
+			formData.checkbox
+		) {
+			e.preventDefault();
 			if (formData.password === formData.confirmPassword) {
 				try {
 					const response = await axios.post('/api/auth/signup', {
@@ -48,8 +54,6 @@ const Signup = () => {
 			} else {
 				toast.error('Passwords do not match');
 			}
-		} else {
-			toast.warn('Enter all fields');
 		}
 	};
 
@@ -108,7 +112,14 @@ const Signup = () => {
 							/>
 						</div>
 						<div className={`checkbox-container ${styles.checkboxContainer}`}>
-							<input type="checkbox" name="disabled example input" id="checkbox-1" />
+							<input
+								type="checkbox"
+								name="disabled example input"
+								id="checkbox-1"
+								required
+								checked={formData.checkbox}
+								onChange={() => setFormData((prev) => ({ ...prev, checkbox: !prev.checkbox }))}
+							/>
 							<label htmlFor="checkbox-1">Accept all terms and conditions</label>
 						</div>
 						<button className={`btn ${styles.btn}`} onClick={formSubmitHandler} type="submit">

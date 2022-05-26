@@ -39,32 +39,34 @@ const Login = () => {
 	};
 
 	const formSubmitHandler = async (e) => {
-		e.preventDefault();
-		try {
-			const response = await axios.post('/api/auth/login', {
-				email: formData.email,
-				password: formData.password,
-			});
-			if (response.status === 200) {
-				toast.success(`Welcome back! ${response.data.foundUser.firstName}`);
-				authDispatch({
-					type: 'LOGIN',
-					payload: { token: response.data.encodedToken, user: response.data.foundUser },
+		if (formData.email && formData.password) {
+			e.preventDefault();
+			try {
+				const response = await axios.post('/api/auth/login', {
+					email: formData.email,
+					password: formData.password,
 				});
-				if (formData.rememberMe) {
-					localStorage.setItem('token', response.data.encodedToken);
-					localStorage.setItem('user', JSON.stringify(response.data.foundUser));
+				if (response.status === 200) {
+					toast.success(`Welcome back! ${response.data.foundUser.firstName}`);
+					authDispatch({
+						type: 'LOGIN',
+						payload: { token: response.data.encodedToken, user: response.data.foundUser },
+					});
+					if (formData.rememberMe) {
+						localStorage.setItem('token', response.data.encodedToken);
+						localStorage.setItem('user', JSON.stringify(response.data.foundUser));
+					}
+					fetchCartProducts(response.data.encodedToken, cartDispatch);
+					fetchWishlist(response.data.encodedToken, wishlistDispatch);
+					navigate(location?.state?.from?.pathname || -1, { replace: true });
+				} else {
+					console.error('ERROR: ', response);
+					alert('ERROR');
 				}
-				fetchCartProducts(response.data.encodedToken, cartDispatch);
-				fetchWishlist(response.data.encodedToken, wishlistDispatch);
-				navigate(location?.state?.from?.pathname || -1, { replace: true });
-			} else {
-				console.error('ERROR: ', response);
-				alert('ERROR');
+			} catch (error) {
+				toast.error(error.response.data.errors[0]);
+				console.error(error);
 			}
-		} catch (error) {
-			toast.error(error.response.data.errors[0]);
-			console.error(error);
 		}
 	};
 
@@ -82,9 +84,9 @@ const Login = () => {
 								id="email"
 								name="email"
 								placeholder="Enter your email"
+								required
 								value={formData.email}
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-								autoComplete="off"
 							/>
 						</div>
 						<div className={`input-container ${styles.inputContainer}`}>
@@ -94,6 +96,7 @@ const Login = () => {
 								id="password"
 								name="password"
 								placeholder="Enter your password"
+								required
 								value={formData.password}
 								onChange={(e) => setFormData({ ...formData, password: e.target.value })}
 							/>
