@@ -84,19 +84,26 @@ const Header = ({ products }) => {
 			<nav className={`nav ${styles.nav} ${showMenu ? styles.active : ''} ${styles.searchActive}`}>
 				<ul className="nav-list">
 					<li>
-						<Link to={authState.token && authState.user ? '/user' : '/login'}>
+						<Link
+							to={authState.token && authState.user ? '/user' : '/login'}
+							onClick={() => setShowMenu(false)}
+						>
 							<i className="fas fa-user"></i>
 							{authState.user ? ` ${authState.user.firstName}` : ' Login'}
 						</Link>
 					</li>
 					<li>
-						<Link to="/wishlist" className={styles.badgeContainer}>
+						<Link
+							to="/wishlist"
+							className={styles.badgeContainer}
+							onClick={() => setShowMenu(false)}
+						>
 							<i className="fas fa-heart"></i> Wishlist
 							{wishlist.length > 0 ? <span className={styles.badge}>{wishlist.length}</span> : null}
 						</Link>
 					</li>
 					<li>
-						<Link to="/cart" className={styles.badgeContainer}>
+						<Link to="/cart" className={styles.badgeContainer} onClick={() => setShowMenu(false)}>
 							<i className="fa-solid fa-bag-shopping"></i> Bag
 							{cart.length > 0 ? <span className={styles.badge}>{cart.length}</span> : null}
 						</Link>
