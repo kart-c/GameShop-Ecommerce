@@ -40,8 +40,6 @@ const Signup = () => {
 							payload: { token: response.data.encodedToken, user: response.data.createdUser },
 						});
 						toast.success(`Welcome ${response.data.createdUser.firstName}`);
-						localStorage.setItem('token', response.data.encodedToken);
-						localStorage.setItem('user', JSON.stringify(response.data.createdUser));
 						navigate(-2);
 					} else {
 						console.error('ERROR: ', response);
