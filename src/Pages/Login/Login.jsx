@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { useAuth, useCart, useWishlist } from '../../Context';
-import styles from './Login.module.css';
-import { fetchCartProducts, fetchWishlist } from '../../Utils';
 import { toast } from 'react-toastify';
+import { useAuth, useCart, useWishlist } from '../../Context';
+import { fetchCartProducts, fetchWishlist } from '../../Utils';
+import styles from './Login.module.css';
 
 const Login = () => {
 	const { authDispatch } = useAuth();

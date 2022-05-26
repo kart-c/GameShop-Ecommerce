@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Loaders } from '../../Components';
-import Filters from './Components/Filter/Filters';
+import { Filters } from './Components/Filter/Filters';
 import { useFilter } from '../../Context';
 import { categoryFilter, checkInStock, priceFilter, productSort, ratingFilter } from '../../Utils';
 import styles from './Products.module.css';

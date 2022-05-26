@@ -26,6 +26,7 @@ const Carousel = () => {
 						<Link to="/products" key={index}>
 							<img
 								src={img}
+								alt={img}
 								className={`resp-img ${index === currentIndex ? styles.activeImg : ''}`}
 							/>
 						</Link>
@@ -41,4 +42,4 @@ const Carousel = () => {
 	);
 };
 
-export default Carousel;
+export { Carousel };

@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../Login/Login.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useAuth } from '../../Context';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import styles from '../Login/Login.module.css';
 
 const Signup = () => {
 	const [formData, setFormData] = useState({

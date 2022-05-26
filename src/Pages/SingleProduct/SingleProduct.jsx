@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { Loaders } from '../../Components';
-import styles from './SingleProduct.module.css';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import {
 	addToCartHandler,
@@ -10,7 +10,7 @@ import {
 	checkWishlistStatus,
 	removeFromWishlistHandler,
 } from '../../Utils';
-import { toast } from 'react-toastify';
+import styles from './SingleProduct.module.css';
 
 const SingleProduct = () => {
 	const [cartBtnLoader, setCartBtnLoader] = useState(false);
