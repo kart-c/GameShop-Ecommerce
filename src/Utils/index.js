@@ -17,3 +17,4 @@ export { deleteAddress } from './delete-address';
 export * from './price-details';
 export { getOrders } from './get-orders';
 export { addToOrders } from './add-to-orders';
+export { fetchProducts } from './get-products';

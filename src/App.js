@@ -1,9 +1,8 @@
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Mockman from 'mockman-js';
-import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { RequiresAuth, Profile, Address, Orders, Header } from './Components';
+import { RequiresAuth, Address, Orders, Header } from './Components';
 import {
 	Home,
 	Products,
@@ -15,10 +14,18 @@ import {
 	Error404,
 	SingleProduct,
 } from './Pages';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { fetchProducts } from './Utils';
 
 function App() {
-	const { authState } = useAuth();
+	const [products, setProducts] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
+
+	useEffect(() => {
+		fetchProducts(setIsError, setIsLoading, setProducts);
+	}, []);
 
 	return (
 		<>
@@ -37,7 +44,10 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/products" element={<Products />} />
+				<Route
+					path="/products"
+					element={<Products products={products} isLoading={isLoading} isError={isError} />}
+				/>
 				<Route
 					path="/cart"
 					element={

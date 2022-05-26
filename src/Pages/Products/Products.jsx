@@ -1,50 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Header, Loaders } from '../../Components';
+import { Card, Loaders } from '../../Components';
 import Filters from './Components/Filter/Filters';
 import { useFilter } from '../../Context';
-import {
-	categoryFilter,
-	checkInStock,
-	priceFilter,
-	productSort,
-	ratingFilter,
-	searchProducts,
-} from '../../Utils';
-import axios from 'axios';
+import { categoryFilter, checkInStock, priceFilter, productSort, ratingFilter } from '../../Utils';
 import styles from './Products.module.css';
 
-const Products = () => {
+const Products = ({ products, isLoading, isError }) => {
 	const { filterState } = useFilter();
-	const [products, setProducts] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
+
 	const [filterDisplay, setFilterDisplay] = useState(false);
-	// const [searchValue, setSearchValue] = useState('');
 	const [currentPg, setCurrentPg] = useState(1);
 	const [pages, setPages] = useState([]);
 	const [currentSlice, setCurrentSlice] = useState({ start: 0, end: 6 });
-
-	const fetchProducts = async () => {
-		try {
-			const response = await axios.get('/api/products');
-			if (response.status === 200) {
-				setIsLoading(false);
-				setIsError(false);
-				setProducts(response.data.products);
-			} else {
-				console.error('ERROR: ', response);
-			}
-		} catch (error) {
-			setIsLoading(false);
-			setIsError(true);
-			console.error('ERROR: ', error.message);
-		}
-	};
-
-	useEffect(() => {
-		fetchProducts();
-	}, []);
 
 	const removeFromStock = checkInStock(filterState, products);
 
@@ -55,8 +23,6 @@ const Products = () => {
 	const priceRangeHandler = priceFilter(filterState, selectedRating);
 
 	const sortedProducts = productSort(filterState, priceRangeHandler);
-
-	// const searchedProducts = searchProducts(sortedProducts, searchValue);
 
 	useEffect(() => {
 		setCurrentSlice((prev) => ({ ...prev, start: currentPg * 6 - 6, end: currentPg * 6 }));
