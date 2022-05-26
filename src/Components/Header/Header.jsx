@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useAuth, useCart, useWishlist } from '../../Context';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
@@ -6,8 +6,10 @@ import styles from './Header.module.css';
 const Header = ({ products }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
-	const { authState } = useAuth();
 	const [searchList, setSearchList] = useState([]);
+	const [isDebouncing, setIsDebouncing] = useState(false);
+	const timerRef = useRef();
+	const { authState } = useAuth();
 	const {
 		cartState: { cart },
 	} = useCart();
@@ -21,10 +23,17 @@ const Header = ({ products }) => {
 
 	useEffect(() => {
 		if (searchValue) {
-			const searchedProducts = products.filter((product) =>
-				product.title.toLowerCase().includes(searchValue.toLowerCase())
-			);
-			setSearchList(searchedProducts);
+			clearTimeout(timerRef.current);
+			if (searchValue !== 0) {
+				setIsDebouncing(false);
+				timerRef.current = setTimeout(() => {
+					const searchedProducts = products.filter((product) =>
+						product.title.toLowerCase().includes(searchValue.toLowerCase())
+					);
+					setSearchList(searchedProducts);
+					setIsDebouncing(true);
+				}, 300);
+			}
 		}
 	}, [searchValue]);
 
@@ -56,7 +65,7 @@ const Header = ({ products }) => {
 						autoComplete="off"
 					/>
 				) : null}
-				{searchValue ? (
+				{searchValue && isDebouncing ? (
 					<ul className={styles.searchList}>
 						{searchList.length > 0
 							? searchList.map((listItem) => (
