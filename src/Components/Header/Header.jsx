@@ -84,7 +84,7 @@ const Header = ({ products }) => {
 				) : null}
 			</div>
 			<button className={`${styles.menuBtn}`} onClick={() => setShowMenu(!showMenu)}>
-				<i className="fas fa-bars hamburger-menu"></i>
+				<i className="fas fa-bars"></i>
 			</button>
 			<nav className={`nav ${styles.nav} ${showMenu ? styles.active : ''} ${styles.searchActive}`}>
 				<ul className="nav-list">

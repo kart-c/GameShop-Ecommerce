@@ -72,6 +72,11 @@
 .shopNow {
 	margin-left: 1.6rem;
 	font-size: var(--text-md);
+	text-decoration: underline;
+}
+
+.menuBtn {
+	display: none;
 }
 
 @media only screen and (max-width: 980px) {
@@ -79,11 +84,16 @@
 		flex-wrap: wrap;
 	}
 
+	.header nav {
+		display: none;
+	}
+
 	.header h2 {
 		margin: 0;
 	}
 
 	.menuBtn {
+		font-size: var(--text-lg);
 		cursor: pointer;
 		display: block;
 		margin-left: auto;
@@ -100,7 +110,7 @@
 		background-color: var(--white);
 	}
 
-	.active {
+	.header .active {
 		display: block;
 	}
 
