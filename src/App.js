@@ -63,7 +63,6 @@ function App() {
 						</RequiresAuth>
 					}
 				>
-					{/* <Route path="profile" element={<Profile />} /> */}
 					<Route path="address" element={<Address />} />
 					<Route path="orders" element={<Orders />} />
 				</Route>
