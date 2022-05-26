@@ -43,7 +43,7 @@ const SingleProduct = () => {
 
 	useEffect(() => {
 		fetchProduct();
-	}, []);
+	}, [params._id]);
 
 	const discoutedPrice = (price, discount) => (price - (price * discount) / 100).toFixed(0);
 
