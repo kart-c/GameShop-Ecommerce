@@ -27,7 +27,7 @@ import {
 
 export const products = [
 	{
-		_id: uuid(),
+		_id: '3fbe8787-7618-4606-aee2-5df44023578b',
 		title: 'Batman: Arkham Knight',
 		description: `Batman: Arkham Knight brings the award-winning Arkham trilogy from Rocksteady Studios to its epic conclusion. Developed exclusively for New-Gen platforms, Batman: Arkham Knight introduces Rocksteady's uniquely designed version of the Batmobile. The highly anticipated addition of this legendary vehicle, combined with the acclaimed gameplay of the Arkham series, offers gamers the ultimate and complete Batman experience as they tear through the streets and soar across the skyline of the entirety of Gotham City.`,
 		badge: '',
@@ -39,7 +39,7 @@ export const products = [
 		categoryName: 'Action',
 	},
 	{
-		_id: uuid(),
+		_id: '9d8b7008-53b7-4ef1-ae7a-a9bf3cafe69b',
 		title: 'Red Dead Redemption 2',
 		description:
 			'Winner of over 175 Game of the Year Awards and recipient of over 250 perfect scores, RDR2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age. Also includes access to the shared living world of Red Dead Online.',
@@ -52,7 +52,7 @@ export const products = [
 		categoryName: 'Action',
 	},
 	{
-		_id: uuid(),
+		_id: '1df47f33-50e1-4b4d-9e7e-7f73cabf42c9',
 		title: 'Fifa 2022',
 		description:
 			'Powered by Football, EA SPORTS FIFA 22 brings the game even closer to the real thing with fundamental gameplay advances and a new season of innovation across every mode.',
@@ -65,7 +65,7 @@ export const products = [
 		categoryName: 'Sports',
 	},
 	{
-		_id: uuid(),
+		_id: '041b5d72-d90c-45ba-8f28-4df2e15b36f3',
 		title: 'Horizon Forbidden West',
 		description: `Horizon Forbidden West is a 2022 action role-playing game developed by Guerrilla Games and published by Sony Interactive Entertainment. A sequel to 2017's Horizon Zero Dawn, the game is set in a post-apocalyptic version of the Western United States, which has been overrun by a deadly plague.`,
 		badge: 'New',
@@ -77,7 +77,7 @@ export const products = [
 		categoryName: 'RPG',
 	},
 	{
-		_id: uuid(),
+		_id: '0e2a940c-4819-4a54-81a5-d8f57993c01b',
 		title: 'God of War',
 		description:
 			'His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.',
@@ -90,7 +90,7 @@ export const products = [
 		categoryName: 'RPG',
 	},
 	{
-		_id: uuid(),
+		_id: '511c319d-e584-4433-b861-63d0fb652f09',
 		title: 'Age of Empires IV',
 		description:
 			'One of the most beloved real-time strategy games returns to glory with Age of Empires IV, putting you at the center of epic historical battles that shaped the world.',
@@ -103,7 +103,7 @@ export const products = [
 		categoryName: 'Strategy',
 	},
 	{
-		_id: uuid(),
+		_id: 'b012cb96-201f-4a05-b4bc-134d98909817',
 		title: 'Valorant',
 		description:
 			'Valorant is a first-person hero shooter developed and published by Riot Games, for Microsoft Windows.',
@@ -115,7 +115,7 @@ export const products = [
 		categoryName: 'Action',
 	},
 	{
-		_id: uuid(),
+		_id: '300c8fe7-db61-404a-aad2-e8b10ee1b227',
 		title: 'Civilization VI',
 		description:
 			'Civilization VI offers new ways to interact with your world, expand your empire across the map, advance your culture, and compete against history’s greatest leaders to build a civilization that will stand the test of time. Play as one of 20 historical leaders including Roosevelt (America) and Victoria (England).',
@@ -128,7 +128,7 @@ export const products = [
 		categoryName: 'Strategy',
 	},
 	{
-		_id: uuid(),
+		_id: 'd251ff01-9051-4fc2-b336-535b30591f00',
 		title: 'Age of Empires 2',
 		description:
 			'Age of Empires II has been re-imagined in high definition with new features, trading cards, improved AI, workshop support, multiplayer, Steamworks integration and more!',
@@ -141,7 +141,7 @@ export const products = [
 		categoryName: 'Strategy',
 	},
 	{
-		_id: uuid(),
+		_id: '6944f288-124f-4ec9-8ef5-4ce351b6feb9',
 		title: 'NBA 2K22',
 		description:
 			'NBA 2K22 puts the entire basketball universe in your hands. Anyone, anywhere can hoop in NBA 2K22.',
@@ -154,7 +154,7 @@ export const products = [
 		categoryName: 'Sports',
 	},
 	{
-		_id: uuid(),
+		_id: '5dd8e435-52ec-4e04-9cc0-1fbfb108fbe2',
 		title: 'Sekiro Shadows Die Twice',
 		description:
 			'Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Unleash an arsenal of deadly prosthetic tools and powerful ninja abilities while you blend stealth, vertical traversal, and visceral head to head combat in a bloody confrontation.',
@@ -167,7 +167,7 @@ export const products = [
 		categoryName: 'Action',
 	},
 	{
-		_id: uuid(),
+		_id: '91bb055b-87c6-463a-b3c9-546cf82cd2c5',
 		title: 'The Witcher 3: Wild Hunt',
 		description:
 			'As war rages on throughout the Northern Realms, you take on the greatest contract of your life — tracking down the Child of Prophecy, a living weapon that can alter the shape of the world.',
@@ -180,7 +180,7 @@ export const products = [
 		categoryName: 'RPG',
 	},
 	{
-		_id: uuid(),
+		_id: '46c5cdf0-cc23-44b4-9271-93fcc86fee20',
 		title: 'Mario Golf: Super Rush',
 		description:
 			'Mario Golf: Super Rush is a golf video game developed by Camelot Software Planning and published by Nintendo for the Nintendo Switch console. It is the sixth installment in the Mario Golf series following Mario Golf: World Tour in 2014 and is part of the larger Mario franchise.',
@@ -193,7 +193,7 @@ export const products = [
 		categoryName: 'Sports',
 	},
 	{
-		_id: uuid(),
+		_id: 'b75cb869-a94d-4ddd-8b0c-ccd0e674ff74',
 		title: 'Call of Duty: Modern Warfare',
 		description:
 			'Call of Duty: Modern Warfare is a 2019 first-person shooter game developed by Infinity Ward and published by Activision.',
@@ -206,7 +206,7 @@ export const products = [
 		categoryName: 'Action',
 	},
 	{
-		_id: uuid(),
+		_id: '4d6f7abc-9785-45ca-b9b9-fdb12b3cba98',
 		title: 'Grand Theft Auto V',
 		description:
 			"Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the seventh main entry in the Grand Theft Auto series, following 2008's Grand Theft Auto IV, and the fifteenth instalment overall.",
@@ -219,7 +219,7 @@ export const products = [
 		categoryName: 'RPG',
 	},
 	{
-		_id: uuid(),
+		_id: 'c3b4b256-745e-4da0-b63e-82597886176f',
 		title: 'Rocket League',
 		description:
 			'Rocket League is a vehicular soccer video game developed and published by Psyonix. The game was first released for Microsoft Windows and PlayStation 4 in July 2015',
@@ -232,7 +232,7 @@ export const products = [
 		categoryName: 'sports',
 	},
 	{
-		_id: uuid(),
+		_id: '05db6a65-d39b-4aba-b108-9ae6500d14fb',
 		title: 'Minecraft',
 		description:
 			'Minecraft is a sandbox video game developed by Mojang Studios. The game was created by Markus "Notch" Persson.',
@@ -245,7 +245,7 @@ export const products = [
 		categoryName: 'strategy',
 	},
 	{
-		_id: uuid(),
+		_id: '99ee6b21-a58b-4909-b1d4-1a1aae6b956a',
 		title: 'Portal 2',
 		description:
 			"Portal 2 is a 2011 puzzle-platform video game developed by Valve for Windows, Mac OS X, Linux, PlayStation 3, and Xbox 360. The digital PC version is distributed online by Valve's Steam service, while all retail editions were distributed by Electronic Arts.",

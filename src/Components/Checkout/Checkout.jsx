@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth, useCart } from '../../Context';
 import { addToOrders, discount, discountedPrice, finalValue, totalPrice } from '../../Utils';
-import { AddressModal } from '../AddressModal/AddressModal';
+import { AddressModal } from '../index';
 import styles from './Checkout.module.css';
 
 const Checkout = ({ couponType, setCheckout, deleteHandler }) => {

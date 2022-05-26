@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Header, Loaders } from '../../Components';
+import { Card, Loaders } from '../../Components';
 import { useAuth, useWishlist } from '../../Context';
 import { Link } from 'react-router-dom';
 import { fetchWishlist } from '../../Utils';
@@ -19,7 +19,6 @@ const Wishlist = () => {
 
 	return (
 		<>
-			<Header />
 			{isLoading && <Loaders />}
 			<main className={styles.wlPg}>
 				{wishlist.length > 0 && !isLoading ? (

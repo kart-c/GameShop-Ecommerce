@@ -7,3 +7,4 @@ export { Address } from './Address/Address';
 export { Orders } from './Orders/Orders';
 export { AddressModal } from './AddressModal/AddressModal';
 export { Checkout } from './Checkout/Checkout';
+export { HorizontalCard } from './Horizontal_Card/HorizontalCard';

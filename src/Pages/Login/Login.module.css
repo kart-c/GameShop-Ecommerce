@@ -1,5 +1,5 @@
 .loginContainer {
-	margin: 10.8rem auto 0;
+	margin: 14rem auto 0;
 	padding: 0 2.4rem;
 	max-width: 35rem;
 }
@@ -31,6 +31,7 @@
 
 .checkboxContainer label {
 	font-size: 1.4rem;
+	user-select: none;
 }
 
 .loginContainer > span {

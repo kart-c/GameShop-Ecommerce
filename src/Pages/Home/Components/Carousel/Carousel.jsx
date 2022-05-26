@@ -21,9 +21,17 @@ const Carousel = () => {
 
 	return (
 		<div className={styles.lpCarouselContainer}>
-			<Link to="/products">
-				<img src={carouselImgs[currentIndex]} alt="carousel image 1" className="resp-img" />
-			</Link>
+			{carouselImgs
+				? carouselImgs.map((img, index) => (
+						<Link to="/products" key={index}>
+							<img
+								src={img}
+								alt={img}
+								className={`resp-img ${index === currentIndex ? styles.activeImg : ''}`}
+							/>
+						</Link>
+				  ))
+				: null}
 			<button className={styles.carouselLeft} onClick={() => carouselHandler('prev')}>
 				<i className="fa-solid fa-circle-chevron-left"></i>
 			</button>
@@ -34,4 +42,4 @@ const Carousel = () => {
 	);
 };
 
-export default Carousel;
+export { Carousel };

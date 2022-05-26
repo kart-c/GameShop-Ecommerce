@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
-import { Header } from '../../Components';
-import Carousel from './Components/Carousel/Carousel';
-import Categories from './Components/Categories/Categories';
-import Footer from './Components/Footer/Footer';
-import styles from './Home.module.css';
+import { Carousel, Categories, Footer } from './Components';
 import { horizon } from '../../Assets/images';
+import styles from './Home.module.css';
 
 const Home = () => {
 	return (
 		<>
-			<Header />
 			<main className={styles.lpMain}>
 				<section className={styles.heroImgContainer}>
 					<Link to="/products">

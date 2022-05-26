@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Checkout, Header, Loaders } from '../../Components';
-import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
-import { useAuth, useCart } from '../../Context';
-import PriceContainer from './Components/Price Container/PriceContainer';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Checkout, Loaders, HorizontalCard } from '../../Components';
+import { PriceContainer } from './Components/Price Container/PriceContainer';
+import { useAuth, useCart } from '../../Context';
 import { fetchCartProducts } from '../../Utils';
 import { emptyCart } from '../../Assets/images';
 import styles from './Cart.module.css';
-import axios from 'axios';
-import { toast } from 'react-toastify';
 
 const Cart = () => {
 	const { authState } = useAuth();
@@ -44,7 +43,6 @@ const Cart = () => {
 
 	return (
 		<>
-			<Header />
 			{isLoading && <Loaders />}
 			{checkout ? (
 				<Checkout couponType={couponType} setCheckout={setCheckout} deleteHandler={deleteHandler} />

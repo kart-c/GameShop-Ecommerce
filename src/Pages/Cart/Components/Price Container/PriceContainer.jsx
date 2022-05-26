@@ -99,4 +99,4 @@ const PriceContainer = ({ couponType, setCouponType, setCheckout }) => {
 	);
 };
 
-export default PriceContainer;
+export { PriceContainer };

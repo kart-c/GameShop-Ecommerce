@@ -3,6 +3,7 @@
 	margin: 1.6rem auto;
 	padding: 1.6rem 2.4rem;
 	border: 1px solid var(--grey);
+	font-size: var(--text-md);
 }
 
 .orderId {

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../Context';
-import { getAddress, deleteAddress } from '../../Utils';
+import { deleteAddress } from '../../Utils';
 import { AddressModal } from '../index';
 import styles from './Address.module.css';
 

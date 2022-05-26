@@ -5,8 +5,15 @@
 }
 
 .lpCarouselContainer img {
-	display: block;
 	height: 100%;
+	opacity: 0;
+	position: absolute;
+	transition: opacity 0.4s ease-out;
+}
+
+.lpCarouselContainer .activeImg {
+	transition: opacity 0.4s ease-out;
+	opacity: 1;
 }
 
 .lpCarouselContainer button {
@@ -15,8 +22,8 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 2.4rem;
-	height: 2.4rem;
+	height: 100%;
+	padding: 1.6rem;
 }
 
 .lpCarouselContainer > button:active {
@@ -29,9 +36,9 @@
 }
 
 .carouselLeft {
-	left: 1.6rem;
+	left: 0;
 }
 
 .carouselRight {
-	right: 1.6rem;
+	right: 0;
 }
