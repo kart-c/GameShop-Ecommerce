@@ -52,6 +52,7 @@ const Header = ({ products }) => {
 						placeholder="Search..."
 						value={searchValue}
 						onChange={(e) => setSearchValue(e.target.value)}
+						autoComplete="off"
 					/>
 				) : null}
 				{searchValue ? (
