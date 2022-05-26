@@ -20,7 +20,7 @@ const Products = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 	const [filterDisplay, setFilterDisplay] = useState(false);
-	const [searchValue, setSearchValue] = useState('');
+	// const [searchValue, setSearchValue] = useState('');
 	const [currentPg, setCurrentPg] = useState(1);
 	const [pages, setPages] = useState([]);
 	const [currentSlice, setCurrentSlice] = useState({ start: 0, end: 6 });
@@ -56,7 +56,7 @@ const Products = () => {
 
 	const sortedProducts = productSort(filterState, priceRangeHandler);
 
-	const searchedProducts = searchProducts(sortedProducts, searchValue);
+	// const searchedProducts = searchProducts(sortedProducts, searchValue);
 
 	useEffect(() => {
 		setCurrentSlice((prev) => ({ ...prev, start: currentPg * 6 - 6, end: currentPg * 6 }));
@@ -64,10 +64,10 @@ const Products = () => {
 		window.scrollTo(0, 0);
 	}, [currentPg]);
 
-	const slicedProducts = searchedProducts.slice(currentSlice.start, currentSlice.end);
+	const slicedProducts = sortedProducts.slice(currentSlice.start, currentSlice.end);
 
 	useEffect(() => {
-		const num = Math.ceil(searchedProducts.length / 6);
+		const num = Math.ceil(sortedProducts.length / 6);
 		if (num) {
 			setPages([]);
 			for (let i = 0; i < num; i++) {
@@ -78,7 +78,7 @@ const Products = () => {
 		if (slicedProducts.length < 6) {
 			setCurrentPg(1);
 		}
-	}, [searchedProducts.length]);
+	}, [sortedProducts.length]);
 
 	const paginationHandler = (page) => setCurrentPg(page + 1);
 
@@ -88,7 +88,7 @@ const Products = () => {
 				className={`${styles.backdrop} ${filterDisplay ? styles.active : ''}`}
 				onClick={() => setFilterDisplay(false)}
 			></div>
-			<Header searchValue={searchValue} setSearchValue={setSearchValue} />
+			{/* <Header searchValue={searchValue} setSearchValue={setSearchValue} /> */}
 			<main className={styles.plPg}>
 				<Filters filterDisplay={filterDisplay} />
 				<ul className={styles.productList}>

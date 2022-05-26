@@ -3,7 +3,7 @@ import Mockman from 'mockman-js';
 import { useAuth } from './Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { RequiresAuth, Profile, Address, Orders } from './Components';
+import { RequiresAuth, Profile, Address, Orders, Header } from './Components';
 import {
 	Home,
 	Products,
@@ -34,6 +34,7 @@ function App() {
 				draggable
 				pauseOnHover
 			/>
+			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/products" element={<Products />} />

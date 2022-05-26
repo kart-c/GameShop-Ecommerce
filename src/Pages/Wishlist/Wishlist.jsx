@@ -19,7 +19,7 @@ const Wishlist = () => {
 
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			{isLoading && <Loaders />}
 			<main className={styles.wlPg}>
 				{wishlist.length > 0 && !isLoading ? (

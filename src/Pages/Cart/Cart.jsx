@@ -44,7 +44,7 @@ const Cart = () => {
 
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			{isLoading && <Loaders />}
 			{checkout ? (
 				<Checkout couponType={couponType} setCheckout={setCheckout} deleteHandler={deleteHandler} />

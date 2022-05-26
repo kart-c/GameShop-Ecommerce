@@ -9,7 +9,7 @@ const User = () => {
 
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			<nav className={styles.userNav}>
 				<button
 					className={location.pathname === '/user' ? styles.active : ''}

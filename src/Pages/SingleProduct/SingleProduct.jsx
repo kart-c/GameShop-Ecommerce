@@ -95,7 +95,7 @@ const SingleProduct = () => {
 
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			{isLoading && <Loaders />}
 			<section className={styles.productPg}>
 				<div className={styles.plBreadcrumbContainer}>

@@ -9,7 +9,7 @@ import { horizon } from '../../Assets/images';
 const Home = () => {
 	return (
 		<>
-			<Header />
+			{/* <Header /> */}
 			<main className={styles.lpMain}>
 				<section className={styles.heroImgContainer}>
 					<Link to="/products">
