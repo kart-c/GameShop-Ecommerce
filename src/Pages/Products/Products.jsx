@@ -14,7 +14,7 @@ import {
 import styles from './Products.module.css';
 
 const Products = ({ products, isLoading, isError }) => {
-	const { filterState } = useFilter();
+	const { filterState, filterDispatch } = useFilter();
 
 	const [filterDisplay, setFilterDisplay] = useState(false);
 	const [currentPg, setCurrentPg] = useState(1);
@@ -23,6 +23,10 @@ const Products = ({ products, isLoading, isError }) => {
 
 	useEffect(() => {
 		scrollToTop();
+
+		return () => {
+			filterDispatch({ type: 'CLEAR' });
+		};
 	}, []);
 
 	const removeFromStock = checkInStock(filterState, products);
