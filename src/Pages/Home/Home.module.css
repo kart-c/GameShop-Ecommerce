@@ -40,13 +40,11 @@
 	margin: 3.2rem auto;
 }
 
-.lpCta button {
+.lpCta a {
+	display: inline-block;
 	background-color: var(--brand-color);
 	color: var(--white);
 	border-radius: 4rem;
 	padding: 1.6rem 3.2rem;
-}
-
-.lpCta a {
-	color: inherit;
+	font-size: var(--text-md);
 }

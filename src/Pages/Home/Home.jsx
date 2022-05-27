@@ -24,9 +24,7 @@ const Home = () => {
 					<Categories />
 				</section>
 				<div className={styles.lpCta}>
-					<button className="btn btn-primary">
-						<Link to="/products">Explore More</Link>
-					</button>
+					<Link to="/products">Explore More</Link>
 				</div>
 			</main>
 			<Footer />
