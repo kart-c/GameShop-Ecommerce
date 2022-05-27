@@ -18,3 +18,4 @@ export * from './price-details';
 export { getOrders } from './get-orders';
 export { addToOrders } from './add-to-orders';
 export { fetchProducts } from './get-products';
+export { scrollToTop } from './scroll-to-top';

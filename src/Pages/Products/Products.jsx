@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import { Card, Loaders } from '../../Components';
 import { Filters } from './Components/Filter/Filters';
 import { useFilter } from '../../Context';
-import { categoryFilter, checkInStock, priceFilter, productSort, ratingFilter } from '../../Utils';
+import {
+	categoryFilter,
+	checkInStock,
+	priceFilter,
+	productSort,
+	ratingFilter,
+	scrollToTop,
+} from '../../Utils';
 import styles from './Products.module.css';
 
 const Products = ({ products, isLoading, isError }) => {
@@ -13,6 +20,10 @@ const Products = ({ products, isLoading, isError }) => {
 	const [currentPg, setCurrentPg] = useState(1);
 	const [pages, setPages] = useState([]);
 	const [currentSlice, setCurrentSlice] = useState({ start: 0, end: 6 });
+
+	useEffect(() => {
+		scrollToTop();
+	}, []);
 
 	const removeFromStock = checkInStock(filterState, products);
 
@@ -26,8 +37,7 @@ const Products = ({ products, isLoading, isError }) => {
 
 	useEffect(() => {
 		setCurrentSlice((prev) => ({ ...prev, start: currentPg * 6 - 6, end: currentPg * 6 }));
-
-		window.scrollTo(0, 0);
+		scrollToTop();
 	}, [currentPg]);
 
 	const slicedProducts = sortedProducts.slice(currentSlice.start, currentSlice.end);

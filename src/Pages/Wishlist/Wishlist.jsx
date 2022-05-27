@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Loaders } from '../../Components';
 import { useAuth, useWishlist } from '../../Context';
 import { Link } from 'react-router-dom';
-import { fetchWishlist } from '../../Utils';
+import { fetchWishlist, scrollToTop } from '../../Utils';
 import { emptyWishlist } from '../../Assets/images';
 import styles from './Wishlist.module.css';
 
@@ -16,6 +16,10 @@ const Wishlist = () => {
 	} = useWishlist();
 
 	useEffect(() => fetchWishlist(authState.token, wishlistDispatch, setIsLoading), []);
+
+	useEffect(() => {
+		scrollToTop();
+	}, []);
 
 	return (
 		<>

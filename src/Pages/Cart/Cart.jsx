@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { Checkout, Loaders, HorizontalCard } from '../../Components';
 import { PriceContainer } from './Components/Price Container/PriceContainer';
 import { useAuth, useCart } from '../../Context';
-import { fetchCartProducts } from '../../Utils';
+import { fetchCartProducts, scrollToTop } from '../../Utils';
 import { emptyCart } from '../../Assets/images';
 import styles from './Cart.module.css';
 
@@ -19,6 +19,10 @@ const Cart = () => {
 
 	useEffect(() => {
 		fetchCartProducts(authState.token, cartDispatch, setIsLoading);
+	}, []);
+
+	useEffect(() => {
+		scrollToTop();
 	}, []);
 
 	const deleteHandler = async (_id, setQtyChangeLoader, title) => {

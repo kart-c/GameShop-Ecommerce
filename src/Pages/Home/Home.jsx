@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel, Categories, Footer } from './Components';
 import { horizon } from '../../Assets/images';
 import styles from './Home.module.css';
+import { scrollToTop } from '../../Utils';
 
 const Home = () => {
+	useEffect(() => {
+		scrollToTop();
+	}, []);
+
 	return (
 		<>
 			<main className={styles.lpMain}>
