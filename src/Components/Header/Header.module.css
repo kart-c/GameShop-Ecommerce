@@ -73,6 +73,7 @@
 	margin-left: 1.6rem;
 	font-size: var(--text-md);
 	text-decoration: underline;
+	color: var(--brand-color);
 }
 
 .menuBtn {
