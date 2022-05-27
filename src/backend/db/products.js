@@ -229,7 +229,7 @@ export const products = [
 		discount: 20,
 		rating: 4,
 		reviewers: 157,
-		categoryName: 'sports',
+		categoryName: 'Sports',
 	},
 	{
 		_id: '05db6a65-d39b-4aba-b108-9ae6500d14fb',
@@ -242,7 +242,7 @@ export const products = [
 		discount: '',
 		rating: 3.5,
 		reviewers: 15,
-		categoryName: 'strategy',
+		categoryName: 'Strategy',
 	},
 	{
 		_id: '99ee6b21-a58b-4909-b1d4-1a1aae6b956a',
@@ -255,6 +255,6 @@ export const products = [
 		discount: '',
 		rating: 4,
 		reviewers: 117,
-		categoryName: 'strategy',
+		categoryName: 'Strategy',
 	},
 ];
