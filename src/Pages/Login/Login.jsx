@@ -32,8 +32,8 @@ const Login = () => {
 	const guestLoginHandler = () => {
 		setFormData((prev) => ({
 			...prev,
-			email: 'adarshbalika@gmail.com',
-			password: 'adarshBalika123',
+			email: 'johndoe@gmail.com',
+			password: 'johnDoe123',
 			rememberMe: true,
 		}));
 	};
@@ -116,7 +116,7 @@ const Login = () => {
 							type="button"
 							onClick={guestLoginHandler}
 						>
-							Log In with guest credentials
+							Use guest credentials
 						</button>
 						<button className={`btn ${styles.btn}`} type="submit" onClick={formSubmitHandler}>
 							Log In
