@@ -32,7 +32,11 @@ const SingleProduct = () => {
 	const fetchProduct = async () => {
 		try {
 			const response = await axios.get(`/api/products/${params._id}`);
+			console.log(response);
 			if (response.status === 200) {
+				if (!response.data.product) {
+					navigate('*');
+				}
 				setIsLoading(false);
 				setProduct(response.data.product);
 			}
