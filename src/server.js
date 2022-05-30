@@ -62,7 +62,7 @@ export function makeServer({ environment = 'development' } = {}) {
 					address: [
 						{
 							_id: uuid(),
-							name: 'Adarsh Balika',
+							name: 'John Doe',
 							street: '15, Plot No11, East St, Sec 12 D',
 							city: 'Mumbai',
 							state: 'Maharashtra',
