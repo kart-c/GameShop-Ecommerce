@@ -1,6 +1,6 @@
 .cartMain {
 	margin: 9.6rem auto 7.2rem;
-	width: 90%;
+	width: max-content;
 }
 
 .cartHeading {
