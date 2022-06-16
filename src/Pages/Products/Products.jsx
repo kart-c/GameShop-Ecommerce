@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Header, Loaders } from '../../Components';
-import Filters from './Components/Filter/Filters';
+import { Card, Loaders } from '../../Components';
+import { Filters } from './Components/Filter/Filters';
 import { useFilter } from '../../Context';
 import {
 	categoryFilter,
@@ -9,39 +9,24 @@ import {
 	priceFilter,
 	productSort,
 	ratingFilter,
-	searchProducts,
+	scrollToTop,
 } from '../../Utils';
-import axios from 'axios';
 import styles from './Products.module.css';
 
-const Products = () => {
-	const { filterState } = useFilter();
-	const [products, setProducts] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
-	const [filterDisplay, setFilterDisplay] = useState(false);
-	const [searchValue, setSearchValue] = useState('');
+const Products = ({ products, isLoading, isError }) => {
+	const { filterState, filterDispatch } = useFilter();
 
-	// Fetch products from database
-	const fetchProducts = async () => {
-		try {
-			const response = await axios.get('/api/products');
-			if (response.status === 200) {
-				setIsLoading(false);
-				setIsError(false);
-				setProducts(response.data.products);
-			} else {
-				console.error('ERROR: ', response);
-			}
-		} catch (error) {
-			setIsLoading(false);
-			setIsError(true);
-			console.error('ERROR: ', error.message);
-		}
-	};
+	const [filterDisplay, setFilterDisplay] = useState(false);
+	const [currentPg, setCurrentPg] = useState(1);
+	const [pages, setPages] = useState([]);
+	const [currentSlice, setCurrentSlice] = useState({ start: 0, end: 6 });
 
 	useEffect(() => {
-		fetchProducts();
+		scrollToTop();
+
+		return () => {
+			filterDispatch({ type: 'CLEAR' });
+		};
 	}, []);
 
 	const removeFromStock = checkInStock(filterState, products);
@@ -54,7 +39,28 @@ const Products = () => {
 
 	const sortedProducts = productSort(filterState, priceRangeHandler);
 
-	const searchedProducts = searchProducts(sortedProducts, searchValue);
+	useEffect(() => {
+		setCurrentSlice((prev) => ({ ...prev, start: currentPg * 6 - 6, end: currentPg * 6 }));
+		scrollToTop();
+	}, [currentPg]);
+
+	const slicedProducts = sortedProducts.slice(currentSlice.start, currentSlice.end);
+
+	useEffect(() => {
+		const num = Math.ceil(sortedProducts.length / 6);
+		if (num) {
+			setPages([]);
+			for (let i = 0; i < num; i++) {
+				setPages((prev) => [...prev, i]);
+			}
+		}
+
+		if (slicedProducts.length < 6) {
+			setCurrentPg(1);
+		}
+	}, [sortedProducts.length]);
+
+	const paginationHandler = (page) => setCurrentPg(page + 1);
 
 	return (
 		<>
@@ -62,7 +68,6 @@ const Products = () => {
 				className={`${styles.backdrop} ${filterDisplay ? styles.active : ''}`}
 				onClick={() => setFilterDisplay(false)}
 			></div>
-			<Header searchValue={searchValue} setSearchValue={setSearchValue} />
 			<main className={styles.plPg}>
 				<Filters filterDisplay={filterDisplay} />
 				<ul className={styles.productList}>
@@ -73,18 +78,17 @@ const Products = () => {
 								Products
 							</Link>
 						</div>
-						{searchedProducts.length > 0 && (
+						{slicedProducts.length > 0 && (
 							<span>
-								Showing {searchedProducts.length}{' '}
-								{searchedProducts.length > 1 ? 'products' : 'product'}
+								Showing {slicedProducts.length} {slicedProducts.length > 1 ? 'products' : 'product'}
 							</span>
 						)}
 					</div>
 					{isLoading && <Loaders />}
 					{isError && <h2>Error ...</h2>}
 					{!isLoading && !isError ? (
-						searchedProducts.length > 0 ? (
-							searchedProducts.map((product) => (
+						slicedProducts.length > 0 ? (
+							slicedProducts.map((product) => (
 								<li key={product.id}>
 									<Card {...product} products={products} />
 								</li>
@@ -93,7 +97,21 @@ const Products = () => {
 							<h2>No Products found</h2>
 						)
 					) : null}
+					<div className={styles.pgButtonContainer}>
+						{pages.length > 0
+							? pages.map((page) => (
+									<button
+										key={page}
+										className={currentPg === page + 1 ? styles.pgActiveBtn : ''}
+										onClick={() => paginationHandler(page)}
+									>
+										{page + 1}
+									</button>
+							  ))
+							: null}
+					</div>
 				</ul>
+
 				<footer className={styles.filterFooter}>
 					<button className="btn-primary" onClick={() => setFilterDisplay(!filterDisplay)}>
 						Filters
@@ -105,4 +123,4 @@ const Products = () => {
 	);
 };
 
-export default Products;
+export { Products };

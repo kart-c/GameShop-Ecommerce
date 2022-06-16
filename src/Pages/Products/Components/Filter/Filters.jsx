@@ -154,4 +154,4 @@ const Filters = ({ filterDisplay }) => {
 	);
 };
 
-export default Filters;
+export { Filters };

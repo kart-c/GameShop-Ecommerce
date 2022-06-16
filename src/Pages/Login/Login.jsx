@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Header } from '../../Components';
-import { useAuth, useCart, useWishlist } from '../../Context';
-import styles from './Login.module.css';
-import { fetchCartProducts, fetchWishlist } from '../../Utils';
 import { toast } from 'react-toastify';
+import { useAuth, useCart, useWishlist } from '../../Context';
+import { fetchCartProducts, fetchWishlist } from '../../Utils';
+import styles from './Login.module.css';
 
 const Login = () => {
 	const { authDispatch } = useAuth();
@@ -13,6 +12,7 @@ const Login = () => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
+		rememberMe: false,
 	});
 
 	const location = useLocation();
@@ -32,42 +32,46 @@ const Login = () => {
 	const guestLoginHandler = () => {
 		setFormData((prev) => ({
 			...prev,
-			email: 'adarshbalika@gmail.com',
-			password: 'adarshBalika123',
+			email: 'johndoe@gmail.com',
+			password: 'johnDoe123',
+			rememberMe: true,
 		}));
 	};
 
 	const formSubmitHandler = async (e) => {
-		e.preventDefault();
-		try {
-			const response = await axios.post('/api/auth/login', {
-				email: formData.email,
-				password: formData.password,
-			});
-			if (response.status === 200) {
-				toast.success(`Welcome back! ${response.data.foundUser.firstName}`);
-				authDispatch({
-					type: 'LOGIN',
-					payload: { token: response.data.encodedToken, user: response.data.foundUser },
+		if (formData.email && formData.password) {
+			e.preventDefault();
+			try {
+				const response = await axios.post('/api/auth/login', {
+					email: formData.email,
+					password: formData.password,
 				});
-				localStorage.setItem('token', response.data.encodedToken);
-				localStorage.setItem('user', JSON.stringify(response.data.foundUser));
-				fetchCartProducts(response.data.encodedToken, cartDispatch);
-				fetchWishlist(response.data.encodedToken, wishlistDispatch);
-				navigate(location?.state?.from?.pathname || -1, { replace: true });
-			} else {
-				console.error('ERROR: ', response);
-				alert('ERROR');
+				if (response.status === 200) {
+					toast.success(`Welcome back! ${response.data.foundUser.firstName}`);
+					authDispatch({
+						type: 'LOGIN',
+						payload: { token: response.data.encodedToken, user: response.data.foundUser },
+					});
+					if (formData.rememberMe) {
+						localStorage.setItem('token', response.data.encodedToken);
+						localStorage.setItem('user', JSON.stringify(response.data.foundUser));
+					}
+					fetchCartProducts(response.data.encodedToken, cartDispatch);
+					fetchWishlist(response.data.encodedToken, wishlistDispatch);
+					navigate(location?.state?.from?.pathname || -1, { replace: true });
+				} else {
+					console.error('ERROR: ', response);
+					alert('ERROR');
+				}
+			} catch (error) {
+				toast.error(error.response.data.errors[0]);
+				console.error(error);
 			}
-		} catch (error) {
-			toast.error(error.response.data.errors[0]);
-			console.error(error);
 		}
 	};
 
 	return (
 		<>
-			<Header />
 			<main>
 				<form>
 					<div className={styles.loginContainer}>
@@ -80,9 +84,9 @@ const Login = () => {
 								id="email"
 								name="email"
 								placeholder="Enter your email"
+								required
 								value={formData.email}
 								onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-								autoComplete="off"
 							/>
 						</div>
 						<div className={`input-container ${styles.inputContainer}`}>
@@ -92,13 +96,19 @@ const Login = () => {
 								id="password"
 								name="password"
 								placeholder="Enter your password"
+								required
 								value={formData.password}
 								onChange={(e) => setFormData({ ...formData, password: e.target.value })}
 							/>
 						</div>
-						<span>Forgot password?</span>
 						<div className={`checkbox-container ${styles.checkboxContainer}`}>
-							<input type="checkbox" name="disabled example input" id="checkbox-1" />
+							<input
+								type="checkbox"
+								name="disabled example input"
+								id="checkbox-1"
+								checked={formData.rememberMe}
+								onChange={() => setFormData((prev) => ({ ...prev, rememberMe: !prev.rememberMe }))}
+							/>
 							<label htmlFor="checkbox-1">Remember me</label>
 						</div>
 						<button
@@ -106,7 +116,7 @@ const Login = () => {
 							type="button"
 							onClick={guestLoginHandler}
 						>
-							Log In with guest credentials
+							Use guest credentials
 						</button>
 						<button className={`btn ${styles.btn}`} type="submit" onClick={formSubmitHandler}>
 							Log In
@@ -124,4 +134,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export { Login };

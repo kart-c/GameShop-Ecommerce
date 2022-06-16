@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, useCart, useWishlist } from '../../Context';
-import styles from './HorizontalCard.module.css';
 import axios from 'axios';
-import { addToWishlistHandler, checkWishlistStatus } from '../../Utils';
 import { toast } from 'react-toastify';
+import { useAuth, useCart, useWishlist } from '../../Context';
+import { addToWishlistHandler, checkWishlistStatus } from '../../Utils';
+import styles from './HorizontalCard.module.css';
 
 const HorizontalCard = ({
 	_id,

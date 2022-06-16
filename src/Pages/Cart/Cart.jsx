@@ -1,24 +1,28 @@
 import { useState, useEffect } from 'react';
-import { Header, Loaders } from '../../Components';
-import { HorizontalCard } from '../../Components/Horizontal_Card/HorizontalCard';
-import { useAuth, useCart } from '../../Context';
-import PriceContainer from './Components/Price Container/PriceContainer';
 import { Link } from 'react-router-dom';
-import { fetchCartProducts } from '../../Utils';
-import { emptyCart } from '../../Assets/images';
-import styles from './Cart.module.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Checkout, Loaders, HorizontalCard } from '../../Components';
+import { PriceContainer } from './Components/Price Container/PriceContainer';
+import { useAuth, useCart } from '../../Context';
+import { fetchCartProducts, scrollToTop } from '../../Utils';
+import { emptyCart } from '../../Assets/images';
+import styles from './Cart.module.css';
 
 const Cart = () => {
 	const { authState } = useAuth();
 	const [couponType, setCouponType] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
+	const [checkout, setCheckout] = useState(false);
 
 	const { cartState, cartDispatch } = useCart();
 
 	useEffect(() => {
 		fetchCartProducts(authState.token, cartDispatch, setIsLoading);
+	}, []);
+
+	useEffect(() => {
+		scrollToTop();
 	}, []);
 
 	const deleteHandler = async (_id, setQtyChangeLoader, title) => {
@@ -43,50 +47,53 @@ const Cart = () => {
 
 	return (
 		<>
-			<Header />
 			{isLoading && <Loaders />}
-			<main className={styles.cartMain}>
-				{cartState.cart.length > 0 && !isLoading ? (
-					<>
-						<div>
-							<h3 className={styles.cartHeading}>My Cart</h3>
-							<small>
-								{cartState.cart.length} {cartState.cart.length > 1 ? 'items' : 'item'}
-							</small>
-						</div>
-						<section className={styles.cartContainer}>
+			{checkout ? (
+				<Checkout couponType={couponType} setCheckout={setCheckout} deleteHandler={deleteHandler} />
+			) : (
+				<main className={styles.cartMain}>
+					{cartState.cart.length > 0 && !isLoading ? (
+						<>
 							<div>
-								{cartState.cart.map((card) => (
-									<HorizontalCard
-										{...card}
-										key={card._id}
-										setCouponType={setCouponType}
-										deleteHandler={deleteHandler}
-									/>
-								))}
+								<h3 className={styles.cartHeading}>My Cart</h3>
+								<small>
+									{cartState.cart.length} {cartState.cart.length > 1 ? 'items' : 'item'}
+								</small>
 							</div>
+							<section className={styles.cartContainer}>
+								<div>
+									{cartState.cart.map((card) => (
+										<HorizontalCard
+											{...card}
+											key={card._id}
+											setCouponType={setCouponType}
+											deleteHandler={deleteHandler}
+										/>
+									))}
+								</div>
 
-							<PriceContainer
-								couponType={couponType}
-								setCouponType={setCouponType}
-								deleteHandler={deleteHandler}
-							/>
-						</section>
-					</>
-				) : (
-					<>
-						{!isLoading && (
-							<div className={styles.emptyCartContainer}>
-								<span className={styles.emptyMsgTitle}>Looks like your cart is empty</span>
-								<img src={emptyCart} alt="responsive image" className="resp-img" />
-								<Link to="/products"> Browse Products</Link>
-							</div>
-						)}
-					</>
-				)}
-			</main>
+								<PriceContainer
+									couponType={couponType}
+									setCouponType={setCouponType}
+									setCheckout={setCheckout}
+								/>
+							</section>
+						</>
+					) : (
+						<>
+							{!isLoading && (
+								<div className={styles.emptyCartContainer}>
+									<span className={styles.emptyMsgTitle}>Looks like your cart is empty</span>
+									<img src={emptyCart} alt="responsive image" className="resp-img" />
+									<Link to="/products"> Browse Products</Link>
+								</div>
+							)}
+						</>
+					)}
+				</main>
+			)}
 		</>
 	);
 };
 
-export default Cart;
+export { Cart };

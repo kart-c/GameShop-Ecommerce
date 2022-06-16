@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Header } from '../../Components';
-import styles from '../Login/Login.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useAuth } from '../../Context';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import styles from '../Login/Login.module.css';
 
 const Signup = () => {
 	const [formData, setFormData] = useState({
@@ -13,6 +11,7 @@ const Signup = () => {
 		email: '',
 		password: '',
 		confirmPassword: '',
+		checkbox: false,
 	});
 
 	const navigate = useNavigate();
@@ -20,9 +19,14 @@ const Signup = () => {
 	const { authDispatch } = useAuth();
 
 	const formSubmitHandler = async (e) => {
-		e.preventDefault();
-
-		if (formData.name && formData.email && formData.password && formData.confirmPassword) {
+		if (
+			formData.name &&
+			formData.email &&
+			formData.password &&
+			formData.confirmPassword &&
+			formData.checkbox
+		) {
+			e.preventDefault();
 			if (formData.password === formData.confirmPassword) {
 				try {
 					const response = await axios.post('/api/auth/signup', {
@@ -36,8 +40,6 @@ const Signup = () => {
 							payload: { token: response.data.encodedToken, user: response.data.createdUser },
 						});
 						toast.success(`Welcome ${response.data.createdUser.firstName}`);
-						localStorage.setItem('token', response.data.encodedToken);
-						localStorage.setItem('user', JSON.stringify(response.data.createdUser));
 						navigate(-2);
 					} else {
 						console.error('ERROR: ', response);
@@ -49,14 +51,11 @@ const Signup = () => {
 			} else {
 				toast.error('Passwords do not match');
 			}
-		} else {
-			toast.warn('Enter all fields');
 		}
 	};
 
 	return (
 		<>
-			<Header />
 			<main>
 				<form action="">
 					<div className={styles.loginContainer}>
@@ -110,7 +109,14 @@ const Signup = () => {
 							/>
 						</div>
 						<div className={`checkbox-container ${styles.checkboxContainer}`}>
-							<input type="checkbox" name="disabled example input" id="checkbox-1" />
+							<input
+								type="checkbox"
+								name="disabled example input"
+								id="checkbox-1"
+								required
+								checked={formData.checkbox}
+								onChange={() => setFormData((prev) => ({ ...prev, checkbox: !prev.checkbox }))}
+							/>
 							<label htmlFor="checkbox-1">Accept all terms and conditions</label>
 						</div>
 						<button className={`btn ${styles.btn}`} onClick={formSubmitHandler} type="submit">
@@ -129,4 +135,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export { Signup };
